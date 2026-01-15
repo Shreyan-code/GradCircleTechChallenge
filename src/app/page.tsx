@@ -13,7 +13,7 @@ const features = [
   {
     icon: <Heart className="h-8 w-8 text-primary" />,
     title: 'Social Feed',
-    description: 'Share your pet\'s moments on an Instagram-style feed. Like, comment, and connect with fellow pet lovers.',
+    description: 'Share your pet\'s moments on our feed. Like, comment, and connect with fellow pet lovers.',
   },
   {
     icon: <Stethoscope className="h-8 w-8 text-primary" />,
@@ -190,7 +190,7 @@ export default function LandingPage() {
             <div>
               <h3 className="text-3xl font-extrabold text-foreground font-headline">Share Unforgettable Moments</h3>
               <p className="mt-4 text-lg text-muted-foreground">
-                Our Instagram-style feed is the perfect place to post photos of your furry, feathery, or scaly friends. Celebrate milestones, share funny moments, and get inspired by others.
+                Our feed is the perfect place to post photos of your furry, feathery, or scaly friends. Celebrate milestones, share funny moments, and get inspired by others.
               </p>
             </div>
           </div>
