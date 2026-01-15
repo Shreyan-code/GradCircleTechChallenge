@@ -44,7 +44,7 @@ export default function ForumsPage() {
                                     <AvatarFallback>{topic.userName.charAt(0)}</AvatarFallback>
                                 </Avatar>
                                 <div className="flex-1">
-                                    <Link href="#" className="font-semibold text-lg hover:text-primary transition-colors">{topic.title}</Link>
+                                    <Link href={`/forums/${topic.topicId}`} className="font-semibold text-lg hover:text-primary transition-colors">{topic.title}</Link>
                                     <div className="text-sm text-muted-foreground mt-1 flex items-center gap-4">
                                         <span>Started by <Link href={`/profile/${topic.userId}`} className="font-medium text-foreground hover:underline">{topic.userName}</Link></span>
                                         <span>{formatDistanceToNow(new Date(topic.createdAt), { addSuffix: true })}</span>
