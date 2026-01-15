@@ -141,17 +141,6 @@ export default function ForumsPage() {
                     </ul>
                 </CardContent>
               </Card>
-              <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Pin className="w-5 h-5 text-primary"/> Pinned Topics</CardTitle>
-                </CardHeader>
-                <CardContent>
-                   <ul className="space-y-3 text-sm">
-                        <li><Link href="#" className="hover:text-primary">Welcome & Forum Rules</Link></li>
-                        <li><Link href="#" className="hover:text-primary">Pet Introduction Thread</Link></li>
-                   </ul>
-                </CardContent>
-              </Card>
           </div>
         </div>
     </div>
