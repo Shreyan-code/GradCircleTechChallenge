@@ -1,0 +1,211 @@
+'use client';
+
+import { useState } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { mockData } from '@/lib/mock-data';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { aiSymptomChecker, type AiSymptomCheckerOutput } from '@/ai/flows/ai-symptom-checker';
+import { Loader2, Sparkles, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+
+const schema = z.object({
+  petId: z.string({ required_error: 'Please select a pet.' }),
+  symptoms: z.string().min(10, 'Please describe the symptoms in at least 10 characters.'),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+export function SymptomCheckerForm() {
+  const [step, setStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState<AiSymptomCheckerOutput | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(schema),
+  });
+
+  const { pets, users } = mockData;
+  const currentUserPets = pets.filter((pet) => users[0].petIds.includes(pet.petId));
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    setIsLoading(true);
+    setError(null);
+    setResult(null);
+
+    const selectedPet = currentUserPets.find((p) => p.petId === data.petId);
+    if (!selectedPet) {
+      setError('Could not find selected pet.');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await aiSymptomChecker({
+        petType: `${selectedPet.breed} (${selectedPet.type})`,
+        symptoms: data.symptoms,
+      });
+      setResult(response);
+      setStep(3);
+    } catch (e) {
+      console.error(e);
+      setError('An error occurred while analyzing symptoms. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  const renderUrgencyBadge = (urgency: string) => {
+    switch (urgency.toLowerCase()) {
+      case 'high':
+        return <Badge variant="destructive" className="capitalize"><AlertTriangle className="mr-2 h-4 w-4" />{urgency}</Badge>;
+      case 'medium':
+        return <Badge variant="default" className="bg-yellow-500 hover:bg-yellow-600 capitalize"><AlertTriangle className="mr-2 h-4 w-4" />{urgency}</Badge>;
+      default:
+        return <Badge variant="secondary" className="capitalize"><ShieldCheck className="mr-2 h-4 w-4" />{urgency}</Badge>;
+    }
+  };
+
+  return (
+    <Card className="mt-8">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          {step === 1 && (
+            <>
+              <CardHeader>
+                <CardTitle>Step 1: Select Your Pet</CardTitle>
+                <CardDescription>Choose which pet is experiencing symptoms.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <FormField
+                  control={form.control}
+                  name="petId"
+                  render={({ field }) => (
+                    <FormItem className="space-y-3">
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="grid grid-cols-2 md:grid-cols-3 gap-4"
+                        >
+                          {currentUserPets.map((pet) => (
+                            <FormItem key={pet.petId}>
+                              <FormControl>
+                                <RadioGroupItem value={pet.petId} className="sr-only" />
+                              </FormControl>
+                              <FormLabel className="flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary cursor-pointer">
+                                <Avatar className="w-16 h-16 mb-2">
+                                  <AvatarImage src={pet.photo} />
+                                  <AvatarFallback>{pet.name.charAt(0)}</AvatarFallback>
+                                </Avatar>
+                                <span className="font-bold">{pet.name}</span>
+                                <span className="text-xs text-muted-foreground">{pet.breed}</span>
+                              </FormLabel>
+                            </FormItem>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+              <CardFooter>
+                <Button onClick={() => form.getValues('petId') && setStep(2)}>Next</Button>
+              </CardFooter>
+            </>
+          )}
+
+          {step === 2 && (
+            <>
+              <CardHeader>
+                <CardTitle>Step 2: Describe the Symptoms</CardTitle>
+                <CardDescription>
+                  Be as detailed as possible. Include changes in behavior, appetite, and any physical signs.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <FormField
+                  control={form.control}
+                  name="symptoms"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Textarea placeholder="e.g., My dog has been lethargic, not eating, and has been coughing for two days..." rows={6} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+              <CardFooter className="justify-between">
+                <Button variant="outline" onClick={() => setStep(1)}>
+                  Back
+                </Button>
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
+                  Analyze Symptoms
+                </Button>
+              </CardFooter>
+            </>
+          )}
+        </form>
+
+        {step === 3 && result && (
+          <>
+            <CardHeader>
+              <CardTitle>AI Analysis Results</CardTitle>
+              <CardDescription>
+                Here are the potential insights based on the symptoms provided.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <Alert variant={result.urgencyLevel.toLowerCase() === 'high' ? 'destructive' : 'default'}>
+                <AlertTriangle className="h-4 w-4" />
+                <AlertTitle className="flex items-center gap-4">Urgency Level {renderUrgencyBadge(result.urgencyLevel)}</AlertTitle>
+                <AlertDescription>
+                    Based on the symptoms, the urgency to consult a vet is considered {result.urgencyLevel.toLowerCase()}.
+                </AlertDescription>
+              </Alert>
+              
+              <div className="space-y-2">
+                <h3 className="font-semibold">Possible Conditions</h3>
+                <div className="prose prose-sm text-foreground" dangerouslySetInnerHTML={{ __html: result.possibleConditions.replace(/\*/g, '•') }} />
+              </div>
+              
+              <div className="space-y-2">
+                <h3 className="font-semibold">Recommendations</h3>
+                <div className="prose prose-sm text-foreground" dangerouslySetInnerHTML={{ __html: result.recommendations.replace(/\*/g, '•') }} />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button onClick={() => { setStep(1); form.reset(); setResult(null); }}>Start Over</Button>
+            </CardFooter>
+          </>
+        )}
+        
+        {step === 3 && error && (
+          <CardContent>
+            <Alert variant="destructive">
+                <AlertTriangle className="h-4 w-4" />
+                <AlertTitle>Analysis Failed</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+            </Alert>
+            <div className="mt-4">
+                 <Button onClick={() => setStep(2)}>Try Again</Button>
+            </div>
+          </CardContent>
+        )}
+      </Form>
+    </Card>
+  );
+}

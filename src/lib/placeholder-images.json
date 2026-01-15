@@ -1,3 +1,148 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "user_priya",
+      "description": "Profile picture of Priya Sharma",
+      "imageUrl": "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3b21hbiUyMHNtaWxpbmd8ZW58MHx8fHwxNzY4NDQzNjQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman smiling"
+    },
+    {
+      "id": "user_arjun",
+      "description": "Profile picture of Arjun Patel",
+      "imageUrl": "https://images.unsplash.com/photo-1687092084146-a2893f0b896a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtYW4lMjBnbGFzc2VzfGVufDB8fHx8MTc2ODQxNzUxN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man glasses"
+    },
+    {
+      "id": "user_ananya",
+      "description": "Profile picture of Ananya Reddy",
+      "imageUrl": "https://images.unsplash.com/photo-1664813495434-34ac9ab3b5b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3b21hbiUyMG91dGRvb3JzfGVufDB8fHx8MTc2ODM4NTE4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman outdoors"
+    },
+    {
+      "id": "user_rohan",
+      "description": "Profile picture of Rohan Mehta",
+      "imageUrl": "https://images.unsplash.com/photo-1581803118522-7b72a50f7e9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYW4lMjBsYXVnaGluZ3xlbnwwfHx8fDE3Njg0ODA5ODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man laughing"
+    },
+    {
+      "id": "user_ishita",
+      "description": "Profile picture of Ishita Gupta",
+      "imageUrl": "https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx3b21hbiUyMHBvcnRyYWl0fGVufDB8fHx8MTc2ODQ2NDM4M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman portrait"
+    },
+    {
+      "id": "pet_max",
+      "description": "Photo of Max, a Golden Retriever",
+      "imageUrl": "https://images.unsplash.com/photo-1602241628512-459cdd3234fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxnb2xkZW4lMjByZXRyaWV2ZXJ8ZW58MHx8fHwxNzY4NDM3ODgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "golden retriever"
+    },
+    {
+      "id": "pet_bella",
+      "description": "Photo of Bella, a Golden Retriever",
+      "imageUrl": "https://images.unsplash.com/photo-1624956578877-4948166c5dcb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxoYXBweSUyMGRvZ3xlbnwwfHx8fDE3Njg0MTA4NDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "happy dog"
+    },
+    {
+      "id": "pet_simba",
+      "description": "Photo of Simba, a Bengal cat",
+      "imageUrl": "https://images.unsplash.com/photo-1496284777878-ce2e3e4dd028?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxiZW5nYWwlMjBjYXR8ZW58MHx8fHwxNzY4MzcxODU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bengal cat"
+    },
+    {
+      "id": "pet_rocky",
+      "description": "Photo of Rocky, an Indian Pariah dog",
+      "imageUrl": "https://images.unsplash.com/photo-1621757298855-12262a78f0cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxicm93biUyMGRvZ3xlbnwwfHx8fDE3Njg0NTU4MDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "brown dog"
+    },
+    {
+      "id": "pet_bruno",
+      "description": "Photo of Bruno, a Beagle",
+      "imageUrl": "https://images.unsplash.com/photo-1710927865281-9cf4d7ee2782?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxiZWFnbGUlMjBwdXBweXxlbnwwfHx8fDE3Njg0ODU0ODF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "beagle puppy"
+    },
+    {
+      "id": "post_juhu",
+      "description": "Dogs playing on Juhu beach",
+      "imageUrl": "https://images.unsplash.com/photo-1645255026229-41b14f029496?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxkb2dzJTIwYmVhY2h8ZW58MHx8fHwxNzY4NDg1NDgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dogs beach"
+    },
+    {
+      "id": "post_simba_code",
+      "description": "Cat sitting on a desk near a laptop",
+      "imageUrl": "https://images.unsplash.com/photo-1589652717406-1c69efaf1ff8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjYXQlMjBsYXB0b3B8ZW58MHx8fHwxNzY4NDg1NDgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cat laptop"
+    },
+    {
+      "id": "post_rocky_rescue",
+      "description": "A happy rescued dog",
+      "imageUrl": "https://images.unsplash.com/photo-1534361960057-19889db9621e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGRvZ3xlbnwwfHx8fDE3Njg0MTA4NDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "happy dog"
+    },
+    {
+      "id": "post_bruno_paratha",
+      "description": "A beagle looking guilty",
+      "imageUrl": "https://images.unsplash.com/photo-1682137145001-5cbdc866c421?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxndWlsdHklMjBkb2d8ZW58MHx8fHwxNzY4NDg1NDgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "guilty dog"
+    },
+    {
+      "id": "post_bengals_chaos",
+      "description": "Multiple cats playing together",
+      "imageUrl": "https://images.unsplash.com/photo-1759568572533-9b435252b388?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjYXRzJTIwcGxheWluZ3xlbnwwfHx8fDE3Njg0ODU0ODF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cats playing"
+    },
+    {
+      "id": "story_max_playing",
+      "description": "Dog playing with a ball",
+      "imageUrl": "https://images.unsplash.com/photo-1608743839000-50a0aa35e979?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkb2clMjBiYWxsfGVufDB8fHx8MTc2ODQ4NTQ4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dog ball"
+    },
+    {
+      "id": "story_simba_nap",
+      "description": "Cat napping in the sun",
+      "imageUrl": "https://images.unsplash.com/photo-1760214695210-7aef133fa9a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjYXQlMjBuYXBwaW5nfGVufDB8fHx8MTc2ODQ4NTQ4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cat napping"
+    },
+    {
+      "id": "story_rocky_park",
+      "description": "Dog in a green park",
+      "imageUrl": "https://images.unsplash.com/photo-1619333774340-3a878585c2e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxkb2clMjBwYXJrfGVufDB8fHx8MTc2ODQxNTI1OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dog park"
+    },
+    {
+      "id": "story_bruno_zoomies",
+      "description": "Blurry photo of a running dog",
+      "imageUrl": "https://images.unsplash.com/photo-1617181668756-68f6613051d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxydW5uaW5nJTIwZG9nfGVufDB8fHx8MTc2ODQ4NTQ4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "running dog"
+    },
+    {
+      "id": "story_cats_window",
+      "description": "Cats looking out a window",
+      "imageUrl": "https://images.unsplash.com/photo-1538097507583-1986951d5a38?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjYXQlMjB3aW5kb3d8ZW58MHx8fHwxNzY4NDc0MjE3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cat window"
+    },
+    {
+      "id": "landing-hero",
+      "description": "A happy person with their dog",
+      "imageUrl": "https://images.unsplash.com/photo-1719985971106-7c72d1f7c850?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwZG9nfGVufDB8fHx8MTc2ODQ4NTQ4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person dog"
+    },
+    {
+      "id": "landing-feature-1",
+      "description": "A collage of pet photos",
+      "imageUrl": "https://images.unsplash.com/photo-1656153164394-99c8867e0746?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwZXQlMjBjb2xsYWdlfGVufDB8fHx8MTc2ODQ4NTQ4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pet collage"
+    },
+    {
+      "id": "landing-feature-2",
+      "description": "A person using a phone to check pet health",
+      "imageUrl": "https://images.unsplash.com/photo-1663661745737-87c8741e9191?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGhvbmUlMjBoZWFsdGh8ZW58MHx8fHwxNzY4NDg1NDgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "phone health"
+    },
+    {
+      "id": "landing-cta",
+      "description": "A group of people with their pets at a park",
+      "imageUrl": "https://images.unsplash.com/photo-1606577017430-20c1a74aa888?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwZW9wbGUlMjBwZXRzfGVufDB8fHx8MTc2ODQ4NTQ4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "people pets"
+    }
+  ]
 }
