@@ -75,6 +75,51 @@ export const mockData: MockData = {
       following: 110,
       petIds: ["pet_006", "pet_007", "pet_008"]
     },
+    {
+      userId: "user_006",
+      email: "shreyan.bagchi@test.com",
+      password: "Test@123",
+      displayName: "Shreyan Bagchi",
+      photoURL: getImageUrl("user_shreyan"),
+      location: { city: "Bangalore", state: "Karnataka", country: "India" },
+      bio: "Just a guy and his dog, exploring the Garden City.",
+      joinedAt: "2024-08-01",
+      postCount: 5,
+      petCount: 1,
+      followers: 50,
+      following: 20,
+      petIds: ["pet_009"]
+    },
+    {
+      userId: "user_007",
+      email: "ishaan.singh@test.com",
+      password: "Test@123",
+      displayName: "Ishaan Som Singh",
+      photoURL: getImageUrl("user_ishaan"),
+      location: { city: "Bangalore", state: "Karnataka", country: "India" },
+      bio: "Persian cat enthusiast. My camera roll is 99% cat photos.",
+      joinedAt: "2024-07-22",
+      postCount: 8,
+      petCount: 1,
+      followers: 78,
+      following: 45,
+      petIds: ["pet_010"]
+    },
+    {
+      userId: "user_008",
+      email: "grad.circle@test.com",
+      password: "Test@123",
+      displayName: "Grad Circle",
+      photoURL: getImageUrl("user_grad_circle"),
+      location: { city: "Bangalore", state: "Karnataka", country: "India" },
+      bio: "We're a pet-friendly workspace in Bangalore! Pawsitivity is part of our culture.",
+      joinedAt: "2024-06-10",
+      postCount: 3,
+      petCount: 1,
+      followers: 150,
+      following: 12,
+      petIds: []
+    }
   ],
   pets: [
     {
@@ -166,6 +211,42 @@ export const mockData: MockData = {
       activityLevel: 10,
       microchipId: "556677889",
       createdAt: "2024-01-02"
+    },
+    {
+      petId: "pet_009",
+      ownerId: "user_006",
+      ownerName: "Shreyan Bagchi",
+      name: "Sheru",
+      type: "Dog",
+      breed: "Indie",
+      gender: "Male",
+      age: { years: 3, months: 0 },
+      birthDate: "2021-09-01",
+      color: "Fawn",
+      weight: 18,
+      photo: getImageUrl("pet_sheru"),
+      specialNeeds: "None",
+      activityLevel: 7,
+      microchipId: "N/A",
+      createdAt: "2024-08-01"
+    },
+    {
+      petId: "pet_010",
+      ownerId: "user_007",
+      ownerName: "Ishaan Som Singh",
+      name: "Mittens",
+      type: "Cat",
+      breed: "Persian",
+      gender: "Female",
+      age: { years: 2, months: 0 },
+      birthDate: "2022-10-10",
+      color: "White",
+      weight: 4,
+      photo: getImageUrl("pet_mittens"),
+      specialNeeds: "Requires daily grooming.",
+      activityLevel: 5,
+      microchipId: "445566778",
+      createdAt: "2024-07-22"
     }
   ],
   posts: [
@@ -246,6 +327,51 @@ export const mockData: MockData = {
       comments: [],
       saved: false,
       createdAt: "2025-01-15T04:00:00Z"
+    },
+    {
+      postId: "post_006",
+      userId: "user_006",
+      userName: "Shreyan Bagchi",
+      userPhoto: getImageUrl("user_shreyan"),
+      petId: "pet_009",
+      petName: "Sheru",
+      image: getImageUrl("post_sheru_cubbon"),
+      caption: "Sunday morning vibes at Cubbon Park. Sheru loves the open space! #bangalorediaries #dogsofbangalore",
+      likes: 28,
+      likedBy: ["user_007", "user_008"],
+      comments: [],
+      saved: false,
+      createdAt: "2025-01-16T08:00:00Z"
+    },
+    {
+      postId: "post_007",
+      userId: "user_007",
+      userName: "Ishaan Som Singh",
+      userPhoto: getImageUrl("user_ishaan"),
+      petId: "pet_010",
+      petName: "Mittens",
+      image: getImageUrl("post_mittens_sunbathing"),
+      caption: "The queen claims her throne (and the sunniest spot in the house). #persiancat #catlife",
+      likes: 52,
+      likedBy: ["user_006", "user_002"],
+      comments: [],
+      saved: true,
+      createdAt: "2025-01-16T10:00:00Z"
+    },
+    {
+      postId: "post_008",
+      userId: "user_008",
+      userName: "Grad Circle",
+      userPhoto: getImageUrl("user_grad_circle"),
+      petId: "pet_009",
+      petName: "Sheru",
+      image: getImageUrl("post_grad_circle_office"),
+      caption: "We had a very good boy visit us at Grad Circle today! Sheru kept the team morale high. #petfriendlyoffice #bangalorestartups",
+      likes: 95,
+      likedBy: ["user_006", "user_007", "user_001"],
+      comments: [],
+      saved: false,
+      createdAt: "2025-01-17T11:00:00Z"
     }
   ],
   stories: [
@@ -261,3 +387,5 @@ export const mockData: MockData = {
   tipArticles: [],
   conversations: []
 };
+
+    
