@@ -11,7 +11,7 @@ export const mockData: MockData = {
   users: [{
       userId: "user_001",
       email: "priya.sharma@test.com",
-      password: "happy123",
+      password: "Test@123",
       displayName: "Priya Sharma",
       photoURL: getImageUrl("user_priya"),
       location: { city: "Mumbai", state: "Maharashtra", country: "India" },
@@ -21,8 +21,22 @@ export const mockData: MockData = {
       petCount: 2,
       followers: 145,
       following: 89,
-      petIds: ["pet_001", "pet_002"
-  ]
+      petIds: ["pet_001", "pet_002"]
+    },
+    {
+      userId: "user_032",
+      email: "Happy@test.com",
+      password: "Test@123",
+      displayName: "happy",
+      photoURL: "https://picsum.photos/seed/happy/400/400",
+      location: { city: "Unknown", state: "", country: "India" },
+      bio: "",
+      joinedAt: "2026-01-15T16:57:33.947Z",
+      postCount: 0,
+      petCount: 0,
+      followers: 0,
+      following: 0,
+      petIds: []
     },
     {
       userId: "user_002",
@@ -741,3 +755,5 @@ export const mockData: MockData = {
     }
   ]
 };
+
+    
