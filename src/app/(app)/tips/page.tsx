@@ -12,42 +12,42 @@ const careGuides = [
     title: "The Ultimate Guide to Pet Nutrition",
     description: "Learn what to feed your pet at every stage of their life for optimal health.",
     icon: <Bone className="w-8 h-8 text-primary" />,
-    href: "#"
+    href: "https://www.aspca.org/pet-care/animal-poison-control/people-foods-avoid-feeding-your-pets"
   },
   {
     category: "Training",
     title: "Positive Reinforcement Training Techniques",
     description: "Discover effective and humane ways to train your pet using positive reinforcement.",
     icon: <Brain className="w-8 h-8 text-primary" />,
-    href: "#"
+    href: "https://www.humanesociety.org/resources/positive-reinforcement-training"
   },
   {
     category: "Health & Wellness",
     title: "Recognizing Common Health Issues",
     description: "Know the signs of common health problems to keep your pet safe and healthy.",
     icon: <Heart className="w-8 h-8 text-primary" />,
-    href: "#"
+    href: "https://www.avma.org/resources-tools/pet-owners/petcare/10-signs-your-pet-may-be-sick"
   },
   {
     category: "Grooming",
     title: "Grooming Basics for a Happy Pet",
     description: "From brushing to bathing, get tips on how to keep your pet looking and feeling great.",
     icon: <Scissors className="w-8 h-8 text-primary" />,
-    href: "#"
+    href: "https://www.aspca.org/pet-care/general-pet-care/grooming-your-dog"
   },
-    {
+  {
     category: "Behavior",
     title: "Decoding Your Pet's Behavior",
     description: "Understand what your pet is trying to tell you with their barks, meows, and body language.",
     icon: <Users className="w-8 h-8 text-primary" />,
-    href: "#"
+    href: "https://www.humanesociety.org/resources/cat-body-language"
   },
   {
     category: "First-Time Owners",
     title: "New Pet Checklist for First-Time Owners",
     description: "Everything you need to know and prepare for when bringing a new pet home.",
     icon: <Lightbulb className="w-8 h-8 text-primary" />,
-    href: "#"
+    href: "https://www.thesprucepets.com/new-dog-checklist-1117354"
   }
 ];
 
@@ -76,7 +76,7 @@ export default function TipsPage() {
         <h2 className="text-2xl font-bold tracking-tight font-headline">Pet Care Guides</h2>
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {careGuides.map((guide) => (
-            <Link href={guide.href} key={guide.title} className="group">
+            <Link href={guide.href} key={guide.title} className="group" target="_blank" rel="noopener noreferrer">
               <Card className="h-full hover:border-primary transition-colors hover:shadow-lg">
                 <CardHeader>
                   <div className="flex items-center justify-between">
