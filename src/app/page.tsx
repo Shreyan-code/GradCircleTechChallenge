@@ -65,7 +65,7 @@ export default function LandingPage() {
               <Link href="/login">Log In</Link>
             </Button>
             <Button asChild>
-              <Link href="/login">Sign Up</Link>
+              <Link href="/signup">Sign Up</Link>
             </Button>
           </nav>
         </div>
@@ -84,7 +84,7 @@ export default function LandingPage() {
               </p>
               <div className="mt-8 flex gap-4">
                 <Button size="lg" asChild>
-                  <Link href="/login">Join the Community</Link>
+                  <Link href="/signup">Join the Community</Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <Link href="#features">Learn More</Link>
@@ -223,7 +223,7 @@ export default function LandingPage() {
                 </p>
                 <div className="mt-8">
                   <Button size="lg" variant="secondary" asChild>
-                    <Link href="/login">Sign Up for Free</Link>
+                    <Link href="/signup">Sign Up for Free</Link>
                   </Button>
                 </div>
               </div>
