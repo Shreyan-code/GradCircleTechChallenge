@@ -11,6 +11,7 @@ import { Loader2, Send, Sparkles } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PawPrintIcon } from '@/components/icons';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { mockData } from '@/lib/mock-data';
 
 interface AdvisorChatProps {
   pets: Pet[];
