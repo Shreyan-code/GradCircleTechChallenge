@@ -314,7 +314,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_priya"),
       petId: "pet_001",
       petName: "Max",
-      image: getImageUrl("post_juhu"),
+      image: getImageUrl("post_golden_beach"),
       caption: "Morning walks at Juhu Beach with Max and Bella! They absolutely love the sand 🌊 #dogsofinstagram #mumbai",
       likes: 47,
       likedBy: ["user_004", "user_003"],
@@ -429,6 +429,36 @@ export const mockData: MockData = {
       comments: [],
       saved: false,
       createdAt: subDays(now, 6).toISOString()
+    },
+    {
+      postId: "post_009",
+      userId: "user_001",
+      userName: "Priya Sharma",
+      userPhoto: getImageUrl("user_priya"),
+      petId: "pet_002",
+      petName: "Bella",
+      image: getImageUrl("post_bella_birthday"),
+      caption: "Happy 2nd Birthday to my sweet Bella! 🎂 Can't believe how fast time flies. #birthdaygirl #dogbirthday",
+      likes: 72,
+      likedBy: ["user_002", "user_003", "user_004"],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 2).toISOString()
+    },
+    {
+      postId: "post_010",
+      userId: "user_001",
+      userName: "Priya Sharma",
+      userPhoto: getImageUrl("user_priya"),
+      petId: "pet_001",
+      petName: "Max",
+      image: getImageUrl("post_max_muddy"),
+      caption: "Someone had a little too much fun in the monsoon puddles today... Worth it for that smile! 🐾 #monsoon #muddydog",
+      likes: 61,
+      likedBy: ["user_005"],
+      comments: [],
+      saved: true,
+      createdAt: subDays(now, 4).toISOString()
     }
   ],
   stories: [

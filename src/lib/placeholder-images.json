@@ -103,10 +103,10 @@
       "imageHint": "orange cat"
     },
     {
-      "id": "post_juhu",
-      "description": "Dogs playing on Juhu beach",
-      "imageUrl": "https://images.unsplash.com/photo-1645255026229-41b14f029496?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxkb2dzJTIwYmVhY2h8ZW58MHx8fHwxNzY4NDg1NDgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "dogs beach"
+      "id": "post_golden_beach",
+      "description": "A golden retriever on the beach",
+      "imageUrl": "https://images.unsplash.com/photo-1548262459-4a02c9143899?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb2xkZW4lMjByZXRyaWV2ZXIlMjBiZWFjaHxlbnwwfHx8fDE3Njg1NjQxNTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "golden retriever beach"
     },
     {
       "id": "post_simba_code",
@@ -135,7 +135,7 @@
     {
       "id": "post_sheru_cubbon",
       "description": "A dog enjoying Cubbon Park",
-      "imageUrl": "https://images.unsplash.com/photo-1608200765700-ba7ff78b6dd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkb2clMjBwYXJrfGVufDB8fHx8MTc2ODQxNTI1OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1608200765700-ba7ff78b6dd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkb2clMjBwYXJrfGVufDB8fHx8fDE3Njg0MTUyNTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "dog park"
     },
     {
@@ -149,6 +149,18 @@
       "description": "A dog in an office",
       "imageUrl": "https://images.unsplash.com/photo-1629786913988-506da2a98db8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkb2clMjBvZmZpY2V8ZW58MHx8fHwxNzY4NDg1OTQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "dog office"
+    },
+    {
+      "id": "post_bella_birthday",
+      "description": "A golden retriever with a birthday hat",
+      "imageUrl": "https://images.unsplash.com/photo-1621231943891-3e9a0f443b7e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb2xkZW4lMjByZXRyaWV2ZXIlMjBiaXJ0aGRheXxlbnwwfHx8fDE3Njg1NjQyNTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dog birthday"
+    },
+    {
+      "id": "post_max_muddy",
+      "description": "A muddy golden retriever smiling",
+      "imageUrl": "https://images.unsplash.com/photo-1615497092850-6a5518765955?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtdWRkeSUyMGdvbGRlbiUyMHJldHJpZXZlcnxlbnwwfHx8fDE3Njg1NjQyNzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "muddy dog"
     },
     {
       "id": "story_max_playing",
@@ -165,7 +177,7 @@
     {
       "id": "story_rocky_park",
       "description": "Dog in a green park",
-      "imageUrl": "https://images.unsplash.com/photo-1619333774340-3a878585c2e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxkb2clMjBwYXJrfGVufDB8fHx8MTc2ODQxNTI1OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1619333774340-3a878585c2e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxkb2clMjBwYXJrfGVufDB8fHx8fDE3Njg0MTUyNTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "dog park"
     },
     {
