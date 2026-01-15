@@ -8,11 +8,10 @@ const getImageUrl = (id: string) => PlaceHolderImages.find(p => p.id === id)?.im
 const now = new Date();
 
 export const mockData: MockData = {
-  users: [
-    {
+  users: [{
       userId: "user_001",
       email: "priya.sharma@test.com",
-      password: "Test@123",
+      password: "happy123",
       displayName: "Priya Sharma",
       photoURL: getImageUrl("user_priya"),
       location: { city: "Mumbai", state: "Maharashtra", country: "India" },
@@ -22,7 +21,8 @@ export const mockData: MockData = {
       petCount: 2,
       followers: 145,
       following: 89,
-      petIds: ["pet_001", "pet_002"]
+      petIds: ["pet_001", "pet_002"
+  ]
     },
     {
       userId: "user_002",
