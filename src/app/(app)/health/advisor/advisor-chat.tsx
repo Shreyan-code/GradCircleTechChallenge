@@ -11,6 +11,7 @@ import { Loader2, Send, Sparkles } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useAuth } from '@/context/auth-context';
+import { useToast } from '@/hooks/use-toast';
 
 interface AdvisorChatProps {
   pets: Pet[];
@@ -29,6 +30,7 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
   const [isLoading, setIsLoading] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
+  const { toast } = useToast();
   
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -36,17 +38,17 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
     }
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim() || !selectedPetId) return;
+  const sendMessage = async (messageText: string) => {
+    if (!messageText.trim() || !selectedPetId) return;
 
-    const userMessage: Message = { id: Date.now(), sender: 'user', text: input };
+    const userMessage: Message = { id: Date.now(), sender: 'user', text: messageText };
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
     try {
       const selectedPet = pets.find(p => p.petId === selectedPetId);
-      const query = `My pet is a ${selectedPet?.age.years} year old ${selectedPet?.breed}. Question: ${input}`;
+      const query = `My pet is a ${selectedPet?.age.years} year old ${selectedPet?.breed}. Question: ${messageText}`;
       const result = await aiHealthAdvisor({ query });
       
       const aiMessage: Message = { id: Date.now() + 1, sender: 'ai', text: result.response };
@@ -58,6 +60,22 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  const handleSend = () => {
+    sendMessage(input);
+  };
+  
+  const handleSuggestedPromptClick = (prompt: string) => {
+    if (!selectedPetId) {
+      toast({
+        title: 'Select a Pet',
+        description: 'Please select a pet before asking a question.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    sendMessage(prompt);
   };
   
   const suggestedPrompts = [
@@ -99,7 +117,7 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
               <p className="text-muted-foreground">Select a pet and ask a question to begin.</p>
                <div className="mt-6 flex flex-col gap-2 w-full max-w-md">
                 {suggestedPrompts.map(prompt => (
-                  <Button key={prompt} variant="outline" size="sm" onClick={() => setInput(prompt)}>
+                  <Button key={prompt} variant="outline" size="sm" onClick={() => handleSuggestedPromptClick(prompt)}>
                     {prompt}
                   </Button>
                 ))}
