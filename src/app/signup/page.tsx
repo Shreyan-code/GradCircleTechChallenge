@@ -24,9 +24,9 @@ export default function SignupPage() {
       await signup(email, password, displayName);
       toast({
         title: "Signup Successful",
-        description: "Welcome to PetConnect! Please log in.",
+        description: "Welcome to PetConnect!",
       });
-      router.push('/login');
+      router.push('/feed');
     } catch (error: any) {
       toast({
         variant: "destructive",

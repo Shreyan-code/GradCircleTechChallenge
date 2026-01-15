@@ -103,6 +103,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Signup failed');
     }
+
+    const { user: createdUser } = await response.json();
+
+    const userToStore = { ...createdUser };
+    delete userToStore.password;
+
+    localStorage.setItem('petconnect-user', JSON.stringify(userToStore));
+    setUser(userToStore);
   };
 
   const forgotPassword = async (email: string, newPass: string) => {
