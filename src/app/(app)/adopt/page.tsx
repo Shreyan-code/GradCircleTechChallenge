@@ -56,7 +56,7 @@ export default function AdoptionPage() {
                 </div>
                 <Button className="w-full mt-2">
                     <PawPrint className="mr-2 h-4 w-4" />
-                    I'm Interested in Adopting
+                    I am interested
                 </Button>
             </CardFooter>
           </Card>
