@@ -209,6 +209,18 @@
       "description": "A sad looking dog with a lost poster in the background",
       "imageUrl": "https://images.unsplash.com/photo-1604294525410-d856980b196e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsb3N0JTIwZG9nfGVufDB8fHx8MTc2ODUyNTgwOXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "lost dog"
+    },
+    {
+      "id": "event_yappy_hour",
+      "description": "People and dogs at an outdoor brewery",
+      "imageUrl": "https://images.unsplash.com/photo-1658449692429-06ca8a2c286f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkb2clMjBicmV3ZXJ5fGVufDB8fHx8MTc2ODUzOTg0MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dog brewery"
+    },
+    {
+      "id": "event_indie_playdate",
+      "description": "Many different dogs playing together in a park",
+      "imageUrl": "https://images.unsplash.com/photo-1558509807-e81a373b5b63?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkb2dzJTIwcGFya3xlbnwwfHx8fDE3Njg1Mzk4NzB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dogs park"
     }
   ]
 }

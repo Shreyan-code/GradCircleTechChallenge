@@ -435,7 +435,65 @@ export const mockData: MockData = {
     { storyId: "story_004", userId: "user_004", userName: "Rohan", userPhoto: getImageUrl("user_rohan"), storyImage: getImageUrl("story_bruno_zoomies"), caption: "Mid-day zoomies #beagle", timestamp: "2025-01-15T08:00:00Z", expiresAt: "2025-01-16T08:00:00Z" },
     { storyId: "story_005", userId: "user_005", userName: "Ishita", userPhoto: getImageUrl("user_ishita"), storyImage: getImageUrl("story_cats_window"), caption: "Bird watching crew #catlife", timestamp: "2025-01-15T12:00:00Z", expiresAt: "2025-01-16T12:00:00Z" },
   ],
-  events: [],
+  events: [
+    {
+      eventId: "event_001",
+      organizerId: "user_008",
+      organizerName: "Grad Circle",
+      organizerPhoto: getImageUrl("user_grad_circle"),
+      title: "Paws & Pints: Yappy Hour",
+      description: "Join us for a fun evening of craft beer for humans and puppuccinos for dogs! A great chance to socialize and meet other pet lovers in the city.",
+      bannerImage: getImageUrl("event_yappy_hour"),
+      date: new Date(new Date().setDate(new Date().getDate() + 14)).toISOString(), // 2 weeks from now
+      startTime: "17:00",
+      endTime: "20:00",
+      location: {
+        venue: "Toit",
+        city: "Bangalore",
+        address: "298, 100 Feet Road, Namma Metro Pillar 62, Indiranagar",
+        landmark: "Indiranagar"
+      },
+      petTypes: ['Dogs'],
+      maxAttendees: 50,
+      isFree: false,
+      attendeeCount: 28,
+      attendees: [],
+      status: 'upcoming',
+      createdAt: "2025-02-15T10:00:00Z"
+    },
+    {
+      eventId: "event_002",
+      organizerId: "user_003",
+      organizerName: "Ananya Reddy",
+      organizerPhoto: getImageUrl("user_ananya"),
+      title: "Cubbon Park Indie Playdate",
+      description: "A casual weekend meetup for all our lovely indie dogs and their parents at the Cubbon Park dog park. Let's celebrate our amazing desi hounds!",
+      bannerImage: getImageUrl("event_indie_playdate"),
+      date: new Date(new Date().setDate(new Date().getDate() + 21)).toISOString(), // 3 weeks from now
+      startTime: "08:00",
+      endTime: "10:00",
+      location: {
+        venue: "Cubbon Park Dog Park",
+        city: "Bangalore",
+        address: "Behind Cubbon Park Aquarium",
+        landmark: "Cubbon Park"
+      },
+      petTypes: ['Dogs'],
+      maxAttendees: null,
+      isFree: true,
+      attendeeCount: 16,
+      attendees: [
+        {
+          userId: "user_001",
+          userName: "Priya Sharma",
+          userPhoto: getImageUrl("user_priya"),
+          rsvpDate: "2025-02-18T10:00:00Z"
+        }
+      ],
+      status: 'upcoming',
+      createdAt: "2025-02-20T11:00:00Z"
+    }
+  ],
   forumTopics: [],
   lostPetAlerts: [
     {
