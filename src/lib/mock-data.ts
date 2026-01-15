@@ -683,5 +683,55 @@ export const mockData: MockData = {
       ],
       createdAt: "2025-01-16T11:40:00Z"
     }
+  ],
+  adoptionPets: [
+    {
+      "adoptionId": "adopt_001",
+      "name": "Buddy",
+      "type": "Dog",
+      "breed": "Labrador Retriever Mix",
+      "age": { "years": 2, "months": 0 },
+      "gender": "Male",
+      "photo": getImageUrl("pet_buddy_adopt"),
+      "location": "Bangalore, KA",
+      "story": "Buddy is a super friendly and playful boy who loves everyone he meets. He's great with kids and other dogs. He knows basic commands and is fully house-trained. He would make a perfect family companion.",
+      "reasonForAdoption": "His family is relocating internationally for work and sadly cannot take him with them. They are heartbroken and want to find him a home where he'll be loved just as much.",
+      "contact": {
+        "name": "Rohan Sharma",
+        "phone": "+91 98765 43211"
+      }
+    },
+    {
+      "adoptionId": "adopt_002",
+      "name": "Oreo",
+      "type": "Cat",
+      "breed": "Domestic Shorthair",
+      "age": { "years": 1, "months": 6 },
+      "gender": "Female",
+      "photo": getImageUrl("pet_oreo_adopt"),
+      "location": "Mumbai, MH",
+      "story": "Oreo is a sweet and calm cat who loves to cuddle and nap in sunny spots. She is a little shy at first, but warms up quickly with a gentle touch. She is litter-trained and gets along well with other calm cats.",
+      "reasonForAdoption": "Her owner unfortunately developed a severe cat allergy and, after trying everything, had to make the difficult decision to rehome her. She's looking for a quiet and loving home.",
+      "contact": {
+        "name": "Aisha Khan",
+        "phone": "+91 98765 43212"
+      }
+    },
+    {
+      "adoptionId": "adopt_003",
+      "name": "Lucy",
+      "type": "Dog",
+      "breed": "Indie",
+      "age": { "years": 3, "months": 0 },
+      "gender": "Female",
+      "photo": getImageUrl("pet_lucy_adopt"),
+      "location": "Delhi, NCR",
+      "story": "Lucy was rescued from a tough situation but has blossomed into a loving and trusting companion. She is incredibly resilient and has a heart of gold. She loves her walks and is very loyal to her people. She is looking for a patient owner who can give her the stable home she deserves.",
+      "reasonForAdoption": "She was rescued by a local animal welfare group, has completed her medical treatment, and is now fully healthy and ready for her forever family.",
+      "contact": {
+        "name": "Delhi Paws Rescue",
+        "phone": "+91 98765 43213"
+      }
+    }
   ]
 };

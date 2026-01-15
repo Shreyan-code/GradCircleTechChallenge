@@ -210,6 +210,23 @@ export type Conversation = {
   createdAt: string;
 };
 
+export type AdoptionPet = {
+  adoptionId: string;
+  name: string;
+  type: 'Dog' | 'Cat';
+  breed: string;
+  age: { years: number; months: number };
+  gender: 'Male' | 'Female';
+  photo: string;
+  location: string;
+  story: string;
+  reasonForAdoption: string;
+  contact: {
+    name: string;
+    phone: string;
+  };
+};
+
 export type MockData = {
   users: User[];
   pets: Pet[];
@@ -220,4 +237,5 @@ export type MockData = {
   lostPetAlerts: LostPetAlert[];
   tipArticles: TipArticle[];
   conversations: Conversation[];
+  adoptionPets: AdoptionPet[];
 };

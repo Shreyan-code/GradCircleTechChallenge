@@ -27,7 +27,8 @@ import {
   Sparkles,
   Users,
   BookOpen,
-  Lightbulb
+  Lightbulb,
+  PawPrint
 } from 'lucide-react';
 import Link from 'next/link';
 import { PawPrintIcon } from '@/components/icons';
@@ -35,7 +36,8 @@ import { PawPrintIcon } from '@/components/icons';
 const navItems = [
   { href: '/feed', icon: Home, label: 'Feed' },
   { href: '/connect', icon: Users, label: 'Connect', isAI: true },
-  { href: '/health', icon: Sparkles, label: 'Health Tools', isAI: true },
+  { href: '/health', icon: Heart, label: 'Health Tools', isAI: true },
+  { href: '/adopt', icon: PawPrint, label: 'Adopt a Pet' },
   { href: '/lost-pets', icon: ShieldQuestion, label: 'Lost & Found' },
   { href: '/forums', icon: MessageSquare, label: 'Forums' },
   { href: '/events', icon: Calendar, label: 'Events & Meetups' },
