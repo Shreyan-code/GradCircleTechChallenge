@@ -1,7 +1,10 @@
 import type { MockData } from './types';
 import { PlaceHolderImages } from './placeholder-images';
+import { subDays } from 'date-fns';
 
 const getImageUrl = (id: string) => PlaceHolderImages.find(p => p.id === id)?.imageUrl || '';
+
+const now = new Date();
 
 export const mockData: MockData = {
   users: [
@@ -320,7 +323,7 @@ export const mockData: MockData = {
         { commentId: "cmt_002", userId: "user_003", userName: "Ananya Reddy", userPhoto: getImageUrl("user_ananya"), text: "This is pure happiness!", timestamp: "2025-01-15T08:45:00Z" }
       ],
       saved: false,
-      createdAt: "2025-01-15T06:00:00Z"
+      createdAt: subDays(now, 1).toISOString()
     },
     {
       postId: "post_002",
@@ -337,7 +340,7 @@ export const mockData: MockData = {
          { commentId: "cmt_003", userId: "user_005", userName: "Ishita Gupta", userPhoto: getImageUrl("user_ishita"), text: "That's the look of a senior developer.", timestamp: "2025-01-15T09:10:00Z" }
       ],
       saved: true,
-      createdAt: "2025-01-15T05:00:00Z"
+      createdAt: subDays(now, 2).toISOString()
     },
     {
       postId: "post_003",
@@ -352,7 +355,7 @@ export const mockData: MockData = {
       likedBy: ["user_001", "user_002", "user_004", "user_005"],
       comments: [],
       saved: false,
-      createdAt: "2025-01-14T12:00:00Z"
+      createdAt: subDays(now, 3).toISOString()
     },
     {
       postId: "post_004",
@@ -367,7 +370,7 @@ export const mockData: MockData = {
       likedBy: ["user_001"],
       comments: [],
       saved: false,
-      createdAt: "2025-01-15T03:00:00Z"
+      createdAt: subDays(now, 4).toISOString()
     },
     {
       postId: "post_005",
@@ -380,7 +383,7 @@ export const mockData: MockData = {
       likedBy: ["user_002"],
       comments: [],
       saved: false,
-      createdAt: "2025-01-15T04:00:00Z"
+      createdAt: subDays(now, 5).toISOString()
     },
     {
       postId: "post_006",
@@ -395,7 +398,7 @@ export const mockData: MockData = {
       likedBy: ["user_007", "user_008"],
       comments: [],
       saved: false,
-      createdAt: "2025-01-16T08:00:00Z"
+      createdAt: subDays(now, 1).toISOString()
     },
     {
       postId: "post_007",
@@ -410,7 +413,7 @@ export const mockData: MockData = {
       likedBy: ["user_006", "user_002"],
       comments: [],
       saved: true,
-      createdAt: "2025-01-16T10:00:00Z"
+      createdAt: subDays(now, 2).toISOString()
     },
     {
       postId: "post_008",
@@ -425,7 +428,7 @@ export const mockData: MockData = {
       likedBy: ["user_006", "user_007", "user_001"],
       comments: [],
       saved: false,
-      createdAt: "2025-01-17T11:00:00Z"
+      createdAt: subDays(now, 6).toISOString()
     }
   ],
   stories: [
@@ -448,10 +451,10 @@ export const mockData: MockData = {
       startTime: "17:00",
       endTime: "20:00",
       location: {
-        venue: "Toit",
+        venue: "The Reservoire (Pet-Friendly)",
         city: "Bangalore",
-        address: "298, 100 Feet Road, Namma Metro Pillar 62, Indiranagar",
-        landmark: "Indiranagar"
+        address: "17th Main Rd, KHB Colony, 5th Block, Koramangala",
+        landmark: "Koramangala"
       },
       petTypes: ['Dogs'],
       maxAttendees: 50,
@@ -473,9 +476,9 @@ export const mockData: MockData = {
       startTime: "08:00",
       endTime: "10:00",
       location: {
-        venue: "Cubbon Park Dog Park",
+        venue: "Cubbon Park Dog Park (Official)",
         city: "Bangalore",
-        address: "Behind Cubbon Park Aquarium",
+        address: "Behind Cubbon Park Aquarium, Kasturba Road",
         landmark: "Cubbon Park"
       },
       petTypes: ['Dogs'],
