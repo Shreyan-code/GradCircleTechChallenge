@@ -69,8 +69,8 @@
     {
       "id": "pet_rocky",
       "description": "Photo of Rocky, an Indian Pariah dog",
-      "imageUrl": "https://images.unsplash.com/photo-1621757298855-12262a78f0cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxicm93biUyMGRvZ3xlbnwwfHx8fDE3Njg0NTU4MDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "brown dog"
+      "imageUrl": "https://images.unsplash.com/photo-1621757298855-12262a78f0cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpZSUyMGRvZ3xlbnwwfHx8fDE3Njg0ODU5NTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "indie dog"
     },
     {
       "id": "pet_bruno",
@@ -93,7 +93,7 @@
     {
       "id": "pet_kaiser",
       "description": "Photo of Kaiser, a Siberian Husky",
-      "imageUrl": "https://images.unsplash.com/photo-1622325345243-1e67a07106e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzaWJlcmlhbiUyMGh1c2t5fGVufDB8fHx8MTc2ODUyNTQ5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1622325345243-1e67a07106e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzaWJlcmlhbiUyMGh1c2t5fGVufDB8fHx8fDE3Njg1MjU0OTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "siberian husky"
     },
     {
@@ -219,7 +219,7 @@
     {
       "id": "landing-lost-found",
       "description": "A sad looking dog with a lost poster in the background",
-      "imageUrl": "https://images.unsplash.com/photo-1604294525410-d856980b196e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsb3N0JTIwZG9nfGVufDB8fHx8MTc2ODUyNTgwOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1604294525410-d856980b196e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsb3N0JTIwZG9nfGVufDB8fHx8fDE3Njg1MjU4MDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "lost dog"
     },
     {
@@ -237,8 +237,8 @@
     {
       "id": "pet_buddy_adopt",
       "description": "A happy labrador retriever mix",
-      "imageUrl": "https://images.unsplash.com/photo-1598875706250-21fa76814725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGxhYnJhZG9yfGVufDB8fHx8MTc2ODU4MTE0NHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "happy labrador"
+      "imageUrl": "https://images.unsplash.com/photo-1596796339911-78c74d6f6e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsYWJyYWRvciUyMG1peHxlbnwwfHx8fDE3NjkxNTAxMjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "labrador mix"
     },
     {
       "id": "pet_oreo_adopt",
@@ -249,8 +249,8 @@
     {
       "id": "pet_lucy_adopt",
       "description": "A smiling indie dog",
-      "imageUrl": "https://images.unsplash.com/photo-1629829280363-3a1b55a8f278?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzbWlsaW5nJTIwaW5kaWUlMjBkb2d8ZW58MHx8fHwxNzY4NTgxMjMwfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "smiling indie dog"
+      "imageUrl": "https://images.unsplash.com/photo-1615789591457-74a63395c990?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbmRpZSUyMGRvZ3xlbnwwfHx8fDE3NjkxNTAxODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "indie dog"
     }
   ]
 }
