@@ -150,7 +150,6 @@ export type LostPetAlert = {
   status: 'active' | 'found';
   ownerId: string;
   ownerName: string;
-  ownerPhoto: string;
   ownerPhone: string;
   petId: string;
   petName: string;
@@ -173,10 +172,6 @@ export type LostPetAlert = {
   lastSeenTime: string;
   description: string;
   reward: number;
-  microchipId: string;
-  views: number;
-  shares: number;
-  tips: LostPetTip[];
   createdAt: string;
 };
 

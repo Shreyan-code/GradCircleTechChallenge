@@ -1,9 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { PawPrint, Heart, MessageCircle, MapPin, Users, Calendar, Stethoscope, Search } from 'lucide-react';
+import { PawPrint, Heart, MessageCircle, MapPin, Users, Calendar, Stethoscope, Search, AlertTriangle, Share2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { mockData } from '@/lib/mock-data';
+import { Badge } from '@/components/ui/badge';
+import { formatDistanceToNowStrict } from 'date-fns';
+import { cn } from '@/lib/utils';
 
 const features = [
   {
@@ -43,6 +47,9 @@ export default function LandingPage() {
   const featureImage1 = PlaceHolderImages.find(p => p.id === 'landing-feature-1');
   const featureImage2 = PlaceHolderImages.find(p => p.id === 'landing-feature-2');
   const ctaImage = PlaceHolderImages.find(p => p.id === 'landing-cta');
+  const lostAndFoundImage = PlaceHolderImages.find(p => p.id === 'landing-lost-found');
+  
+  const activeLostPetAlerts = mockData.lostPetAlerts.filter(a => a.status === 'active').slice(0, 2);
 
 
   return (
@@ -100,6 +107,53 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Lost & Found Section */}
+        <section className="py-16 md:py-24 bg-primary/5">
+          <div className="container">
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-foreground font-headline">Help Bring Them Home</h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                These pets are currently missing. Your vigilance can make a difference.
+              </p>
+            </div>
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+              {activeLostPetAlerts.map(alert => (
+                 <Card key={alert.alertId} className="flex flex-col md:flex-row items-center gap-6 p-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="relative w-48 h-48 md:w-40 md:h-40 flex-shrink-0">
+                      <Image src={alert.petPhoto} alt={alert.petName} fill className="object-cover rounded-full border-4 border-destructive" />
+                    </div>
+                    <div className="text-center md:text-left">
+                       <Badge variant="destructive" className="mb-2">
+                          <AlertTriangle className="h-3 w-3 mr-1.5" />
+                          Lost {formatDistanceToNowStrict(new Date(alert.lastSeenDate))} ago
+                       </Badge>
+                       <h3 className="text-2xl font-bold font-headline">{alert.petName}</h3>
+                       <p className="text-muted-foreground">
+                         <span className="font-semibold">{alert.breed}</span> &bull; {alert.gender}
+                       </p>
+                       <p className="mt-2 text-sm flex items-center justify-center md:justify-start gap-2 text-muted-foreground">
+                          <MapPin className="h-4 w-4" /> Last seen near {alert.lastSeenLocation.landmark}, {alert.lastSeenLocation.city}
+                       </p>
+                       <div className="mt-4 flex gap-2 justify-center md:justify-start">
+                         <Button asChild>
+                           <Link href="/lost-pets">View Details</Link>
+                         </Button>
+                         <Button variant="outline">
+                           <Share2 className="mr-2 h-4 w-4" /> Share
+                         </Button>
+                       </div>
+                    </div>
+                 </Card>
+              ))}
+            </div>
+             <div className="text-center mt-12">
+                <Button variant="ghost" asChild>
+                    <Link href="/lost-pets">View All Lost & Found Alerts &rarr;</Link>
+                </Button>
+            </div>
+          </div>
+        </section>
+        
         {/* Features Section */}
         <section id="features" className="py-16 md:py-24 bg-secondary">
           <div className="container">
