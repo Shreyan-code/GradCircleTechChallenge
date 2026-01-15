@@ -432,11 +432,11 @@ export const mockData: MockData = {
     }
   ],
   stories: [
-    { storyId: "story_001", userId: "user_001", userName: "Priya", userPhoto: getImageUrl("user_priya"), storyImage: getImageUrl("story_max_playing"), caption: "Play time! #doglife", timestamp: "2025-01-15T10:00:00Z", expiresAt: "2025-01-16T10:00:00Z" },
-    { storyId: "story_002", userId: "user_002", userName: "Arjun", userPhoto: getImageUrl("user_arjun"), storyImage: getImageUrl("story_simba_nap"), caption: "Sleepy Sunday 😴 #catnap", timestamp: "2025-01-15T09:00:00Z", expiresAt: "2025-01-16T09:00:00Z" },
-    { storyId: "story_003", userId: "user_003", userName: "Ananya", userPhoto: getImageUrl("user_ananya"), storyImage: getImageUrl("story_rocky_park"), caption: "Park adventures! #rescuedog", timestamp: "2025-01-15T11:00:00Z", expiresAt: "2025-01-16T11:00:00Z" },
-    { storyId: "story_004", userId: "user_004", userName: "Rohan", userPhoto: getImageUrl("user_rohan"), storyImage: getImageUrl("story_bruno_zoomies"), caption: "Mid-day zoomies #beagle", timestamp: "2025-01-15T08:00:00Z", expiresAt: "2025-01-16T08:00:00Z" },
-    { storyId: "story_005", userId: "user_005", userName: "Ishita", userPhoto: getImageUrl("user_ishita"), storyImage: getImageUrl("story_cats_window"), caption: "Bird watching crew #catlife", timestamp: "2025-01-15T12:00:00Z", expiresAt: "2025-01-16T12:00:00Z" },
+    { storyId: "story_001", userId: "user_001", userName: "Priya", userPhoto: getImageUrl("user_priya"), storyImage: getImageUrl("story_max_playing"), caption: "Play time! #doglife", timestamp: subDays(now, 0).toISOString(), expiresAt: "2025-01-16T10:00:00Z" },
+    { storyId: "story_002", userId: "user_002", userName: "Arjun", userPhoto: getImageUrl("user_arjun"), storyImage: getImageUrl("story_simba_nap"), caption: "Sleepy Sunday 😴 #catnap", timestamp: subDays(now, 0).toISOString(), expiresAt: "2025-01-16T09:00:00Z" },
+    { storyId: "story_003", userId: "user_003", userName: "Ananya", userPhoto: getImageUrl("user_ananya"), storyImage: getImageUrl("story_rocky_park"), caption: "Park adventures! #rescuedog", timestamp: subDays(now, 0).toISOString(), expiresAt: "2025-01-16T11:00:00Z" },
+    { storyId: "story_004", userId: "user_004", userName: "Rohan", userPhoto: getImageUrl("user_rohan"), storyImage: getImageUrl("story_bruno_zoomies"), caption: "Mid-day zoomies #beagle", timestamp: subDays(now, 0).toISOString(), expiresAt: "2025-01-16T08:00:00Z" },
+    { storyId: "story_005", userId: "user_005", userName: "Ishita", userPhoto: getImageUrl("user_ishita"), storyImage: getImageUrl("story_cats_window"), caption: "Bird watching crew #catlife", timestamp: subDays(now, 0).toISOString(), expiresAt: "2025-01-16T12:00:00Z" },
   ],
   events: [
     {
@@ -451,10 +451,10 @@ export const mockData: MockData = {
       startTime: "17:00",
       endTime: "20:00",
       location: {
-        venue: "The Reservoire (Pet-Friendly)",
+        venue: "Toit (Pet-Friendly Area)",
         city: "Bangalore",
-        address: "17th Main Rd, KHB Colony, 5th Block, Koramangala",
-        landmark: "Koramangala"
+        address: "298, 100 Feet Road, Namma Metro Pillar 62, Indiranagar",
+        landmark: "Indiranagar"
       },
       petTypes: ['Dogs'],
       maxAttendees: 50,
@@ -476,7 +476,7 @@ export const mockData: MockData = {
       startTime: "08:00",
       endTime: "10:00",
       location: {
-        venue: "Cubbon Park Dog Park (Official)",
+        venue: "The Dog Park at Cubbon Park",
         city: "Bangalore",
         address: "Behind Cubbon Park Aquarium, Kasturba Road",
         landmark: "Cubbon Park"
@@ -497,7 +497,64 @@ export const mockData: MockData = {
       createdAt: "2025-02-20T11:00:00Z"
     }
   ],
-  forumTopics: [],
+  forumTopics: [
+    {
+      topicId: "topic_001",
+      categoryId: "dog-talk",
+      userId: "user_001",
+      userName: "Priya Sharma",
+      userPhoto: getImageUrl("user_priya"),
+      title: "Best dog-friendly cafes in Bangalore?",
+      content: "Hey everyone! My husband and I are looking for some new spots to take Max and Bella on the weekends. We've been to TherPUP and Snoopy Paws Cafe, but would love to hear your recommendations!",
+      views: 128,
+      replyCount: 4,
+      lastReplyAt: subDays(now, 1).toISOString(),
+      createdAt: subDays(now, 3).toISOString(),
+      replies: []
+    },
+    {
+      topicId: "topic_002",
+      categoryId: "cat-corner",
+      userId: "user_002",
+      userName: "Arjun Patel",
+      userPhoto: getImageUrl("user_arjun"),
+      title: "Tips for introducing a new cat to your home?",
+      content: "I'm thinking of adopting another cat, but I'm worried about how Simba will react. He's been the only king of this castle for a while now. Any advice on making the introduction smooth?",
+      views: 74,
+      replyCount: 2,
+      lastReplyAt: subDays(now, 2).toISOString(),
+      createdAt: subDays(now, 5).toISOString(),
+      replies: []
+    },
+    {
+      topicId: "topic_003",
+      categoryId: "health",
+      userId: "user_004",
+      userName: "Rohan Mehta",
+      userPhoto: getImageUrl("user_rohan"),
+      title: "Struggling with my Beagle's weight. Help!",
+      content: "Bruno is a foodie and has put on a few extra kilos. The vet has advised us to get his weight under control. Any tips for managing a Beagle's diet without them staging a protest? 😂",
+      views: 210,
+      replyCount: 8,
+      lastReplyAt: subDays(now, 0).toISOString(),
+      createdAt: subDays(now, 2).toISOString(),
+      replies: []
+    },
+    {
+      topicId: "topic_004",
+      categoryId: "all-pets",
+      userId: "user_003",
+      userName: "Ananya Reddy",
+      userPhoto: getImageUrl("user_ananya"),
+      title: "Question about pet adoption process in Hyderabad",
+      content: "A friend of mine is looking to adopt a puppy in Hyderabad. Does anyone have recommendations for good shelters or rescue organizations to contact?",
+      views: 55,
+      replyCount: 1,
+      lastReplyAt: subDays(now, 4).toISOString(),
+      createdAt: subDays(now, 6).toISOString(),
+      replies: []
+    }
+  ],
   lostPetAlerts: [
     {
       alertId: "lpa_001",

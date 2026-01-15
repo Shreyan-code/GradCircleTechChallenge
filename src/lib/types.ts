@@ -120,7 +120,7 @@ export type ForumReply = {
 
 export type ForumTopic = {
   topicId: string;
-  categoryId: 'dog-talk' | 'cat-corner' | 'all-pets';
+  categoryId: 'dog-talk' | 'cat-corner' | 'health' | 'all-pets';
   userId: string;
   userName: string;
   userPhoto: string;
