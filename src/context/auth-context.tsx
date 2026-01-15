@@ -10,6 +10,7 @@ interface AuthContextType {
   login: (email: string, pass: string) => boolean;
   logout: () => void;
   signup: (email: string, pass: string, displayName: string) => Promise<void>;
+  forgotPassword: (email: string, newPass: string) => Promise<void>;
   loading: boolean;
 }
 
@@ -36,10 +37,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
   
   useEffect(() => {
-    if (!loading && !user && !['/login', '/signup', '/'].includes(pathname)) {
+    if (!loading && !user && !['/login', '/signup', '/', '/forgot-password'].includes(pathname)) {
         router.push('/login');
     }
-    if (!loading && user && ['/login', '/signup', '/'].includes(pathname)) {
+    if (!loading && user && ['/login', '/signup', '/', '/forgot-password'].includes(pathname)) {
         router.push('/feed');
     }
   }, [user, loading, pathname, router]);
@@ -104,7 +105,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const value = { user, login, logout, signup, loading };
+  const forgotPassword = async (email: string, newPass: string) => {
+    const response = await fetch('/api/forgot-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, newPassword: newPass }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Password reset failed');
+    }
+  }
+
+  const value = { user, login, logout, signup, forgotPassword, loading };
 
   return (
     <AuthContext.Provider value={value}>
