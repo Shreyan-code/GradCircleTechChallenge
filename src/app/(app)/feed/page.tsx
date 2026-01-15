@@ -20,9 +20,11 @@ export default function FeedPage() {
 
   return (
     <div className="flex justify-center w-full">
-      <div className="w-full max-w-2xl">
-        <StoriesCarousel stories={stories} currentUser={user} />
-        <div className="mt-6 flex flex-col gap-8">
+      <div className="w-full md:max-w-2xl">
+        <div className="px-4 md:px-0">
+          <StoriesCarousel stories={stories} currentUser={user} />
+        </div>
+        <div className="mt-6 flex flex-col md:gap-8">
           {otherUserPosts.map((post) => (
             <PostCard key={post.postId} post={post} />
           ))}

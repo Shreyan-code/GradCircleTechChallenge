@@ -46,7 +46,7 @@ export function PostCard({ post }: PostCardProps) {
 
 
   return (
-    <Card className="bg-card text-card-foreground rounded-lg overflow-hidden shadow-none border-0 md:border md:rounded-xl">
+    <Card className="bg-card text-card-foreground md:rounded-lg overflow-hidden shadow-none md:border-b">
       {/* Post Header */}
       <div className="flex items-center p-4">
         <DropdownMenu>
@@ -83,7 +83,7 @@ export function PostCard({ post }: PostCardProps) {
       </div>
 
       {/* Post Image */}
-      <div className="relative w-full aspect-square md:aspect-auto md:min-h-[400px]" onDoubleClick={handleDoubleClick}>
+      <div className="relative w-full aspect-square" onDoubleClick={handleDoubleClick}>
         <Image src={post.image} alt={post.caption} layout="fill" objectFit="cover" />
       </div>
 
