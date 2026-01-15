@@ -97,7 +97,7 @@ We built this using:
 - **React** - for the frontend (it's what all the cool kids use)
 - **Firebase** - for backend stuff (auth, database, storage)
 - **Tailwind CSS** - to make it look pretty
-- **Claude AI API** - for all the smart AI features
+- **Google Genkit** - for all the smart AI features ✨
 - **shadcn/ui** - for nice-looking components
 
 We chose warm brown/beige colors because they feel cozy and pet-friendly!
@@ -119,8 +119,8 @@ Feel free to explore! We added mock data so it doesn't look empty.
 ## What We Learned
 
 Building this taught us SO much:
-- How to work with AI (Claude is pretty amazing!)
-- Firebase Studio is both awesome and sometimes frustrating
+- How to work with AI (Genkit is pretty amazing!)
+- Firebase is both awesome and sometimes frustrating
 - Designing an app is harder than it looks
 - Managing a big project with lots of features
 - Git and GitHub (we messed up the repo like 3 times 😅)
