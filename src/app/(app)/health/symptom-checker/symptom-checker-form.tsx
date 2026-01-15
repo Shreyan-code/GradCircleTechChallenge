@@ -24,6 +24,15 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
+const suggestedSymptoms = [
+  'Vomiting after eating',
+  'Lethargic and not playful',
+  'Excessive scratching and licking',
+  'Diarrhea or loose stools',
+  'Loss of appetite',
+  'Coughing or sneezing',
+];
+
 export function SymptomCheckerForm() {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -73,6 +82,12 @@ export function SymptomCheckerForm() {
       default:
         return <Badge variant="secondary" className="capitalize"><ShieldCheck className="mr-2 h-4 w-4" />{urgency}</Badge>;
     }
+  };
+  
+  const handleSymptomSuggestionClick = (symptom: string) => {
+    const currentSymptoms = form.getValues('symptoms');
+    const newSymptoms = currentSymptoms ? `${currentSymptoms}, ${symptom}` : symptom;
+    form.setValue('symptoms', newSymptoms);
   };
 
   return (
@@ -130,7 +145,7 @@ export function SymptomCheckerForm() {
               <CardHeader>
                 <CardTitle>Step 2: Describe the Symptoms</CardTitle>
                 <CardDescription>
-                  Be as detailed as possible. Include changes in behavior, appetite, and any physical signs.
+                  Be as detailed as possible. You can also select from the common symptoms below.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -146,6 +161,22 @@ export function SymptomCheckerForm() {
                     </FormItem>
                   )}
                 />
+                <div className="mt-4">
+                    <p className="text-sm font-medium text-muted-foreground mb-2">Common symptoms:</p>
+                    <div className="flex flex-wrap gap-2">
+                        {suggestedSymptoms.map((symptom) => (
+                            <Button 
+                                key={symptom} 
+                                type="button" 
+                                variant="outline" 
+                                size="sm" 
+                                onClick={() => handleSymptomSuggestionClick(symptom)}
+                            >
+                                {symptom}
+                            </Button>
+                        ))}
+                    </div>
+                </div>
               </CardContent>
               <CardFooter className="justify-between">
                 <Button variant="outline" onClick={() => setStep(1)}>
