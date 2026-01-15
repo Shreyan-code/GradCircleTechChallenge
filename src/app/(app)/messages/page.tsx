@@ -10,13 +10,15 @@ import { Send, Search, Users, ChevronLeft, MoreVertical } from "lucide-react";
 import { format, formatDistanceToNowStrict } from 'date-fns';
 import { cn } from '@/lib/utils';
 import type { Conversation, Message, User } from '@/lib/types';
+import { useAuth } from '@/context/auth-context';
 
 export default function MessagesPage() {
-  const currentUser = mockData.users.find(u => u.userId === 'user_001'); // Assuming Priya is the current user
+  const { user: currentUser } = useAuth();
+  
+  if (!currentUser) return null;
+  
   const conversations = mockData.conversations.filter(c => c.participants.includes(currentUser?.userId || ''));
   const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(conversations[0] || null);
-
-  if (!currentUser) return null;
 
   const otherParticipantId = selectedConversation?.participants.find(p => p !== currentUser.userId);
   const otherParticipant = mockData.users.find(u => u.userId === otherParticipantId);

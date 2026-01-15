@@ -1,3 +1,4 @@
+'use client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -26,12 +27,15 @@ import {
   Users,
   Lightbulb,
   PawPrint,
-  Store
+  Store,
+  LogOut
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { PawPrintIcon } from '@/components/icons';
 import { Badge } from '@/components/ui/badge';
 import { SearchBar } from '@/components/search-bar';
+import { useAuth } from '@/context/auth-context';
 
 const navItems = [
   { href: '/feed', icon: Home, label: 'Feed' },
@@ -47,10 +51,21 @@ const navItems = [
 ];
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  // For demo purposes, we'll use the first mock user as the logged-in user.
-  const currentUser = mockData.users[0];
-  const conversations = mockData.conversations.filter(c => c.participants.includes(currentUser.userId));
-  const totalUnread = conversations.reduce((acc, convo) => acc + (convo.unreadCount[currentUser.userId] || 0), 0);
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
+  if (!user) {
+    // Or a loading spinner
+    return null;
+  }
+  
+  const handleLogout = () => {
+    logout();
+    router.push('/login');
+  };
+
+  const conversations = mockData.conversations.filter(c => c.participants.includes(user.userId));
+  const totalUnread = conversations.reduce((acc, convo) => acc + (convo.unreadCount[user.userId] || 0), 0);
 
   return (
     <SidebarProvider>
@@ -87,29 +102,32 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="justify-start w-full h-14 p-2 text-left">
                 <Avatar className='size-9'>
-                  <AvatarImage src={currentUser.photoURL} alt={currentUser.displayName} />
-                  <AvatarFallback>{currentUser.displayName.charAt(0)}</AvatarFallback>
+                  <AvatarImage src={user.photoURL} alt={user.displayName} />
+                  <AvatarFallback>{user.displayName.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div className='ml-2 text-sm overflow-hidden'>
-                    <p className='font-semibold truncate'>{currentUser.displayName}</p>
-                    <p className='text-muted-foreground truncate'>{currentUser.email}</p>
+                    <p className='font-semibold truncate'>{user.displayName}</p>
+                    <p className='text-muted-foreground truncate'>{user.email}</p>
                 </div>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">{currentUser.displayName}</p>
+                  <p className="text-sm font-medium leading-none">{user.displayName}</p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    {currentUser.email}
+                    {user.email}
                   </p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem asChild><Link href={`/profile/${currentUser.userId}`}>Profile</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link href={`/profile/${user.userId}`}>Profile</Link></DropdownMenuItem>
               <DropdownMenuItem asChild><Link href="/settings">Settings</Link></DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Log out</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Log out
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </SidebarFooter>

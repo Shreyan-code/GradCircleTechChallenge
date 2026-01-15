@@ -1,9 +1,15 @@
+'use client';
 import { PlaydateMatchmakerUI } from './playdate-matchmaker-ui';
 import { mockData } from '@/lib/mock-data';
+import { useAuth } from '@/context/auth-context';
 
 export default function PlaydateMatchmakerPage() {
-  const { pets, users } = mockData;
-  const currentUserPets = pets.filter((pet) => users[0].petIds.includes(pet.petId));
+  const { pets } = mockData;
+  const { user } = useAuth();
+  
+  if (!user) return null; // Or a loading spinner
+
+  const currentUserPets = pets.filter((pet) => user.petIds.includes(pet.petId));
 
   return (
     <div className="max-w-6xl mx-auto">

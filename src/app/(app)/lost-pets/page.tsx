@@ -12,11 +12,15 @@ import { useToast } from "@/hooks/use-toast";
 import { format } from 'date-fns';
 import { cn } from "@/lib/utils";
 import { ReportPetForm } from "./report-pet-form";
+import { useAuth } from "@/context/auth-context";
 
 export default function LostPetsPage() {
   const [mockData, setMockData] = useState(initialMockData);
   const [isReportDialogOpen, setReportDialogOpen] = useState(false);
   const { toast } = useToast();
+  const { user } = useAuth();
+
+  if (!user) return null;
 
   const handleShare = (petName: string) => {
     navigator.clipboard.writeText(`Please help find ${petName}! More info on PetConnect.`);
@@ -27,14 +31,13 @@ export default function LostPetsPage() {
   };
 
   const handleReportPet = (newAlert: Omit<LostPetAlert, 'alertId' | 'createdAt' | 'ownerId' | 'ownerName' | 'ownerPhone'>) => {
-    const currentUser = mockData.users[0];
     const alertId = `lpa_${String(mockData.lostPetAlerts.length + 1).padStart(3, '0')}`;
 
     const fullAlert: LostPetAlert = {
       ...newAlert,
       alertId,
-      ownerId: currentUser.userId,
-      ownerName: currentUser.displayName,
+      ownerId: user.userId,
+      ownerName: user.displayName,
       ownerPhone: "+91-9999988888", // Mock phone
       createdAt: new Date().toISOString(),
       status: 'active'
@@ -52,7 +55,7 @@ export default function LostPetsPage() {
     });
   };
 
-  const currentUserPets = mockData.pets.filter(p => p.ownerId === mockData.users[0].userId);
+  const currentUserPets = mockData.pets.filter(p => p.ownerId === user.userId);
 
   return (
     <div>

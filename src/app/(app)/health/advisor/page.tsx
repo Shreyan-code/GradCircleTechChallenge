@@ -1,9 +1,15 @@
+'use client';
 import { AdvisorChat } from './advisor-chat';
 import { mockData } from '@/lib/mock-data';
+import { useAuth } from '@/context/auth-context';
 
 export default function AdvisorPage() {
-  const { pets, users } = mockData;
-  const currentUserPets = pets.filter((pet) => users[0].petIds.includes(pet.petId));
+  const { pets } = mockData;
+  const { user } = useAuth();
+
+  if (!user) return null;
+
+  const currentUserPets = pets.filter((pet) => user.petIds.includes(pet.petId));
 
   return (
     <div className="h-[calc(100vh-10rem)]">

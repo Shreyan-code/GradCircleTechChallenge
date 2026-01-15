@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, use } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { Pet } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,9 +9,8 @@ import { aiHealthAdvisor } from '@/ai/flows/ai-health-advisor';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Loader2, Send, Sparkles } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { PawPrintIcon } from '@/components/icons';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { mockData } from '@/lib/mock-data';
+import { useAuth } from '@/context/auth-context';
 
 interface AdvisorChatProps {
   pets: Pet[];
@@ -29,7 +28,8 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-
+  const { user } = useAuth();
+  
   useEffect(() => {
     if (scrollAreaRef.current) {
       scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
@@ -65,6 +65,8 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
     "How can I tell if my cat is stressed?",
     "What are common signs of arthritis in older dogs?",
   ];
+  
+  if (!user) return null;
 
   return (
     <Card className="h-full flex flex-col">
@@ -127,8 +129,8 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
                   </div>
                    {message.sender === 'user' && (
                     <Avatar className="w-8 h-8">
-                      <AvatarImage src={mockData.users[0].photoURL} />
-                      <AvatarFallback>{mockData.users[0].displayName.charAt(0)}</AvatarFallback>
+                      <AvatarImage src={user.photoURL} />
+                      <AvatarFallback>{user.displayName.charAt(0)}</AvatarFallback>
                     </Avatar>
                   )}
                 </div>

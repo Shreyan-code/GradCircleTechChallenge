@@ -16,6 +16,7 @@ import { aiSymptomChecker, type AiSymptomCheckerOutput } from '@/ai/flows/ai-sym
 import { Loader2, Sparkles, AlertTriangle, ShieldCheck } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
+import { useAuth } from '@/context/auth-context';
 
 const schema = z.object({
   petId: z.string({ required_error: 'Please select a pet.' }),
@@ -39,12 +40,15 @@ export function SymptomCheckerForm() {
   const [result, setResult] = useState<AiSymptomCheckerOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const { user } = useAuth();
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
+  
+  if (!user) return null;
 
-  const { pets, users } = mockData;
-  const currentUserPets = pets.filter((pet) => users[0].petIds.includes(pet.petId));
+  const { pets } = mockData;
+  const currentUserPets = pets.filter((pet) => user.petIds.includes(pet.petId));
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setIsLoading(true);

@@ -16,6 +16,7 @@ import { notFound, useParams } from 'next/navigation';
 import { EditProfileForm } from './edit-profile-form';
 import { AddPetForm } from './add-pet-form';
 import type { Pet, User } from '@/lib/types';
+import { useAuth } from '@/context/auth-context';
 
 export default function ProfilePage() {
   const params = useParams<{ userId: string }>();
@@ -25,15 +26,18 @@ export default function ProfilePage() {
   
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openAddPet, setOpenAddPet] = useState(false);
-
+  
+  const { user: currentUser } = useAuth();
+  
   const user = mockData.users.find(u => u.userId === params.userId);
-  const currentUser = mockData.users[0];
-  const isCurrentUser = currentUser.userId === params.userId;
-
-  if (!user) {
-    notFound();
+  
+  if (!user || !currentUser) {
+    // Should handle loading state better
+    return notFound();
   }
   
+  const isCurrentUser = currentUser.userId === params.userId;
+
   const handleFollow = () => {
     setIsFollowing(!isFollowing);
     toast({

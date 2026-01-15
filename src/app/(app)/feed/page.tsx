@@ -1,3 +1,4 @@
+'use client';
 import { PostCard } from "@/components/feed/post-card";
 import { StoriesCarousel } from "@/components/feed/stories-carousel";
 import { Button } from "@/components/ui/button";
@@ -5,18 +6,22 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useAuth } from "@/context/auth-context";
 import { mockData } from "@/lib/mock-data";
 import { Plus } from "lucide-react";
 
 export default function FeedPage() {
-  const { posts, stories, users } = mockData;
-  const currentUser = users[0];
-  const otherUserPosts = posts.filter(post => post.userId !== currentUser.userId);
+  const { posts, stories } = mockData;
+  const { user } = useAuth();
+  
+  if (!user) return null; // Or a loading spinner
+
+  const otherUserPosts = posts.filter(post => post.userId !== user.userId);
 
   return (
     <div className="flex justify-center w-full">
       <div className="w-full max-w-2xl">
-        <StoriesCarousel stories={stories} currentUser={currentUser} />
+        <StoriesCarousel stories={stories} currentUser={user} />
         <div className="mt-6 flex flex-col gap-8">
           {otherUserPosts.map((post) => (
             <PostCard key={post.postId} post={post} />

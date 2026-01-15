@@ -8,11 +8,14 @@ import type { Event } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Ticket } from "lucide-react";
 import { format } from 'date-fns';
+import { useAuth } from '@/context/auth-context';
 
 export default function EventsPage() {
   const [mockData, setMockData] = useState(initialMockData);
   const { toast } = useToast();
-  const currentUser = mockData.users[0];
+  const { user: currentUser } = useAuth();
+  
+  if (!currentUser) return null;
 
   const handleRegister = (eventId: string) => {
     const event = mockData.events.find(e => e.eventId === eventId);
