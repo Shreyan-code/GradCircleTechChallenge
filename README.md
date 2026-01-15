@@ -107,7 +107,7 @@ We chose warm brown/beige colors because they feel cozy and pet-friendly!
 **Live App:** https://studio--studio-2533192089-b3870.us-central1.hosted.app/
 
 **Test Account:**
-- Email: `priya.sharma@test.com`
+- Email: `grad.circle@test.com`
 - Password: `Test@123`
 
 Feel free to explore! We added mock data so it doesn't look empty.
