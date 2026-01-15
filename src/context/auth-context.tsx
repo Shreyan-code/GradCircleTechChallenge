@@ -76,7 +76,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new Error("Display name must be at least 2 characters long.");
     }
 
-    const newUser: Omit<User, 'userId'> = {
+    const newUser: User = {
+        userId: `user_${Date.now()}`,
         email,
         password: pass,
         displayName,
@@ -90,23 +91,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         following: 0,
         petIds: []
     };
+    
+    // The API route is for dev only and does not work in deployed env.
+    // We will add the user to the mockData in memory for the session.
+    mockData.users.push(newUser);
 
-    const response = await fetch('/api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newUser),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Signup failed');
-    }
-
-    const { user: createdUser } = await response.json();
-
-    const userToStore = { ...createdUser };
+    const userToStore = { ...newUser };
     delete userToStore.password;
 
     localStorage.setItem('petconnect-user', JSON.stringify(userToStore));
@@ -114,6 +104,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const forgotPassword = async (email: string, newPass: string) => {
+    // This API route is for dev only. In a real app this would be a proper backend call.
+    // For now, it will only work in local dev.
     const response = await fetch('/api/forgot-password', {
       method: 'POST',
       headers: {
