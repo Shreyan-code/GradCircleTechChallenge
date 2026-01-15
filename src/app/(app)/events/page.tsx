@@ -6,7 +6,6 @@ import { useToast } from "@/hooks/use-toast";
 import { mockData as initialMockData } from "@/lib/mock-data";
 import type { Event } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
 import { Calendar, MapPin, Users, Ticket } from "lucide-react";
 import { format } from 'date-fns';
 
@@ -70,15 +69,16 @@ export default function EventsPage() {
                 const isRegistered = event.attendees.some(a => a.userId === currentUser.userId);
                 return (
                     <Card key={event.eventId} className="flex flex-col">
-                        <CardHeader className="p-0">
-                            <div className="relative aspect-video w-full">
-                                <Image src={event.bannerImage} alt={event.title} fill className="object-cover rounded-t-lg" />
-                                <Badge className="absolute top-3 right-3">{event.isFree ? 'Free Event' : 'Paid Event'}</Badge>
+                        <CardHeader className="pb-4">
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <p className="text-sm font-semibold text-primary mb-1">{format(new Date(event.date), 'EEEE, MMMM d, yyyy')} &bull; {event.startTime}</p>
+                                <CardTitle className="font-headline text-2xl mb-2">{event.title}</CardTitle>
+                              </div>
+                              <Badge>{event.isFree ? 'Free Event' : 'Paid Event'}</Badge>
                             </div>
                         </CardHeader>
-                        <CardContent className="p-6 flex-1">
-                            <p className="text-sm font-semibold text-primary mb-1">{format(new Date(event.date), 'EEEE, MMMM d, yyyy')} &bull; {event.startTime}</p>
-                            <CardTitle className="font-headline text-2xl mb-2">{event.title}</CardTitle>
+                        <CardContent className="flex-1">
                             <div className="text-sm text-muted-foreground space-y-2">
                                 <div className="flex items-center gap-2">
                                     <MapPin className="w-4 h-4" />
@@ -91,7 +91,7 @@ export default function EventsPage() {
                             </div>
                              <p className="mt-4 text-sm">{event.description}</p>
                         </CardContent>
-                        <CardFooter className="p-6 pt-0">
+                        <CardFooter>
                             <Button className="w-full" onClick={() => handleRegister(event.eventId)} disabled={isRegistered}>
                                 <Ticket className="mr-2 h-4 w-4" />
                                 {isRegistered ? 'Registered' : 'Register Now'}
