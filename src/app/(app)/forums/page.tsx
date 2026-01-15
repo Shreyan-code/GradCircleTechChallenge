@@ -1,10 +1,18 @@
+'use client';
+
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { mockData } from "@/lib/mock-data";
+import { mockData as initialMockData } from "@/lib/mock-data";
 import { formatDistanceToNow } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MessageSquare, Eye, Pin, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { NewDiscussionForm } from './new-discussion-form';
+import type { ForumTopic } from '@/lib/types';
+import { useAuth } from '@/context/auth-context';
+import { useToast } from '@/hooks/use-toast';
 
 const cityChapters = [
   { name: "Bangalore", comingSoon: false },
@@ -15,6 +23,42 @@ const cityChapters = [
 ];
 
 export default function ForumsPage() {
+  const [mockData, setMockData] = useState(initialMockData);
+  const [isNewDiscussionOpen, setNewDiscussionOpen] = useState(false);
+  const { user } = useAuth();
+  const { toast } = useToast();
+
+  if (!user) return null;
+
+  const handleStartDiscussion = (data: { title: string; content: string }) => {
+    const newTopic: ForumTopic = {
+      topicId: `topic_${String(mockData.forumTopics.length + 1).padStart(3, '0')}`,
+      categoryId: "all-pets", // Default category
+      userId: user.userId,
+      userName: user.displayName,
+      userPhoto: user.photoURL,
+      title: data.title,
+      content: data.content,
+      views: 0,
+      replyCount: 0,
+      lastReplyAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      replies: []
+    };
+
+    setMockData(prev => ({
+      ...prev,
+      forumTopics: [newTopic, ...prev.forumTopics]
+    }));
+    
+    toast({
+        title: "Discussion Started!",
+        description: "Your new topic has been posted."
+    });
+
+    setNewDiscussionOpen(false);
+  };
+  
   const { forumTopics } = mockData;
 
   return (
@@ -24,9 +68,19 @@ export default function ForumsPage() {
                 <h1 className="text-3xl font-bold tracking-tight font-headline">Community Forums</h1>
                 <p className="text-muted-foreground mt-2">Ask questions, share advice, and connect with other pet owners.</p>
             </div>
-            <Button>
-                Start a New Discussion
-            </Button>
+            <Dialog open={isNewDiscussionOpen} onOpenChange={setNewDiscussionOpen}>
+              <DialogTrigger asChild>
+                <Button>
+                    Start a New Discussion
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Start a New Discussion</DialogTitle>
+                </DialogHeader>
+                <NewDiscussionForm onSave={handleStartDiscussion} />
+              </DialogContent>
+            </Dialog>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -45,7 +99,7 @@ export default function ForumsPage() {
                                 </Avatar>
                                 <div className="flex-1">
                                     <Link href={`/forums/${topic.topicId}`} className="font-semibold text-lg hover:text-primary transition-colors">{topic.title}</Link>
-                                    <div className="text-sm text-muted-foreground mt-1 flex items-center gap-4">
+                                    <div className="text-sm text-muted-foreground mt-1 flex items-center flex-wrap gap-x-4 gap-y-1">
                                         <span>Started by <Link href={`/profile/${topic.userId}`} className="font-medium text-foreground hover:underline">{topic.userName}</Link></span>
                                         <span>{formatDistanceToNow(new Date(topic.createdAt), { addSuffix: true })}</span>
                                     </div>
