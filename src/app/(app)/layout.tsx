@@ -34,8 +34,8 @@ import { PawPrintIcon } from '@/components/icons';
 
 const navItems = [
   { href: '/feed', icon: Home, label: 'Feed' },
-  { href: '/connect', icon: Users, label: 'Connect' },
-  { href: '/health', icon: Sparkles, label: 'Health Tools' },
+  { href: '/connect', icon: Users, label: 'Connect', isAI: true },
+  { href: '/health', icon: Sparkles, label: 'Health Tools', isAI: true },
   { href: '/lost-pets', icon: ShieldQuestion, label: 'Lost & Found' },
   { href: '/forums', icon: MessageSquare, label: 'Forums' },
   { href: '/events', icon: Calendar, label: 'Events & Meetups' },
@@ -65,7 +65,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 <Link href={item.href} className="w-full">
                   <SidebarMenuButton tooltip={item.label} size="lg">
                     <item.icon />
-                    <span>{item.label}</span>
+                    <span className="flex items-center gap-2">{item.label}</span>
+                    {item.isAI && <Sparkles className="w-4 h-4 text-primary" />}
                     {item.href === '/messages' && totalUnread > 0 && (
                        <span className="ml-auto flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
                         {totalUnread}

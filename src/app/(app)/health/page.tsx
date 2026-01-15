@@ -1,5 +1,5 @@
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Sparkles, Stethoscope, Users } from 'lucide-react';
+import { ArrowRight, Bot, Stethoscope } from 'lucide-react';
 import Link from 'next/link';
 
 const healthTools = [
@@ -11,7 +11,7 @@ const healthTools = [
   },
   {
     href: '/health/advisor',
-    icon: <Sparkles className="w-8 h-8 text-primary" />,
+    icon: <Bot className="w-8 h-8 text-primary" />,
     title: 'AI Health Advisor',
     description: 'Chat with our AI for personalized health and wellness advice for your pet.',
   },
