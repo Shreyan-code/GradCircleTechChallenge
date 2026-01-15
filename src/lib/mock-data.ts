@@ -385,7 +385,50 @@ export const mockData: MockData = {
   forumTopics: [],
   lostPetAlerts: [],
   tipArticles: [],
-  conversations: []
+  conversations: [
+    {
+      conversationId: "convo_001",
+      participants: ["user_001", "user_004"],
+      lastMessage: "Sounds great! Let me know what time works for you.",
+      lastMessageBy: "user_001",
+      lastMessageAt: "2025-01-18T14:00:00Z",
+      unreadCount: { "user_001": 0, "user_004": 2 },
+      messages: [
+        { messageId: "msg_001", senderId: "user_004", text: "Hey! Just saw you on the matchmaker. Bruno would love to meet Max. Would you be up for a playdate?", createdAt: "2025-01-18T13:55:00Z", readBy: ["user_001"] },
+        { messageId: "msg_002", senderId: "user_001", text: "Hi Rohan! Yes, absolutely! Max would love that. He's very friendly.", createdAt: "2025-01-18T13:58:00Z", readBy: [] },
+        { messageId: "msg_003", senderId: "user_001", text: "Sounds great! Let me know what time works for you.", createdAt: "2025-01-18T14:00:00Z", readBy: [] }
+      ],
+      createdAt: "2025-01-18T13:55:00Z"
+    },
+    {
+      conversationId: "convo_002",
+      participants: ["user_001", "user_003"],
+      lastMessage: "He's doing great! So much energy.",
+      lastMessageBy: "user_001",
+      lastMessageAt: "2025-01-17T18:30:00Z",
+      unreadCount: { "user_001": 0, "user_003": 0 },
+      messages: [
+        { messageId: "msg_004", senderId: "user_003", text: "Hi Priya! I saw your post about Rocky's adoption anniversary. So heartwarming. How is he doing?", createdAt: "2025-01-17T18:25:00Z", readBy: ["user_001"] },
+        { messageId: "msg_005", senderId: "user_001", text: "Hi Ananya! Thanks so much. He's doing great! So much energy.", createdAt: "2025-01-17T18:30:00Z", readBy: ["user_003"] }
+      ],
+      createdAt: "2025-01-17T18:25:00Z"
+    },
+    {
+      conversationId: "convo_003",
+      participants: ["user_001", "user_002"],
+      lastMessage: "Haha, definitely! Let's connect next week.",
+      lastMessageBy: "user_002",
+      lastMessageAt: "2025-01-16T11:45:00Z",
+      unreadCount: { "user_001": 1, "user_002": 0 },
+      messages: [
+        { messageId: "msg_006", senderId: "user_001", text: "That picture of Simba judging your code is hilarious!", createdAt: "2025-01-16T11:40:00Z", readBy: ["user_002"] },
+        { messageId: "msg_007", senderId: "user_002", text: "I know right? He's the real boss around here. We should get our pets together sometime, though I'm not sure how Simba would feel about a dog!", createdAt: "2025-01-16T11:42:00Z", readBy: ["user_001"] },
+        { messageId: "msg_008", senderId: "user_001", text: "We could try a slow introduction at a park maybe?", createdAt: "2025-01-16T11:43:00Z", readBy: ["user_002"] },
+        { messageId: "msg_009", senderId: "user_002", text: "Haha, definitely! Let's connect next week.", createdAt: "2025-01-16T11:45:00Z", readBy: [] }
+      ],
+      createdAt: "2025-01-16T11:40:00Z"
+    }
+  ]
 };
 
     

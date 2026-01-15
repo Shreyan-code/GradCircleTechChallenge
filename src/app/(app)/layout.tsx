@@ -46,6 +46,8 @@ const navItems = [
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   // For demo purposes, we'll use the first mock user as the logged-in user.
   const currentUser = mockData.users[0];
+  const conversations = mockData.conversations.filter(c => c.participants.includes(currentUser.userId));
+  const totalUnread = conversations.reduce((acc, convo) => acc + (convo.unreadCount[currentUser.userId] || 0), 0);
 
   return (
     <SidebarProvider>
@@ -64,6 +66,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   <SidebarMenuButton tooltip={item.label} size="lg">
                     <item.icon />
                     <span>{item.label}</span>
+                    {item.href === '/messages' && totalUnread > 0 && (
+                       <span className="ml-auto flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                        {totalUnread}
+                      </span>
+                    )}
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>

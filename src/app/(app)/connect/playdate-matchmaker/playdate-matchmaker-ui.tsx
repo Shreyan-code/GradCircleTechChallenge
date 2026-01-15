@@ -11,6 +11,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
+import { useToast } from "@/hooks/use-toast";
 
 interface PlaydateMatchmakerUIProps {
   userPets: Pet[];
@@ -22,6 +23,7 @@ export function PlaydateMatchmakerUI({ userPets, allPets }: PlaydateMatchmakerUI
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<AiPlaydateMatchmakerOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
 
   const handleFindMatches = async () => {
     if (!selectedPetId) return;
@@ -40,6 +42,13 @@ export function PlaydateMatchmakerUI({ userPets, allPets }: PlaydateMatchmakerUI
       setIsLoading(false);
     }
   };
+
+  const handleArrangePlaydate = (petName: string) => {
+    toast({
+      title: "Playdate request sent!",
+      description: `A message has been sent to ${petName}'s owner.`,
+    });
+  }
 
   const getPetById = (petId: string) => allPets.find(p => p.petId === petId);
 
@@ -162,7 +171,7 @@ export function PlaydateMatchmakerUI({ userPets, allPets }: PlaydateMatchmakerUI
                                 </div>
                             </CardContent>
                             <CardFooter>
-                                <Button className="w-full">
+                                <Button className="w-full" onClick={() => handleArrangePlaydate(pet.name)}>
                                     Arrange a Playdate <ArrowRight className="ml-2 h-4 w-4" />
                                 </Button>
                             </CardFooter>
