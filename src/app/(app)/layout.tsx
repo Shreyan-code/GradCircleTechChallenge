@@ -1,7 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import {
   Sidebar,
   SidebarContent,
@@ -21,12 +20,10 @@ import {
   Heart,
   Home,
   MessageSquare,
-  Search,
   Settings,
   ShieldQuestion,
   Sparkles,
   Users,
-  BookOpen,
   Lightbulb,
   PawPrint,
   Store
@@ -34,6 +31,7 @@ import {
 import Link from 'next/link';
 import { PawPrintIcon } from '@/components/icons';
 import { Badge } from '@/components/ui/badge';
+import { SearchBar } from '@/components/search-bar';
 
 const navItems = [
   { href: '/feed', icon: Home, label: 'Feed' },
@@ -119,14 +117,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <SidebarInset>
         <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:px-6">
           <SidebarTrigger className="md:hidden" />
-          <div className="relative flex-1">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search posts, pets, or people..."
-              className="w-full rounded-lg bg-secondary pl-8 md:w-[300px] lg:w-[400px]"
-            />
-          </div>
+          <SearchBar />
           <Button variant="ghost" size="icon" className="rounded-full">
             <Bell className="h-5 w-5" />
             <span className="sr-only">Toggle notifications</span>
