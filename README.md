@@ -104,7 +104,7 @@ We chose warm brown/beige colors because they feel cozy and pet-friendly!
 
 ## Try It Out!
 
-**Live Demo:** https://studio--studio-2533192089-b3870.us-central1.hosted.app/
+**Live App:** https://studio--studio-2533192089-b3870.us-central1.hosted.app/
 
 **Test Account:**
 - Email: `priya.sharma@test.com`
