@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { mockData as initialMockData } from "@/lib/mock-data";
 import type { LostPetAlert } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
@@ -47,8 +47,8 @@ export default function LostPetsPage() {
 
     setReportDialogOpen(false);
     toast({
-      title: "Alert Posted",
-      description: `The lost pet alert for ${newAlert.petName} has been posted.`,
+      title: "Report Submitted",
+      description: "Your lost pet report is under review and will be posted shortly.",
     });
   };
 
@@ -68,9 +68,12 @@ export default function LostPetsPage() {
                 Report a Pet
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>Report a Lost Pet</DialogTitle>
+              <DialogDescription>
+                Fill out the form below. Your report will be reviewed before being posted.
+              </DialogDescription>
             </DialogHeader>
             <ReportPetForm userPets={currentUserPets} onSave={handleReportPet} />
           </DialogContent>

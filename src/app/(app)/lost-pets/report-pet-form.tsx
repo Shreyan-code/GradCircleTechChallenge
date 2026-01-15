@@ -71,30 +71,30 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4">
         <FormField
           control={form.control}
           name="petId"
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem className="col-span-2">
               <FormLabel>Which pet is missing?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="grid grid-cols-2 md:grid-cols-3 gap-4"
+                  className="grid grid-cols-3 gap-2"
                 >
                   {userPets.map((pet) => (
                     <FormItem key={pet.petId}>
                       <FormControl>
                         <RadioGroupItem value={pet.petId} className="sr-only" />
                       </FormControl>
-                      <FormLabel className="flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary cursor-pointer">
-                        <Avatar className="w-16 h-16 mb-2">
+                      <FormLabel className="flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary cursor-pointer text-center">
+                        <Avatar className="w-12 h-12 mb-2">
                           <AvatarImage src={pet.photo} />
                           <AvatarFallback>{pet.name.charAt(0)}</AvatarFallback>
                         </Avatar>
-                        <span className="font-bold text-sm">{pet.name}</span>
+                        <span className="font-bold text-xs">{pet.name}</span>
                       </FormLabel>
                     </FormItem>
                   ))}
@@ -109,7 +109,7 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
             control={form.control}
             name="lastSeenDate"
             render={({ field }) => (
-                <FormItem className="flex flex-col">
+                <FormItem className="flex flex-col col-span-2">
                 <FormLabel>Last Seen Date</FormLabel>
                 <Popover>
                     <PopoverTrigger asChild>
@@ -151,7 +151,7 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
           control={form.control}
           name="lastSeenLocation.address"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="col-span-2">
               <FormLabel>Last Seen Address / Area</FormLabel>
               <FormControl><Input placeholder="e.g., Near Cubbon Park" {...field} /></FormControl>
               <FormMessage />
@@ -163,9 +163,9 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
           control={form.control}
           name="description"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="col-span-2">
               <FormLabel>Description</FormLabel>
-              <FormControl><Textarea placeholder="Any extra details? What was your pet wearing?" {...field} /></FormControl>
+              <FormControl><Textarea placeholder="Any extra details? What was your pet wearing?" {...field} rows={3} /></FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -175,7 +175,7 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
           control={form.control}
           name="reward"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="col-span-2">
               <FormLabel>Reward (Optional)</FormLabel>
               <FormControl><Input type="number" {...field} /></FormControl>
               <FormMessage />
@@ -183,7 +183,7 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
           )}
         />
 
-        <Button type="submit" className="w-full">Post Alert</Button>
+        <Button type="submit" className="w-full col-span-2">Submit Report</Button>
       </form>
     </Form>
   );
