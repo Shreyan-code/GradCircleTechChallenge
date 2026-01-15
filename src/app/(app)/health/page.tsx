@@ -15,12 +15,6 @@ const healthTools = [
     title: 'AI Health Advisor',
     description: 'Chat with our AI for personalized health and wellness advice for your pet.',
   },
-  {
-    href: '#',
-    icon: <Users className="w-8 h-8 text-primary" />,
-    title: 'Playdate Matchmaker',
-    description: 'Find compatible playmates for your pet based on breed, size, and temperament.',
-  },
 ];
 
 export default function HealthPage() {
