@@ -11,6 +11,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { formatDistanceToNow } from 'date-fns';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import Link from 'next/link';
 
 interface PostCardProps {
   post: Post;
@@ -52,8 +53,10 @@ export function PostCard({ post }: PostCardProps) {
             <DropdownMenuTrigger asChild>
                 <button className="flex items-center text-left">
                     <Avatar className="w-10 h-10">
-                    <AvatarImage src={post.userPhoto} alt={post.userName} />
-                    <AvatarFallback>{post.userName.charAt(0)}</AvatarFallback>
+                      <Link href={`/profile/${post.userId}`}>
+                        <AvatarImage src={post.userPhoto} alt={post.userName} />
+                      </Link>
+                      <AvatarFallback>{post.userName.charAt(0)}</AvatarFallback>
                     </Avatar>
                 </button>
             </DropdownMenuTrigger>
@@ -69,7 +72,9 @@ export function PostCard({ post }: PostCardProps) {
             </DropdownMenuContent>
         </DropdownMenu>
         <div className="ml-3">
-          <p className="font-bold text-sm">{post.userName}</p>
+          <Link href={`/profile/${post.userId}`}>
+            <p className="font-bold text-sm hover:underline">{post.userName}</p>
+          </Link>
           {post.petName && <Badge variant="secondary" className="text-xs -ml-1">{post.petName}</Badge>}
         </div>
         <div className="ml-auto">
@@ -102,7 +107,7 @@ export function PostCard({ post }: PostCardProps) {
       <div className="px-4 pb-2">
         <p className="font-bold text-sm">{likeCount.toLocaleString()} likes</p>
         <div className="text-sm mt-1">
-            <span className="font-bold mr-2">{post.userName}</span>
+            <Link href={`/profile/${post.userId}`}><span className="font-bold mr-2 hover:underline">{post.userName}</span></Link>
             <span>
                 {displayCaption}
                 {isLongCaption && !showFullCaption && (
