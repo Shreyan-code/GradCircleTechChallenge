@@ -1,3 +1,4 @@
+
 import type { MockData } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 import { subDays } from 'date-fns';
@@ -11,6 +12,7 @@ export const mockData: MockData = {
     {
       userId: "user_001",
       email: "priya.sharma@test.com",
+      password: "Test@123",
       displayName: "Priya Sharma",
       photoURL: getImageUrl("user_priya"),
       location: { city: "Mumbai", state: "Maharashtra", country: "India" },
@@ -25,6 +27,7 @@ export const mockData: MockData = {
     {
       userId: "user_002",
       email: "arjun.patel@test.com",
+      password: "Test@123",
       displayName: "Arjun Patel",
       photoURL: getImageUrl("user_arjun"),
       location: { city: "Bangalore", state: "Karnataka", country: "India" },
@@ -39,6 +42,7 @@ export const mockData: MockData = {
     {
       userId: "user_003",
       email: "ananya.reddy@test.com",
+      password: "Test@123",
       displayName: "Ananya Reddy",
       photoURL: getImageUrl("user_ananya"),
       location: { city: "Hyderabad", state: "Telangana", country: "India" },
@@ -53,6 +57,7 @@ export const mockData: MockData = {
      {
       userId: "user_004",
       email: "rohan.mehta@test.com",
+      password: "Test@123",
       displayName: "Rohan Mehta",
       photoURL: getImageUrl("user_rohan"),
       location: { city: "Delhi", state: "NCR", country: "India" },
@@ -67,6 +72,7 @@ export const mockData: MockData = {
     {
       userId: "user_005",
       email: "ishita.gupta@test.com",
+      password: "Test@123",
       displayName: "Ishita Gupta",
       photoURL: getImageUrl("user_ishita"),
       location: { city: "Pune", state: "Maharashtra", country: "India" },
