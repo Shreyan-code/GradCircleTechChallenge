@@ -9,7 +9,7 @@ interface AuthContextType {
   user: User | null;
   login: (email: string, pass: string) => boolean;
   logout: () => void;
-  signup: (email: string, pass: string, displayName: string) => void;
+  signup: (email: string, pass: string, displayName: string) => Promise<void>;
   loading: boolean;
 }
 
@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
   
-  const signup = (email: string, pass: string, displayName: string) => {
+  const signup = async (email: string, pass: string, displayName: string) => {
     if (mockData.users.some(u => u.email === email)) {
         throw new Error("An account with this email already exists.");
     }
@@ -75,12 +75,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new Error("Display name must be at least 2 characters long.");
     }
 
-    const newUser: User = {
-        userId: `user_${String(mockData.users.length + 1).padStart(3, '0')}`,
+    const newUser: Omit<User, 'userId'> = {
         email,
         password: pass,
         displayName,
-        photoURL: 'https://picsum.photos/seed/newuser/400/400',
+        photoURL: `https://picsum.photos/seed/${displayName.replace(/\s/g, '')}/400/400`,
         location: { city: "Unknown", state: "", country: "India" },
         bio: "",
         joinedAt: new Date().toISOString(),
@@ -90,11 +89,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         following: 0,
         petIds: []
     };
-    
-    // In a real app, this would be an API call. Here we just log it.
-    console.log("New user created (not saved to mock-data.ts):", newUser);
-    // Note: This does not actually modify the `mock-data.ts` file.
-    // The new user will not persist across page reloads unless you manually add them to the file.
+
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Signup failed');
+    }
   };
 
   const value = { user, login, logout, signup, loading };

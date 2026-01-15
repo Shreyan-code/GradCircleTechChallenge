@@ -18,9 +18,9 @@ export default function SignupPage() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     try {
-      signup(email, password, displayName);
+      await signup(email, password, displayName);
       toast({
         title: "Signup Successful",
         description: "Welcome to PetConnect! Please log in.",
