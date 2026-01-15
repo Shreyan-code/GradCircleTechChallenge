@@ -1,16 +1,21 @@
 'use client';
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { mockData } from "@/lib/mock-data";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { mockData as initialMockData } from "@/lib/mock-data";
+import type { LostPetAlert } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Phone, MapPin, Share2, PlusCircle, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { format } from 'date-fns';
 import { cn } from "@/lib/utils";
+import { ReportPetForm } from "./report-pet-form";
 
 export default function LostPetsPage() {
-  const { lostPetAlerts } = mockData;
+  const [mockData, setMockData] = useState(initialMockData);
+  const [isReportDialogOpen, setReportDialogOpen] = useState(false);
   const { toast } = useToast();
 
   const handleShare = (petName: string) => {
@@ -21,6 +26,34 @@ export default function LostPetsPage() {
     });
   };
 
+  const handleReportPet = (newAlert: Omit<LostPetAlert, 'alertId' | 'createdAt' | 'ownerId' | 'ownerName' | 'ownerPhone'>) => {
+    const currentUser = mockData.users[0];
+    const alertId = `lpa_${String(mockData.lostPetAlerts.length + 1).padStart(3, '0')}`;
+
+    const fullAlert: LostPetAlert = {
+      ...newAlert,
+      alertId,
+      ownerId: currentUser.userId,
+      ownerName: currentUser.displayName,
+      ownerPhone: "+91-9999988888", // Mock phone
+      createdAt: new Date().toISOString(),
+      status: 'active'
+    };
+
+    setMockData(prev => ({
+      ...prev,
+      lostPetAlerts: [fullAlert, ...prev.lostPetAlerts]
+    }));
+
+    setReportDialogOpen(false);
+    toast({
+      title: "Alert Posted",
+      description: `The lost pet alert for ${newAlert.petName} has been posted.`,
+    });
+  };
+
+  const currentUserPets = mockData.pets.filter(p => p.ownerId === mockData.users[0].userId);
+
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
@@ -28,14 +61,24 @@ export default function LostPetsPage() {
             <h1 className="text-3xl font-bold tracking-tight font-headline">Lost & Found</h1>
             <p className="text-muted-foreground mt-2">Help reunite pets with their families. Report a lost or found pet.</p>
         </div>
-        <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Report a Pet
-        </Button>
+        <Dialog open={isReportDialogOpen} onOpenChange={setReportDialogOpen}>
+          <DialogTrigger asChild>
+            <Button>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Report a Pet
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Report a Lost Pet</DialogTitle>
+            </DialogHeader>
+            <ReportPetForm userPets={currentUserPets} onSave={handleReportPet} />
+          </DialogContent>
+        </Dialog>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {lostPetAlerts.map(alert => (
+        {mockData.lostPetAlerts.map(alert => (
           <Card key={alert.alertId} className="flex flex-col">
             <CardHeader className="p-0">
                 <div className="relative aspect-video w-full">
