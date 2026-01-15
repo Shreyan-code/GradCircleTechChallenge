@@ -26,7 +26,8 @@ import {
   ShieldQuestion,
   Sparkles,
   Users,
-  BookOpen
+  BookOpen,
+  Lightbulb
 } from 'lucide-react';
 import Link from 'next/link';
 import { PawPrintIcon } from '@/components/icons';
@@ -38,7 +39,7 @@ const navItems = [
   { href: '/lost-pets', icon: ShieldQuestion, label: 'Lost & Found' },
   { href: '/forums', icon: MessageSquare, label: 'Forums' },
   { href: '/events', icon: Calendar, label: 'Events & Meetups' },
-  { href: '/tips', icon: BookOpen, label: 'Tips & Advice' },
+  { href: '/tips', icon: Lightbulb, label: 'Tips & Advice' },
   { href: '/messages', icon: Bell, label: 'Messages' },
 ];
 
