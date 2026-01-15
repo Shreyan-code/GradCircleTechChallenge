@@ -71,6 +71,7 @@ export type Story = {
   userName: string;
   userPhoto: string;
   storyImage: string;
+  caption?: string;
   timestamp: string;
   expiresAt: string;
 };

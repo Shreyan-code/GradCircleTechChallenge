@@ -429,11 +429,11 @@ export const mockData: MockData = {
     }
   ],
   stories: [
-    { storyId: "story_001", userId: "user_001", userName: "Priya", userPhoto: getImageUrl("user_priya"), storyImage: getImageUrl("story_max_playing"), timestamp: "2025-01-15T10:00:00Z", expiresAt: "2025-01-16T10:00:00Z" },
-    { storyId: "story_002", userId: "user_002", userName: "Arjun", userPhoto: getImageUrl("user_arjun"), storyImage: getImageUrl("story_simba_nap"), timestamp: "2025-01-15T09:00:00Z", expiresAt: "2025-01-16T09:00:00Z" },
-    { storyId: "story_003", userId: "user_003", userName: "Ananya", userPhoto: getImageUrl("user_ananya"), storyImage: getImageUrl("story_rocky_park"), timestamp: "2025-01-15T11:00:00Z", expiresAt: "2025-01-16T11:00:00Z" },
-    { storyId: "story_004", userId: "user_004", userName: "Rohan", userPhoto: getImageUrl("user_rohan"), storyImage: getImageUrl("story_bruno_zoomies"), timestamp: "2025-01-15T08:00:00Z", expiresAt: "2025-01-16T08:00:00Z" },
-    { storyId: "story_005", userId: "user_005", userName: "Ishita", userPhoto: getImageUrl("user_ishita"), storyImage: getImageUrl("story_cats_window"), timestamp: "2025-01-15T12:00:00Z", expiresAt: "2025-01-16T12:00:00Z" },
+    { storyId: "story_001", userId: "user_001", userName: "Priya", userPhoto: getImageUrl("user_priya"), storyImage: getImageUrl("story_max_playing"), caption: "Play time! #doglife", timestamp: "2025-01-15T10:00:00Z", expiresAt: "2025-01-16T10:00:00Z" },
+    { storyId: "story_002", userId: "user_002", userName: "Arjun", userPhoto: getImageUrl("user_arjun"), storyImage: getImageUrl("story_simba_nap"), caption: "Sleepy Sunday 😴 #catnap", timestamp: "2025-01-15T09:00:00Z", expiresAt: "2025-01-16T09:00:00Z" },
+    { storyId: "story_003", userId: "user_003", userName: "Ananya", userPhoto: getImageUrl("user_ananya"), storyImage: getImageUrl("story_rocky_park"), caption: "Park adventures! #rescuedog", timestamp: "2025-01-15T11:00:00Z", expiresAt: "2025-01-16T11:00:00Z" },
+    { storyId: "story_004", userId: "user_004", userName: "Rohan", userPhoto: getImageUrl("user_rohan"), storyImage: getImageUrl("story_bruno_zoomies"), caption: "Mid-day zoomies #beagle", timestamp: "2025-01-15T08:00:00Z", expiresAt: "2025-01-16T08:00:00Z" },
+    { storyId: "story_005", userId: "user_005", userName: "Ishita", userPhoto: getImageUrl("user_ishita"), storyImage: getImageUrl("story_cats_window"), caption: "Bird watching crew #catlife", timestamp: "2025-01-15T12:00:00Z", expiresAt: "2025-01-16T12:00:00Z" },
   ],
   events: [],
   forumTopics: [],
@@ -516,7 +516,7 @@ export const mockData: MockData = {
       unreadCount: { "user_001": 0, "user_003": 0 },
       messages: [
         { messageId: "msg_004", senderId: "user_003", text: "Hi Priya! I saw your post about Rocky's adoption anniversary. So heartwarming. How is he doing?", createdAt: "2025-01-17T18:25:00Z", readBy: ["user_001"] },
-        { messageId: "msg_005", senderId: "user_001", text: "Hi Ananya! Thanks so much. He's doing great! So much energy.", createdAt: "2025-01-17T18:30:00Z", readBy: ["user_003"] }
+        { messageId: "msg_005", senderId: "user_001", text: "He's doing great! So much energy.", createdAt: "2025-01-17T18:30:00Z", readBy: ["user_003"] }
       ],
       createdAt: "2025-01-17T18:25:00Z"
     },
