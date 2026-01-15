@@ -11,13 +11,14 @@ import { Plus } from "lucide-react";
 export default function FeedPage() {
   const { posts, stories, users } = mockData;
   const currentUser = users[0];
+  const otherUserPosts = posts.filter(post => post.userId !== currentUser.userId);
 
   return (
     <div className="flex justify-center w-full">
       <div className="w-full max-w-2xl">
         <StoriesCarousel stories={stories} currentUser={currentUser} />
         <div className="mt-6 flex flex-col gap-8">
-          {posts.map((post) => (
+          {otherUserPosts.map((post) => (
             <PostCard key={post.postId} post={post} />
           ))}
         </div>

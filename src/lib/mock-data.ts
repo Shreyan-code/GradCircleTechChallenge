@@ -213,6 +213,60 @@ export const mockData: MockData = {
       createdAt: "2024-01-02"
     },
     {
+      petId: "pet_006",
+      ownerId: "user_005",
+      ownerName: "Ishita Gupta",
+      name: "Leo",
+      type: "Cat",
+      breed: "Bengal",
+      gender: "Male",
+      age: { years: 1, months: 2 },
+      birthDate: "2023-11-01",
+      color: "Spotted Silver",
+      weight: 5,
+      photo: "https://picsum.photos/seed/leo/400/400",
+      specialNeeds: "None",
+      activityLevel: 9,
+      microchipId: "121212121",
+      createdAt: "2023-11-18"
+    },
+    {
+      petId: "pet_007",
+      ownerId: "user_005",
+      ownerName: "Ishita Gupta",
+      name: "Luna",
+      type: "Cat",
+      breed: "Bengal",
+      gender: "Female",
+      age: { years: 1, months: 2 },
+      birthDate: "2023-11-01",
+      color: "Spotted Brown",
+      weight: 4,
+      photo: "https://picsum.photos/seed/luna/400/400",
+      specialNeeds: "None",
+      activityLevel: 9,
+      microchipId: "343434343",
+      createdAt: "2023-11-18"
+    },
+    {
+      petId: "pet_008",
+      ownerId: "user_005",
+      ownerName: "Ishita Gupta",
+      name: "Milo",
+      type: "Cat",
+      breed: "Bengal",
+      gender: "Male",
+      age: { years: 1, months: 2 },
+      birthDate: "2023-11-01",
+      color: "Spotted Snow",
+      weight: 5.5,
+      photo: "https://picsum.photos/seed/milo/400/400",
+      specialNeeds: "None",
+      activityLevel: 9,
+      microchipId: "565656565",
+      createdAt: "2023-11-18"
+    },
+    {
       petId: "pet_009",
       ownerId: "user_006",
       ownerName: "Shreyan Bagchi",
@@ -483,5 +537,3 @@ export const mockData: MockData = {
     }
   ]
 };
-
-    

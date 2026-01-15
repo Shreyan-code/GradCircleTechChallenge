@@ -8,16 +8,23 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from "@/hooks/use-toast";
-import { mockData } from "@/lib/mock-data";
+import { mockData as initialMockData } from "@/lib/mock-data";
 import { Mail, MapPin, PlusCircle, Settings, UserPlus, Send, MessageSquare } from "lucide-react";
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useParams } from 'next/navigation';
+import { EditProfileForm } from './edit-profile-form';
+import { AddPetForm } from './add-pet-form';
+import type { Pet, User } from '@/lib/types';
 
 export default function ProfilePage() {
   const params = useParams<{ userId: string }>();
   const { toast } = useToast();
   const [isFollowing, setIsFollowing] = useState(false);
+  const [mockData, setMockData] = useState(initialMockData);
+  
+  const [openEditProfile, setOpenEditProfile] = useState(false);
+  const [openAddPet, setOpenAddPet] = useState(false);
 
   const user = mockData.users.find(u => u.userId === params.userId);
   const currentUser = mockData.users[0];
@@ -33,6 +40,39 @@ export default function ProfilePage() {
       title: isFollowing ? `Unfollowed ${user.displayName}` : `You are now following ${user.displayName}!`,
     });
   };
+  
+  const handleUpdateProfile = (updatedUser: Partial<User>) => {
+    setMockData(prevData => ({
+        ...prevData,
+        users: prevData.users.map(u => u.userId === user.userId ? { ...u, ...updatedUser } : u)
+    }));
+    toast({ title: "Profile updated successfully!"});
+    setOpenEditProfile(false);
+  };
+  
+  const handleAddPet = (newPet: Omit<Pet, 'petId' | 'ownerId' | 'ownerName' | 'createdAt'>) => {
+    const petId = `pet_${String(mockData.pets.length + 1).padStart(3, '0')}`;
+    const petWithOwner: Pet = {
+        ...newPet,
+        petId: petId,
+        ownerId: currentUser.userId,
+        ownerName: currentUser.displayName,
+        createdAt: new Date().toISOString(),
+    };
+
+    setMockData(prevData => ({
+        ...prevData,
+        pets: [...prevData.pets, petWithOwner],
+        users: prevData.users.map(u => 
+            u.userId === currentUser.userId 
+                ? { ...u, petIds: [...u.petIds, petId], petCount: u.petCount + 1 } 
+                : u
+        )
+    }));
+    toast({ title: `${newPet.name} has been added to your family!` });
+    setOpenAddPet(false);
+  };
+
 
   const userPets = mockData.pets.filter(p => user.petIds.includes(p.petId));
   const userPosts = mockData.posts.filter(p => p.userId === user.userId);
@@ -48,9 +88,19 @@ export default function ProfilePage() {
           <div className="flex items-center justify-center md:justify-start gap-4">
             <h1 className="text-2xl md:text-3xl font-bold font-headline">{user.displayName}</h1>
              {isCurrentUser ? (
-              <Button variant="outline" size="sm">
-                <Settings className="mr-2 h-4 w-4" /> Edit Profile
-              </Button>
+              <Dialog open={openEditProfile} onOpenChange={setOpenEditProfile}>
+                <DialogTrigger asChild>
+                    <Button variant="outline" size="sm">
+                        <Settings className="mr-2 h-4 w-4" /> Edit Profile
+                    </Button>
+                </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Edit Profile</DialogTitle>
+                    </DialogHeader>
+                    <EditProfileForm user={user} onSave={handleUpdateProfile} />
+                </DialogContent>
+              </Dialog>
             ) : (
               <div className="flex gap-2">
                 <Button size="sm" onClick={handleFollow}>
@@ -116,10 +166,20 @@ export default function ProfilePage() {
         <div className="flex justify-between items-center mb-4 px-4">
             <h2 className="text-xl font-bold font-headline">Pets</h2>
             {isCurrentUser && (
-                <Button variant="ghost">
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    Add Pet
-                </Button>
+                <Dialog open={openAddPet} onOpenChange={setOpenAddPet}>
+                    <DialogTrigger asChild>
+                        <Button variant="ghost">
+                            <PlusCircle className="mr-2 h-4 w-4" />
+                            Add Pet
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Add a New Pet</DialogTitle>
+                        </DialogHeader>
+                        <AddPetForm onSave={handleAddPet} />
+                    </DialogContent>
+                </Dialog>
             )}
         </div>
         
