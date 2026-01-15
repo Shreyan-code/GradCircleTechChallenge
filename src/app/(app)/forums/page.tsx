@@ -15,7 +15,7 @@ import { useAuth } from '@/context/auth-context';
 import { useToast } from '@/hooks/use-toast';
 
 const cityChapters = [
-  { name: "Bangalore", comingSoon: false },
+  { name: "Bangalore", comingSoon: true },
   { name: "Mumbai", comingSoon: true },
   { name: "Delhi", comingSoon: true },
   { name: "Hyderabad", comingSoon: true },
