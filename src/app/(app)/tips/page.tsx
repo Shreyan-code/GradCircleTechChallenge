@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Lightbulb, Bone, Brain, Heart, Scissors, ArrowRight } from "lucide-react";
+import { Lightbulb, Bone, Brain, Heart, Scissors, ArrowRight, Users } from "lucide-react";
 import Link from 'next/link';
 
 const tipOfTheDay = {
