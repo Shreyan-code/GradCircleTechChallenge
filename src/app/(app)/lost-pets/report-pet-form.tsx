@@ -8,13 +8,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { Pet, LostPetAlert } from '@/lib/types';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const schema = z.object({
   petId: z.string({ required_error: 'Please select a pet.' }),
@@ -78,28 +77,20 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
           render={({ field }) => (
             <FormItem className="col-span-2">
               <FormLabel>Which pet is missing?</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="grid grid-cols-3 gap-2"
-                >
-                  {userPets.map((pet) => (
-                    <FormItem key={pet.petId}>
-                      <FormControl>
-                        <RadioGroupItem value={pet.petId} className="sr-only" />
-                      </FormControl>
-                      <FormLabel className="flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary cursor-pointer text-center">
-                        <Avatar className="w-12 h-12 mb-2">
-                          <AvatarImage src={pet.photo} />
-                          <AvatarFallback>{pet.name.charAt(0)}</AvatarFallback>
-                        </Avatar>
-                        <span className="font-bold text-xs">{pet.name}</span>
-                      </FormLabel>
-                    </FormItem>
-                  ))}
-                </RadioGroup>
-              </FormControl>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select one of your pets" />
+                        </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                        {userPets.map((pet) => (
+                            <SelectItem key={pet.petId} value={pet.petId}>
+                                {pet.name} ({pet.breed})
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
               <FormMessage />
             </FormItem>
           )}
