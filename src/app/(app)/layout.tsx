@@ -28,10 +28,12 @@ import {
   Users,
   BookOpen,
   Lightbulb,
-  PawPrint
+  PawPrint,
+  Store
 } from 'lucide-react';
 import Link from 'next/link';
 import { PawPrintIcon } from '@/components/icons';
+import { Badge } from '@/components/ui/badge';
 
 const navItems = [
   { href: '/feed', icon: Home, label: 'Feed' },
@@ -39,6 +41,7 @@ const navItems = [
   { href: '/health', icon: Heart, label: 'Health Tools', isAI: true },
   { href: '/adopt', icon: PawPrint, label: 'Adopt a Pet' },
   { href: '/lost-pets', icon: ShieldQuestion, label: 'Lost & Found' },
+  { href: '/store', icon: Store, label: 'Pet Store', comingSoon: true },
   { href: '/forums', icon: MessageSquare, label: 'Forums' },
   { href: '/events', icon: Calendar, label: 'Events & Meetups' },
   { href: '/tips', icon: Lightbulb, label: 'Tips & Advice' },
@@ -69,6 +72,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     <item.icon />
                     <span className="flex items-center gap-2">{item.label}</span>
                     {item.isAI && <Sparkles className="w-4 h-4 text-primary" />}
+                    {item.comingSoon && <Badge variant="outline" className="text-xs ml-auto">Coming Soon</Badge>}
                     {item.href === '/messages' && totalUnread > 0 && (
                        <span className="ml-auto flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
                         {totalUnread}
