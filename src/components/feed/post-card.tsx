@@ -4,12 +4,13 @@ import type { Post } from '@/lib/types';
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Badge } from '../ui/badge';
-import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal } from 'lucide-react';
+import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal, UserPlus, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { formatDistanceToNow } from 'date-fns';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 
 interface PostCardProps {
   post: Post;
@@ -47,10 +48,26 @@ export function PostCard({ post }: PostCardProps) {
     <Card className="bg-card text-card-foreground rounded-lg overflow-hidden shadow-none border-0 md:border md:rounded-xl">
       {/* Post Header */}
       <div className="flex items-center p-4">
-        <Avatar className="w-10 h-10">
-          <AvatarImage src={post.userPhoto} alt={post.userName} />
-          <AvatarFallback>{post.userName.charAt(0)}</AvatarFallback>
-        </Avatar>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <button className="flex items-center text-left">
+                    <Avatar className="w-10 h-10">
+                    <AvatarImage src={post.userPhoto} alt={post.userName} />
+                    <AvatarFallback>{post.userName.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+                <DropdownMenuItem>
+                    <UserPlus className="mr-2 h-4 w-4" />
+                    <span>Follow</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    <MessageSquare className="mr-2 h-4 w-4" />
+                    <span>Send DM</span>
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
         <div className="ml-3">
           <p className="font-bold text-sm">{post.userName}</p>
           {post.petName && <Badge variant="secondary" className="text-xs -ml-1">{post.petName}</Badge>}
