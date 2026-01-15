@@ -12,7 +12,8 @@ import {
   SidebarMenuButton,
   SidebarProvider,
   SidebarTrigger,
-  SidebarFooter
+  SidebarFooter,
+  useSidebar
 } from '@/components/ui/sidebar';
 import { mockData } from '@/lib/mock-data';
 import {
@@ -50,9 +51,11 @@ const navItems = [
   { href: '/messages', icon: Bell, label: 'Messages' },
 ];
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+function AppLayoutContent({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
   const router = useRouter();
+  const { setOpenMobile } = useSidebar();
+
 
   if (!user) {
     // Or a loading spinner
@@ -63,15 +66,19 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     logout();
     router.push('/login');
   };
+  
+  const handleLinkClick = () => {
+    setOpenMobile(false);
+  }
 
   const conversations = mockData.conversations.filter(c => c.participants.includes(user.userId));
   const totalUnread = conversations.reduce((acc, convo) => acc + (convo.unreadCount[user.userId] || 0), 0);
 
   return (
-    <SidebarProvider>
+    <>
       <Sidebar>
         <SidebarHeader>
-          <Link href="/feed" className="flex items-center gap-2.5">
+          <Link href="/feed" className="flex items-center gap-2.5" onClick={handleLinkClick}>
             <PawPrintIcon className="size-7 shrink-0 text-primary" />
             <span className="font-bold text-lg text-foreground font-headline">PetConnect</span>
           </Link>
@@ -80,7 +87,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <SidebarMenu>
             {navItems.map((item) => (
               <SidebarMenuItem key={item.href}>
-                <Link href={item.href} className="w-full">
+                <Link href={item.href} className="w-full" onClick={handleLinkClick}>
                   <SidebarMenuButton tooltip={item.label} size="lg">
                     <item.icon />
                     <span className="flex items-center gap-2">{item.label}</span>
@@ -141,10 +148,19 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <span className="sr-only">Toggle notifications</span>
           </Button>
         </header>
-        <main className="flex-1 md:p-6 lg:p-8">
+        <main className="flex-1 p-4 md:p-6 lg:p-8">
             {children}
         </main>
       </SidebarInset>
-    </SidebarProvider>
+    </>
   );
+}
+
+
+export default function AppLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <SidebarProvider>
+      <AppLayoutContent>{children}</AppLayoutContent>
+    </SidebarProvider>
+  )
 }
