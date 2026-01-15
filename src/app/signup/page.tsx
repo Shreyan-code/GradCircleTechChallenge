@@ -63,9 +63,6 @@ export default function SignupPage() {
             <Button onClick={handleSignup} className="w-full">
               Sign Up
             </Button>
-            <Button variant="outline" className="w-full">
-              Sign Up with Google
-            </Button>
           </div>
           <div className="mt-4 text-center text-sm">
             Already have an account?{" "}
