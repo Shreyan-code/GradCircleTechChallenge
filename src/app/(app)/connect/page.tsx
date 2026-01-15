@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const connectFeatures = [
   {
-    href: '#',
+    href: '/connect/playdate-matchmaker',
     icon: <Users className="w-8 h-8 text-primary" />,
     title: 'Playdate Matchmaker',
     description: 'Find compatible playmates for your pet based on breed, size, and temperament.',
