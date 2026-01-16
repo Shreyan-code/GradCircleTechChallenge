@@ -1,4 +1,5 @@
 'use client';
+import * as React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -23,7 +24,7 @@ import {
   Home,
   MessageSquare,
   Settings,
-  ShieldQuestion,
+  AlertTriangle,
   Sparkles,
   Users,
   Lightbulb,
@@ -37,16 +38,26 @@ import { PawPrintIcon } from '@/components/icons';
 import { Badge } from '@/components/ui/badge';
 import { SearchBar } from '@/components/search-bar';
 import { useAuth } from '@/context/auth-context';
+import { cn } from '@/lib/utils';
 
-const navItems = [
+type NavItem = {
+  href: string;
+  icon: React.ElementType;
+  label: string;
+  isAI?: boolean;
+  comingSoon?: boolean;
+  isAlert?: boolean;
+};
+
+const navItems: NavItem[] = [
   { href: '/feed', icon: Home, label: 'Feed' },
   { href: '/forums', icon: MessageSquare, label: 'Forums' },
   { href: '/events', icon: Calendar, label: 'Events & Meetups' },
   { href: '/connect', icon: Users, label: 'Connect', isAI: true },
   { href: '/health', icon: Heart, label: 'Health Tools', isAI: true },
   { href: '/tips', icon: Lightbulb, label: 'Tips & Advice', isAI: true },
+  { href: '/lost-pets', icon: AlertTriangle, label: 'Lost & Found', isAlert: true },
   { href: '/adopt', icon: PawPrint, label: 'Adopt a Pet' },
-  { href: '/lost-pets', icon: ShieldQuestion, label: 'Lost & Found' },
   { href: '/store', icon: Store, label: 'Pet Store', comingSoon: true },
   { href: '/messages', icon: Bell, label: 'Messages' },
 ];
@@ -85,12 +96,14 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
-            {navItems.map((item) => (
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
               <SidebarMenuItem key={item.href}>
                 <Link href={item.href} className="w-full" onClick={handleLinkClick}>
                   <SidebarMenuButton tooltip={item.label} size="lg">
-                    <item.icon />
-                    <span className="flex items-center gap-2">{item.label}</span>
+                    <Icon className={cn(item.isAlert && "text-destructive")} />
+                    <span className={cn("flex items-center gap-2", item.isAlert && "text-destructive")}>{item.label}</span>
                     {item.isAI && <Sparkles className="w-4 h-4 text-primary" />}
                     {item.comingSoon && <Badge variant="outline" className="text-xs ml-auto">Coming Soon</Badge>}
                     {item.href === '/messages' && totalUnread > 0 && (
@@ -101,7 +114,7 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>
-            ))}
+            )})}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
