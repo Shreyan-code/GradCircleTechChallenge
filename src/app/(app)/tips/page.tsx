@@ -99,6 +99,23 @@ export default function TipsPage() {
     }
   };
 
+  const renderMarkdownList = (text: string) => {
+    if (!text) return '';
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .split('\n')
+      .map(line => {
+        if (line.trim().startsWith('* ')) {
+          return `<li>${line.replace('* ', '').trim()}</li>`;
+        }
+        if (line.trim() === '') {
+          return '<br />';
+        }
+        return line.trim();
+      })
+      .join('');
+  };
+
   return (
     <div>
       <h1 className="text-3xl font-bold tracking-tight font-headline">Tips & Advice</h1>
@@ -118,7 +135,7 @@ export default function TipsPage() {
           {isTipLoading ? (
             <Skeleton className="h-6 w-3/4" />
           ) : (
-            <p className="text-lg text-foreground">"{tipOfTheDay?.tip}"</p>
+            <p className="text-lg text-foreground">{tipOfTheDay?.tip}</p>
           )}
         </CardContent>
       </Card>
@@ -166,7 +183,7 @@ export default function TipsPage() {
                   )}
                   {generatedTip && (
                     <div className="space-y-4 text-sm">
-                        <p className="text-base">{generatedTip.tip}</p>
+                        <div className="prose prose-sm max-w-none text-foreground text-base" dangerouslySetInnerHTML={{ __html: `<ul>${renderMarkdownList(generatedTip.tip)}</ul>` }} />
                         <div>
                             <h4 className="font-semibold mb-2">Further Reading:</h4>
                             <ul className="space-y-2">
