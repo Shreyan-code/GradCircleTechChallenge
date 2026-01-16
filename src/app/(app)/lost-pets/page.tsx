@@ -31,7 +31,7 @@ export default function LostPetsPage() {
     });
   };
 
-  const handleReportPet = (newAlert: Omit<LostPetAlert, 'alertId' | 'createdAt' | 'ownerId' | 'ownerName' | 'ownerPhone'>) => {
+  const handleReportPet = (newAlert: Omit<LostPetAlert, 'alertId' | 'createdAt' | 'ownerId' | 'ownerName' | 'ownerPhone' | 'status'>) => {
     const alertId = `lpa_${String(mockData.lostPetAlerts.length + 1).padStart(3, '0')}`;
 
     const fullAlert: LostPetAlert = {
