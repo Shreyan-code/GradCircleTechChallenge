@@ -442,16 +442,13 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_priya"),
       petId: "pet_001",
       petName: "Max",
-      image: getImageUrl("post_golden_beach"),
-      caption: "Morning walks at Juhu Beach with Max and Bella! They absolutely love the sand 🌊 #dogsofinstagram #mumbai",
-      likes: 47,
-      likedBy: ["user_004", "user_003"],
-      comments: [
-        { commentId: "cmt_001", userId: "user_004", userName: "Rohan Mehta", userPhoto: getImageUrl("user_rohan"), text: "Such cuties! Bruno would love to meet them 🐕", timestamp: "2025-01-15T08:30:00Z" },
-        { commentId: "cmt_002", userId: "user_003", userName: "Ananya Reddy", userPhoto: getImageUrl("user_ananya"), text: "This is pure happiness!", timestamp: "2025-01-15T08:45:00Z" }
-      ],
+      image: getImageUrl("story_rocky_park"),
+      caption: "A perfect evening at the park with my two favorite fluffballs. ❤️ #doglife #petconnect",
+      likes: 68,
+      likedBy: [],
+      comments: [],
       saved: false,
-      createdAt: subDays(now, 1).toISOString()
+      createdAt: subDays(now, 0).toISOString()
     },
     {
       postId: "post_002",
@@ -1269,3 +1266,4 @@ export const mockData: MockData = {
 
 
     
+
