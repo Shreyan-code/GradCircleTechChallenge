@@ -1092,6 +1092,32 @@ export const mockData: MockData = {
       createdAt: subDays(now, 1).toISOString(),
     },
     {
+      alertId: "lpa_003",
+      status: 'active',
+      ownerId: "user_001",
+      ownerName: "Priya Sharma",
+      ownerPhone: "+91-9876543210",
+      petId: "pet_018", 
+      petName: "Whiskers",
+      petType: 'Cat',
+      breed: "Siamese",
+      age: { years: 2, months: 0 },
+      gender: 'Female',
+      color: "Cream with dark points",
+      petPhoto: getImageUrl("pet_whiskers_lost"),
+      distinctiveMarks: "She has striking blue eyes.",
+      lastSeenLocation: {
+        address: "Jayanagar 4th Block",
+        city: "Bangalore",
+        landmark: "Near the Jayanagar shopping complex"
+      },
+      lastSeenDate: subDays(now, 2).toISOString().split('T')[0],
+      lastSeenTime: "18:00",
+      description: "Whiskers is very friendly but might be scared. She slipped out the front door. She is not wearing a collar. We miss her dearly.",
+      reward: 2000,
+      createdAt: subDays(now, 2).toISOString(),
+    },
+    {
       alertId: "lpa_002",
       status: 'found',
       ownerId: "user_007",
@@ -1226,22 +1252,6 @@ export const mockData: MockData = {
         "name": "Rohan Sharma",
         "phone": "+91 98765 43211"
       }
-    },
-    {
-      "adoptionId": "adopt_002",
-      "name": "Oreo",
-      "type": "Cat",
-      "breed": "Domestic Shorthair",
-      "age": { "years": 1, "months": 6 },
-      "gender": "Female",
-      "photo": getImageUrl("pet_oreo_adopt"),
-      "location": "Mumbai, MH",
-      "story": "Oreo is a sweet and calm cat who loves to cuddle and nap in sunny spots. She is a little shy at first, but warms up quickly with a gentle touch. She is litter-trained and gets along well with other calm cats.",
-      "reasonForAdoption": "Her owner unfortunately developed a severe cat allergy and, after trying everything, had to make the difficult decision to rehome her. She's looking for a quiet and loving home.",
-      "contact": {
-        "name": "Aisha Khan",
-        "phone": "+91 98765 43212"
-      }
     }
   ]
 };
@@ -1250,6 +1260,7 @@ export const mockData: MockData = {
 
 
     
+
 
 
 

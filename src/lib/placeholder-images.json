@@ -257,6 +257,12 @@
       "description": "Photo of Byte, a golden doodle puppy",
       "imageUrl": "https://images.unsplash.com/photo-1618359469273-05459a997d91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxnb2xkZW5kb29kbGUlMjBwdXBweXxlbnwwfHx8fDE3Mjk3NzQ1MTZ8MA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "goldendoodle puppy"
+    },
+    {
+      "id": "pet_whiskers_lost",
+      "description": "Photo of Whiskers, a lost siamese cat",
+      "imageUrl": "https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzaWFtZXNlJTIwY2F0fGVufDB8fHx8fDE3Njk2ODg0MTJ8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "siamese cat"
     }
   ]
 }
