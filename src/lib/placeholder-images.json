@@ -93,7 +93,7 @@
     {
       "id": "pet_kaiser",
       "description": "Photo of Kaiser, a Siberian Husky",
-      "imageUrl": "https://images.unsplash.com/photo-1529429617124-95b109e86bb8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzaWJlcmlhbiUyMGh1c2t5fGVufDB8fHx8fDE3NzEzNzkwNDh8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1610482613524-aaeb252156a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMGFuZCUyMHdoaXRlJTIwc2liZXJpYW4lMjBodXNreXxlbnwwfHx8fDE3NjkxODMyMDB8MA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "siberian husky"
     },
     {
@@ -251,6 +251,12 @@
       "description": "A smiling indie dog",
       "imageUrl": "https://images.unsplash.com/photo-1576683562471-f92500858ce7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbmRpZSUyMGRvZ3xlbnwwfHx8fDE3NjkxNzk3ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indie dog"
+    },
+    {
+      "id": "pet_chip_doodle",
+      "description": "Photo of Chip, a golden doodle",
+      "imageUrl": "https://images.unsplash.com/photo-1615233505853-241838c92823?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb2xkZW5lJTIwZG9vZGxlfGVufDB8fHx8fDE3NjkxODMyMDB8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "golden doodle"
     }
   ]
 }

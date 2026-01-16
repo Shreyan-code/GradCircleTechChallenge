@@ -107,11 +107,11 @@ export const mockData: MockData = {
       location: { city: "Bangalore", state: "Karnataka", country: "India" },
       bio: "Just a guy and his dog, exploring the Garden City.",
       joinedAt: "2024-08-01",
-      postCount: 8,
-      petCount: 2,
+      postCount: 12,
+      petCount: 3,
       followers: 50,
       following: 20,
-      petIds: ["pet_009", "pet_011"]
+      petIds: ["pet_009", "pet_011", "pet_016"]
     },
     {
       userId: "user_007",
@@ -122,11 +122,11 @@ export const mockData: MockData = {
       location: { city: "Bangalore", state: "Karnataka", country: "India" },
       bio: "Persian cat enthusiast. My camera roll is 99% cat photos.",
       joinedAt: "2024-07-22",
-      postCount: 11,
-      petCount: 2,
+      postCount: 15,
+      petCount: 3,
       followers: 78,
       following: 45,
-      petIds: ["pet_010", "pet_012"]
+      petIds: ["pet_010", "pet_012", "pet_015"]
     },
     {
       userId: "user_008",
@@ -137,11 +137,11 @@ export const mockData: MockData = {
       location: { city: "Bangalore", state: "Karnataka", country: "India" },
       bio: "We're a pet-friendly workspace in Bangalore! Pawsitivity is part of our culture.",
       joinedAt: "2024-06-10",
-      postCount: 6,
-      petCount: 1,
+      postCount: 9,
+      petCount: 2,
       followers: 150,
       following: 12,
-      petIds: ["pet_013"]
+      petIds: ["pet_013", "pet_017"]
     }
   ],
   pets: [
@@ -373,11 +373,65 @@ export const mockData: MockData = {
       birthDate: "2022-08-01",
       color: "Apricot",
       weight: 25,
-      photo: "https://picsum.photos/seed/chipdog/400/400",
+      photo: getImageUrl("pet_chip_doodle"),
       specialNeeds: "Chief Morale Officer.",
       activityLevel: 8,
       microchipId: "CHIP98765",
       createdAt: "2024-09-12"
+    },
+    {
+      petId: "pet_015",
+      ownerId: "user_007",
+      ownerName: "Ishaan Som Singh",
+      name: "Zorro",
+      type: "Rabbit",
+      breed: "Holland Lop",
+      gender: "Male",
+      age: { years: 1, months: 0 },
+      birthDate: "2023-09-15",
+      color: "Broken Black",
+      weight: 1.8,
+      photo: "https://picsum.photos/seed/zorrorabbit/400/400",
+      specialNeeds: "Needs lots of hay.",
+      activityLevel: 4,
+      microchipId: "ZORRO12345",
+      createdAt: "2024-09-15"
+    },
+    {
+      petId: "pet_016",
+      ownerId: "user_006",
+      ownerName: "Shreyan Bagchi",
+      name: "Rocket",
+      type: "Rabbit",
+      breed: "Netherland Dwarf",
+      gender: "Male",
+      age: { years: 0, months: 10 },
+      birthDate: "2023-11-15",
+      color: "Chestnut",
+      weight: 1.2,
+      photo: "https://picsum.photos/seed/rocketrabbit/400/400",
+      specialNeeds: "Very energetic.",
+      activityLevel: 8,
+      microchipId: "ROCKET54321",
+      createdAt: "2024-09-15"
+    },
+    {
+      petId: "pet_017",
+      ownerId: "user_008",
+      ownerName: "Grad Circle",
+      name: "Byte",
+      type: "Dog",
+      breed: "Golden Doodle",
+      gender: "Female",
+      age: { years: 1, months: 0 },
+      birthDate: "2023-09-15",
+      color: "Cream",
+      weight: 22,
+      photo: "https://picsum.photos/seed/bytedog/400/400",
+      specialNeeds: "Head of Bark-end Development.",
+      activityLevel: 7,
+      microchipId: "BYTE54321",
+      createdAt: "2024-09-15"
     }
   ],
   posts: [
@@ -668,6 +722,141 @@ export const mockData: MockData = {
       comments: [],
       saved: false,
       createdAt: subDays(now, 9).toISOString()
+    },
+    {
+      postId: "post_020",
+      userId: "user_007",
+      userName: "Ishaan Som Singh",
+      userPhoto: getImageUrl("user_ishaan"),
+      petId: "pet_015",
+      petName: "Zorro",
+      image: "https://picsum.photos/seed/zorro_post1/600/600",
+      caption: "Zorro exploring his new kingdom (my desk).",
+      likes: 45,
+      likedBy: [],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 1).toISOString()
+    },
+    {
+      postId: "post_021",
+      userId: "user_007",
+      userName: "Ishaan Som Singh",
+      userPhoto: getImageUrl("user_ishaan"),
+      petId: "pet_015",
+      petName: "Zorro",
+      image: "https://picsum.photos/seed/zorro_post2/600/600",
+      caption: "Salad for one, please. 🥬",
+      likes: 58,
+      likedBy: [],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 4).toISOString()
+    },
+    {
+      postId: "post_022",
+      userId: "user_007",
+      userName: "Ishaan Som Singh",
+      userPhoto: getImageUrl("user_ishaan"),
+      petId: "pet_015",
+      petName: "Zorro",
+      image: "https://picsum.photos/seed/zorro_post3/600/600",
+      caption: "The definition of a fluffy tail.",
+      likes: 62,
+      likedBy: [],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 8).toISOString()
+    },
+    {
+      postId: "post_023",
+      userId: "user_006",
+      userName: "Shreyan Bagchi",
+      userPhoto: getImageUrl("user_shreyan"),
+      petId: "pet_016",
+      petName: "Rocket",
+      image: "https://picsum.photos/seed/rocket_post1/600/600",
+      caption: "Meet Rocket, the newest and tiniest member of the family!",
+      likes: 71,
+      likedBy: [],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 2).toISOString()
+    },
+    {
+      postId: "post_024",
+      userId: "user_006",
+      userName: "Shreyan Bagchi",
+      userPhoto: getImageUrl("user_shreyan"),
+      petId: "pet_016",
+      petName: "Rocket",
+      image: "https://picsum.photos/seed/rocket_post2/600/600",
+      caption: "He's so small! My phone is bigger than he is.",
+      likes: 82,
+      likedBy: [],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 6).toISOString()
+    },
+    {
+      postId: "post_025",
+      userId: "user_006",
+      userName: "Shreyan Bagchi",
+      userPhoto: getImageUrl("user_shreyan"),
+      petId: "pet_016",
+      petName: "Rocket",
+      image: "https://picsum.photos/seed/rocket_post3/600/600",
+      caption: "It's hard to get anything done with this level of cuteness around.",
+      likes: 75,
+      likedBy: [],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 11).toISOString()
+    },
+    {
+      postId: "post_026",
+      userId: "user_008",
+      userName: "Grad Circle",
+      userPhoto: getImageUrl("user_grad_circle"),
+      petId: "pet_017",
+      petName: "Byte",
+      image: "https://picsum.photos/seed/byte_post1/600/600",
+      caption: "Our new Head of Bark-end Development, Byte, ensuring all our code is paw-some.",
+      likes: 99,
+      likedBy: [],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 3).toISOString()
+    },
+    {
+      postId: "post_027",
+      userId: "user_008",
+      userName: "Grad Circle",
+      userPhoto: getImageUrl("user_grad_circle"),
+      petId: "pet_017",
+      petName: "Byte",
+      image: "https://picsum.photos/seed/byte_post2/600/600",
+      caption: "Byte and Chip are the best of friends. #officepups",
+      likes: 130,
+      likedBy: [],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 7).toISOString()
+    },
+    {
+      postId: "post_028",
+      userId: "user_008",
+      userName: "Grad Circle",
+      userPhoto: getImageUrl("user_grad_circle"),
+      petId: "pet_017",
+      petName: "Byte",
+      image: "https://picsum.photos/seed/byte_post3/600/600",
+      caption: "Important meeting in progress.",
+      likes: 115,
+      likedBy: [],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 12).toISOString()
     }
   ],
   stories: [
@@ -834,6 +1023,48 @@ export const mockData: MockData = {
       lastReplyAt: subDays(now, 0).toISOString(),
       createdAt: subDays(now, 2).toISOString(),
       replies: []
+    },
+    {
+      topicId: "topic_008",
+      categoryId: "all-pets",
+      userId: "user_006",
+      userName: "Shreyan Bagchi",
+      userPhoto: getImageUrl("user_shreyan"),
+      title: "Rabbit-proofing my apartment - tips needed!",
+      content: "Rocket is a little explorer and loves to chew on everything. Especially wires! Any tips or product recommendations for rabbit-proofing an apartment?",
+      views: 30,
+      replyCount: 1,
+      lastReplyAt: subDays(now, 1).toISOString(),
+      createdAt: subDays(now, 1).toISOString(),
+      replies: []
+    },
+    {
+      topicId: "topic_009",
+      categoryId: "dog-talk",
+      userId: "user_007",
+      userName: "Ishaan Som Singh",
+      userPhoto: getImageUrl("user_ishaan"),
+      title: "Pomeranian puppy training is a challenge!",
+      content: "Coco is adorable but has so much energy. Potty training is going... slowly. Any tips for training a high-energy, intelligent puppy like a Pomeranian?",
+      views: 65,
+      replyCount: 2,
+      lastReplyAt: subDays(now, 0).toISOString(),
+      createdAt: subDays(now, 2).toISOString(),
+      replies: []
+    },
+    {
+      topicId: "topic_010",
+      categoryId: "dog-talk",
+      userId: "user_008",
+      userName: "Grad Circle",
+      userPhoto: getImageUrl("user_grad_circle"),
+      title: "Best chew toys for a Golden Doodle?",
+      content: "Our office doodles, Chip and Byte, go through toys like crazy. We need some recommendations for durable chew toys that can stand up to their enthusiasm. Any ideas?",
+      views: 95,
+      replyCount: 4,
+      lastReplyAt: subDays(now, 3).toISOString(),
+      createdAt: subDays(now, 5).toISOString(),
+      replies: []
     }
   ],
   lostPetAlerts: [
@@ -937,30 +1168,49 @@ export const mockData: MockData = {
     {
       conversationId: "convo_004",
       participants: ["user_006", "user_007"],
-      lastMessage: "Thanks for the welcome!",
-      lastMessageBy: "user_006",
+      lastMessage: "For sure! Let's plan something.",
+      lastMessageBy: "user_007",
       lastMessageAt: subDays(now, 1).toISOString(),
-      unreadCount: { "user_006": 0, "user_007": 0 },
+      unreadCount: { "user_006": 1, "user_007": 0 },
       messages: [
         { messageId: "msg_010", senderId: "user_007", text: "Hey Shreyan, welcome to PetConnect!", createdAt: subDays(now, 1).toISOString(), readBy: ["user_006"] },
-        { messageId: "msg_011", senderId: "user_006", text: "Thanks for the welcome!", createdAt: subDays(now, 1).toISOString(), readBy: ["user_007"] }
+        { messageId: "msg_011", senderId: "user_006", text: "Thanks for the welcome! Love your cat photos.", createdAt: subDays(now, 1).toISOString(), readBy: ["user_007"] },
+        { messageId: "msg_020", senderId: "user_007", text: "Thanks! We should get all our pets together for a chaotic playdate sometime.", createdAt: subDays(now, 1).toISOString(), readBy: [] },
+        { messageId: "msg_021", senderId: "user_006", text: "Haha, a dog, two cats, and two rabbits. What could go wrong?", createdAt: subDays(now, 1).toISOString(), readBy: ["user_007"] },
+        { messageId: "msg_022", senderId: "user_007", text: "For sure! Let's plan something.", createdAt: subDays(now, 1).toISOString(), readBy: [] }
       ],
       createdAt: subDays(now, 1).toISOString()
     },
     {
       conversationId: "convo_005",
       participants: ["user_008", "user_006"],
-      lastMessage: "Will do, thanks!",
-      lastMessageBy: "user_006",
-      lastMessageAt: subDays(now, 2).toISOString(),
-      unreadCount: { "user_006": 0, "user_008": 1 },
+      lastMessage: "He's here now! Come say hi if you're around.",
+      lastMessageBy: "user_008",
+      lastMessageAt: subDays(now, 0).toISOString(),
+      unreadCount: { "user_006": 1, "user_008": 0 },
       messages: [
         { messageId: "msg_012", senderId: "user_008", text: "Hi Shreyan! We saw your post about Sheru. Feel free to bring him by our pet-friendly workspace sometime!", createdAt: subDays(now, 2).toISOString(), readBy: ["user_006"] },
         { messageId: "msg_013", senderId: "user_006", text: "Wow, that's awesome! I might just do that.", createdAt: subDays(now, 2).toISOString(), readBy: ["user_008"] },
         { messageId: "msg_014", senderId: "user_008", text: "Great! Just give us a heads-up.", createdAt: subDays(now, 2).toISOString(), readBy: ["user_006"] },
-        { messageId: "msg_015", senderId: "user_006", text: "Will do, thanks!", createdAt: subDays(now, 2).toISOString(), readBy: [] }
+        { messageId: "msg_015", senderId: "user_006", text: "Will do, thanks!", createdAt: subDays(now, 2).toISOString(), readBy: ["user_008"] },
+        { messageId: "msg_023", senderId: "user_008", text: "He's here now! Come say hi if you're around.", createdAt: subDays(now, 0).toISOString(), readBy: [] }
       ],
       createdAt: subDays(now, 2).toISOString()
+    },
+    {
+      conversationId: "convo_006",
+      participants: ["user_008", "user_007"],
+      lastMessage: "Perfect, see you then!",
+      lastMessageBy: "user_007",
+      lastMessageAt: subDays(now, 1).toISOString(),
+      unreadCount: { "user_007": 0, "user_008": 0 },
+      messages: [
+        { messageId: "msg_016", senderId: "user_008", text: "Hey Ishaan, the team loved meeting Coco. You're welcome to bring her by anytime!", createdAt: subDays(now, 1).toISOString(), readBy: ["user_007"] },
+        { messageId: "msg_017", senderId: "user_007", text: "That's so great to hear! She had a blast. We'll definitely be back next week.", createdAt: subDays(now, 1).toISOString(), readBy: ["user_008"] },
+        { messageId: "msg_018", senderId: "user_008", text: "Awesome. Chip and Byte are already looking forward to it.", createdAt: subDays(now, 1).toISOString(), readBy: ["user_007"] },
+        { messageId: "msg_019", senderId: "user_007", text: "Perfect, see you then!", createdAt: subDays(now, 1).toISOString(), readBy: ["user_008"] }
+      ],
+      createdAt: subDays(now, 1).toISOString()
     }
   ],
   adoptionPets: [
@@ -1014,5 +1264,8 @@ export const mockData: MockData = {
     }
   ]
 };
+
+    
+
 
     
