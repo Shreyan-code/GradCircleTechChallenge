@@ -436,6 +436,54 @@ export const mockData: MockData = {
   ],
   posts: [
     {
+      postId: "post_001",
+      userId: "user_001",
+      userName: "Priya Sharma",
+      userPhoto: getImageUrl("user_priya"),
+      petId: "pet_001",
+      petName: "Max",
+      image: getImageUrl("post_bella_birthday"),
+      caption: "Happy 3rd Birthday to my boy, Max! 🎉 So much love for this goofball.",
+      likes: 124,
+      likedBy: ["user_002", "user_003", "user_004", "user_005"],
+      comments: [
+        { commentId: "cmt_001", userId: "user_003", userName: "Ananya Reddy", userPhoto: getImageUrl("user_ananya"), text: "Happy Birthday, Max!", timestamp: "2025-01-15T09:00:00Z" },
+        { commentId: "cmt_002", userId: "user_004", userName: "Rohan Mehta", userPhoto: getImageUrl("user_rohan"), text: "He's getting so big!", timestamp: "2025-01-15T09:05:00Z" }
+      ],
+      saved: true,
+      createdAt: subDays(now, 1).toISOString()
+    },
+    {
+      postId: "post_009",
+      userId: "user_001",
+      userName: "Priya Sharma",
+      userPhoto: getImageUrl("user_priya"),
+      petId: "pet_002",
+      petName: "Bella",
+      image: getImageUrl("post_golden_beach"),
+      caption: "Bella's first time at the beach! She's a natural. 🌊 #beachday #dogsofinstagram",
+      likes: 152,
+      likedBy: ["user_002", "user_005"],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 10).toISOString()
+    },
+    {
+      postId: "post_010",
+      userId: "user_001",
+      userName: "Priya Sharma",
+      userPhoto: getImageUrl("user_priya"),
+      petId: "pet_001",
+      petName: "Max",
+      image: getImageUrl("post_max_muddy"),
+      caption: "A muddy dog is a happy dog, right? 😅",
+      likes: 98,
+      likedBy: ["user_004"],
+      comments: [],
+      saved: false,
+      createdAt: subDays(now, 20).toISOString()
+    },
+    {
       postId: "post_002",
       userId: "user_002",
       userName: "Arjun Patel",
@@ -1295,6 +1343,7 @@ export const mockData: MockData = {
 
 
     
+
 
 
 
