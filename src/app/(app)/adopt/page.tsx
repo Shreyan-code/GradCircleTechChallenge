@@ -1,12 +1,23 @@
+'use client';
+
 import { mockData } from '@/lib/mock-data';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { PawPrint, MapPin, Phone } from 'lucide-react';
+import { useNotificationToast } from "@/hooks/use-notification-toast";
 
 export default function AdoptionPage() {
   const { adoptionPets } = mockData;
+  const { notificationToast: toast } = useNotificationToast();
+
+  const handleInterest = (petName: string, ownerName: string) => {
+    toast({
+      title: "Interest sent!",
+      description: `Your interest in adopting ${petName} has been sent to ${ownerName}. They will contact you shortly.`,
+    });
+  };
 
   return (
     <div>
@@ -53,7 +64,7 @@ export default function AdoptionPage() {
                     <Phone className="w-4 h-4 text-primary" />
                     <span>{pet.contact.name} - {pet.contact.phone}</span>
                 </div>
-                <Button className="w-full mt-2">
+                <Button className="w-full mt-2" onClick={() => handleInterest(pet.name, pet.contact.name)}>
                     <PawPrint className="mr-2 h-4 w-4" />
                     I am interested
                 </Button>
