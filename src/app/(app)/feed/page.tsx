@@ -26,8 +26,10 @@ export default function FeedPage() {
   
   if (!user) return null; // Or a loading spinner
 
-  // Show all posts, newest first
-  const sortedPosts = [...posts].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  // Filter out the logged-in user's posts and sort the rest
+  const sortedPosts = posts
+    .filter(post => post.userId !== user.userId)
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -72,7 +74,7 @@ export default function FeedPage() {
         setImageFile(null);
         toast({
           title: "Post created!",
-          description: "Your new post is live on the feed.",
+          description: "Your new post is live on your profile.",
         });
     }, 1000);
   };
