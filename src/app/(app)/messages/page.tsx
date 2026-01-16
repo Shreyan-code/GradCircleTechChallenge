@@ -33,11 +33,17 @@ export default function MessagesPage() {
   const petInvolved = otherParticipant ? data.pets.find(p => otherParticipant.petIds.includes(p.petId)) : null;
 
   useEffect(() => {
-    // Scroll to bottom when messages change
+    // Scroll to bottom when messages change or conversation is selected
     if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+        // The viewport is the first child of the scroll area
+        const viewport = scrollAreaRef.current.firstElementChild;
+        if (viewport) {
+            setTimeout(() => {
+                viewport.scrollTop = viewport.scrollHeight;
+            }, 0);
+        }
     }
-  }, [selectedConversation?.messages.length]);
+  }, [selectedConversation]);
 
   const handleSendMessage = () => {
     if (!newMessage.trim() || !selectedConversationId) return;
