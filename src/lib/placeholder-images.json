@@ -236,9 +236,9 @@
     },
     {
       "id": "pet_buddy_adopt",
-      "description": "A happy labrador retriever mix",
-      "imageUrl": "https://images.unsplash.com/photo-1594140882654-416d8a39a65d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsYWJyYWRvciUyMG1peHxlbnwwfHx8fDE3NjkxNzk3NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "labrador mix"
+      "description": "A happy golden retriever",
+      "imageUrl": "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxnb2xkZW4lMjByZXRyaWV2ZXJ8ZW58MHx8fHwxNzY4NDM3ODgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "golden retriever"
     },
     {
       "id": "pet_oreo_adopt",
@@ -248,8 +248,8 @@
     },
     {
       "id": "pet_lucy_adopt",
-      "description": "A smiling indie dog",
-      "imageUrl": "https://images.unsplash.com/photo-1576683562471-f92500858ce7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbmRpZSUyMGRvZ3xlbnwwfHx8fDE3NjkxNzk3ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "A cute indie dog looking for a home",
+      "imageUrl": "https://images.unsplash.com/photo-1625794084883-55a53909f193?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmRpZSUyMGRvZ3xlbnwwfHx8fDE3NjkxNzk3ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indie dog"
     },
     {

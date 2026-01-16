@@ -1215,7 +1215,7 @@ export const mockData: MockData = {
       "adoptionId": "adopt_001",
       "name": "Buddy",
       "type": "Dog",
-      "breed": "Labrador Retriever Mix",
+      "breed": "Golden Retriever",
       "age": { "years": 2, "months": 0 },
       "gender": "Male",
       "photo": getImageUrl("pet_buddy_adopt"),
@@ -1266,5 +1266,6 @@ export const mockData: MockData = {
 
 
     
+
 
 
