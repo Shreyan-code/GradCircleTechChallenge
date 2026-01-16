@@ -436,24 +436,6 @@ export const mockData: MockData = {
   ],
   posts: [
     {
-      postId: "post_001",
-      userId: "user_001",
-      userName: "Priya Sharma",
-      userPhoto: getImageUrl("user_priya"),
-      petId: "pet_001",
-      petName: "Max",
-      image: getImageUrl("post_golden_beach"),
-      caption: "Salty paws and sandy noses. Max living his best life at the beach today! 🌊 #beachday #dogsofpetconnect",
-      likes: 75,
-      likedBy: [],
-      comments: [
-        { commentId: "cmt_001", userId: "user_002", userName: "Arjun Patel", userPhoto: getImageUrl("user_arjun"), text: "Looks amazing! I need to take Simba to the beach sometime.", timestamp: "2025-01-15T12:35:00Z" },
-        { commentId: "cmt_002", userId: "user_004", userName: "Rohan Mehta", userPhoto: getImageUrl("user_rohan"), text: "So much fun!", timestamp: "2025-01-15T12:45:00Z" }
-      ],
-      saved: false,
-      createdAt: subDays(now, 0).toISOString()
-    },
-    {
       postId: "post_002",
       userId: "user_002",
       userName: "Arjun Patel",
@@ -562,36 +544,6 @@ export const mockData: MockData = {
       comments: [],
       saved: false,
       createdAt: subDays(now, 6).toISOString()
-    },
-    {
-      postId: "post_009",
-      userId: "user_001",
-      userName: "Priya Sharma",
-      userPhoto: getImageUrl("user_priya"),
-      petId: "pet_002",
-      petName: "Bella",
-      image: getImageUrl("post_bella_birthday"),
-      caption: "Happy 2nd Birthday to my sweet Bella! 🎂 Can't believe how fast time flies. #birthdaygirl #dogbirthday",
-      likes: 72,
-      likedBy: ["user_002", "user_003", "user_004"],
-      comments: [],
-      saved: false,
-      createdAt: subDays(now, 2).toISOString()
-    },
-    {
-      postId: "post_010",
-      userId: "user_001",
-      userName: "Priya Sharma",
-      userPhoto: getImageUrl("user_priya"),
-      petId: "pet_001",
-      petName: "Max",
-      image: getImageUrl("post_max_muddy"),
-      caption: "Someone had a little too much fun in the monsoon puddles today... Worth it for that smile! 🐾 #monsoon #muddydog",
-      likes: 61,
-      likedBy: ["user_005"],
-      comments: [],
-      saved: true,
-      createdAt: subDays(now, 4).toISOString()
     },
     {
       postId: "post_011",
@@ -1343,6 +1295,7 @@ export const mockData: MockData = {
 
 
     
+
 
 
 
