@@ -1,6 +1,6 @@
 
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useParams, notFound, useRouter } from 'next/navigation';
 import { mockData as initialMockData } from '@/lib/mock-data';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -24,7 +24,8 @@ export default function ForumTopicPage() {
 
   const [mockData, setMockData] = useState(initialMockData);
   const [replyContent, setReplyContent] = useState('');
-  
+  const replyTextareaRef = useRef<HTMLTextAreaElement>(null);
+
   const topic = mockData.forumTopics.find(t => t.topicId === params.topicId);
 
   // Local state for upvotes since it's not in the data model
@@ -42,6 +43,10 @@ export default function ForumTopicPage() {
   const handleUpvote = () => {
     setUpvoteCount(prev => isUpvoted ? prev - 1 : prev + 1);
     setIsUpvoted(!isUpvoted);
+  };
+
+  const handleReplyClick = () => {
+    replyTextareaRef.current?.focus();
   };
 
   const handlePostReply = () => {
@@ -116,7 +121,7 @@ export default function ForumTopicPage() {
                 <ThumbsUp className={cn("mr-2 h-4 w-4", isUpvoted && "fill-current text-primary")} /> 
                 {isUpvoted ? 'Upvoted' : 'Upvote'} ({upvoteCount})
              </Button>
-            <Button>
+            <Button onClick={handleReplyClick}>
                 <MessageSquare className="mr-2 h-4 w-4" /> Reply
             </Button>
         </CardFooter>
@@ -153,6 +158,7 @@ export default function ForumTopicPage() {
         </CardHeader>
         <CardContent>
             <Textarea 
+                ref={replyTextareaRef}
                 rows={5} 
                 placeholder="Write your reply here..." 
                 value={replyContent}
