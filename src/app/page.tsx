@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PawPrint, Heart, MessageCircle, MapPin, Users, Calendar, Stethoscope, Search, AlertTriangle, Share2 } from 'lucide-react';
@@ -8,6 +10,7 @@ import { mockData } from '@/lib/mock-data';
 import { Badge } from '@/components/ui/badge';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 const features = [
   {
@@ -43,6 +46,7 @@ const features = [
 ];
 
 export default function LandingPage() {
+  const { toast } = useToast();
   const heroImage = PlaceHolderImages.find(p => p.id === 'landing-hero');
   const featureImage1 = PlaceHolderImages.find(p => p.id === 'landing-feature-1');
   const featureImage2 = PlaceHolderImages.find(p => p.id === 'landing-feature-2');
@@ -51,6 +55,19 @@ export default function LandingPage() {
   
   const activeLostPetAlerts = mockData.lostPetAlerts.filter(a => a.status === 'active').slice(0, 2);
 
+  const handleShare = (petName: string) => {
+    navigator.clipboard.writeText(`Please help find ${petName}! More info on PetConnect.`);
+    toast({
+      title: "Link Copied!",
+      description: `A shareable link for ${petName} has been copied to your clipboard.`,
+    });
+  };
+
+  const handleViewAll = () => {
+    toast({
+      description: "Showing all lost and found alerts...",
+    });
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -138,7 +155,7 @@ export default function LandingPage() {
                          <Button asChild>
                            <Link href="/lost-pets">View Details</Link>
                          </Button>
-                         <Button variant="outline">
+                         <Button variant="outline" onClick={() => handleShare(alert.petName)}>
                            <Share2 className="mr-2 h-4 w-4" /> Share
                          </Button>
                        </div>
@@ -148,7 +165,7 @@ export default function LandingPage() {
             </div>
              <div className="text-center mt-12">
                 <Button variant="ghost" asChild>
-                    <Link href="/lost-pets">View All Lost & Found Alerts &rarr;</Link>
+                    <Link href="/lost-pets" onClick={handleViewAll}>View All Lost & Found Alerts &rarr;</Link>
                 </Button>
             </div>
           </div>
