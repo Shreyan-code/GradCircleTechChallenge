@@ -20,10 +20,12 @@ const schema = z.object({
   lastSeenLocation: z.object({
     address: z.string().min(5, "Please provide an address."),
     city: z.string().min(2, "Please provide a city."),
-    landmark: z.string().optional(),
+    landmark: z.string().min(3, 'Please provide a landmark.'),
   }),
   lastSeenDate: z.date({ required_error: "Please select a date."}),
+  lastSeenTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Please enter a valid time in HH:MM format."),
   description: z.string().min(10, 'Please provide a brief description.'),
+  distinctiveMarks: z.string().optional(),
   reward: z.coerce.number().min(0).optional(),
 });
 
@@ -40,8 +42,10 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
     resolver: zodResolver(schema),
     defaultValues: {
       lastSeenDate: new Date(),
-      lastSeenLocation: { city: "Bangalore", address: ""},
+      lastSeenTime: new Date().toTimeString().slice(0, 5),
+      lastSeenLocation: { city: "Bangalore", address: "", landmark: "" },
       reward: 0,
+      distinctiveMarks: '',
     },
   });
 
@@ -58,10 +62,10 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
         gender: selectedPet.gender,
         color: selectedPet.color,
         petPhoto: selectedPet.photo,
-        distinctiveMarks: "N/A", // This could be another field
+        distinctiveMarks: data.distinctiveMarks || "N/A",
         lastSeenLocation: data.lastSeenLocation,
         lastSeenDate: data.lastSeenDate.toISOString(),
-        lastSeenTime: new Date().toTimeString().slice(0, 5), // Mock time
+        lastSeenTime: data.lastSeenTime,
         description: data.description,
         reward: data.reward || 0,
     }
@@ -100,7 +104,7 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
             control={form.control}
             name="lastSeenDate"
             render={({ field }) => (
-                <FormItem className="flex flex-col col-span-2">
+                <FormItem className="flex flex-col col-span-1">
                 <FormLabel>Last Seen Date</FormLabel>
                 <Popover>
                     <PopoverTrigger asChild>
@@ -137,6 +141,18 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
                 </FormItem>
             )}
         />
+
+        <FormField
+          control={form.control}
+          name="lastSeenTime"
+          render={({ field }) => (
+            <FormItem className="col-span-1">
+              <FormLabel>Last Seen Time (24h)</FormLabel>
+              <FormControl><Input placeholder="e.g., 14:30" {...field} /></FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         
         <FormField
           control={form.control}
@@ -144,7 +160,31 @@ export function ReportPetForm({ userPets, onSave }: ReportPetFormProps) {
           render={({ field }) => (
             <FormItem className="col-span-2">
               <FormLabel>Last Seen Address / Area</FormLabel>
-              <FormControl><Input placeholder="e.g., Near Cubbon Park" {...field} /></FormControl>
+              <FormControl><Input placeholder="e.g., 123 Main St, HSR Layout" {...field} /></FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        
+        <FormField
+          control={form.control}
+          name="lastSeenLocation.landmark"
+          render={({ field }) => (
+            <FormItem className="col-span-2">
+              <FormLabel>Nearby Landmark</FormLabel>
+              <FormControl><Input placeholder="e.g., Near BDA Complex" {...field} /></FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="distinctiveMarks"
+          render={({ field }) => (
+            <FormItem className="col-span-2">
+              <FormLabel>Distinctive Marks (Optional)</FormLabel>
+              <FormControl><Input placeholder="e.g., Small white spot on chest" {...field} /></FormControl>
               <FormMessage />
             </FormItem>
           )}

@@ -7,13 +7,12 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { mockData } from '@/lib/mock-data';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { aiSymptomChecker, type AiSymptomCheckerOutput } from '@/ai/flows/ai-symptom-checker';
-import { Loader2, Sparkles, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { Loader2, Sparkles, AlertTriangle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/context/auth-context';
@@ -78,14 +77,32 @@ export function SymptomCheckerForm() {
   };
   
   const renderUrgencyBadge = (urgency: string) => {
-    switch (urgency.toLowerCase()) {
+    const urgencyLevel = (urgency.split(' ')[0] || '').toLowerCase();
+    switch (urgencyLevel) {
       case 'high':
-        return <Badge variant="destructive" className="capitalize"><AlertTriangle className="mr-2 h-4 w-4" />{urgency}</Badge>;
+        return <Badge variant="destructive" className="capitalize">{urgency}</Badge>;
       case 'medium':
-        return <Badge variant="default" className="bg-yellow-500 hover:bg-yellow-600 capitalize"><AlertTriangle className="mr-2 h-4 w-4" />{urgency}</Badge>;
+        return <Badge variant="default" className="bg-yellow-500 hover:bg-yellow-600 capitalize">{urgency}</Badge>;
       default:
-        return <Badge variant="secondary" className="capitalize"><ShieldCheck className="mr-2 h-4 w-4" />{urgency}</Badge>;
+        return <Badge variant="secondary" className="capitalize">{urgency}</Badge>;
     }
+  };
+
+  const renderMarkdownList = (text: string) => {
+    if (!text) return '';
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+      .split('\n')
+      .map(line => {
+        if (line.trim().startsWith('* ')) {
+          return `<li>${line.replace('* ', '').trim()}</li>`;
+        }
+        if (line.trim() === '') {
+          return '<br />';
+        }
+        return line;
+      })
+      .join('');
   };
   
   const handleSymptomSuggestionClick = (symptom: string) => {
@@ -101,7 +118,7 @@ export function SymptomCheckerForm() {
           {step === 1 && (
             <>
               <CardHeader>
-                <CardTitle>Step 1: Select Your Pet</CardTitle>
+                <CardTitle>Step 1: Select Your Pet 🐾</CardTitle>
                 <CardDescription>Choose which pet is experiencing symptoms.</CardDescription>
               </CardHeader>
               <CardContent>
@@ -147,7 +164,7 @@ export function SymptomCheckerForm() {
           {step === 2 && (
             <>
               <CardHeader>
-                <CardTitle>Step 2: Describe the Symptoms</CardTitle>
+                <CardTitle>Step 2: Describe the Symptoms 📝</CardTitle>
                 <CardDescription>
                   Be as detailed as possible. You can also select from the common symptoms below.
                 </CardDescription>
@@ -198,28 +215,28 @@ export function SymptomCheckerForm() {
         {step === 3 && result && (
           <>
             <CardHeader>
-              <CardTitle>AI Analysis Results</CardTitle>
+              <CardTitle>🤖 AI Analysis Results</CardTitle>
               <CardDescription>
                 Here are the potential insights based on the symptoms provided.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <Alert variant={result.urgencyLevel.toLowerCase() === 'high' ? 'destructive' : 'default'}>
-                <AlertTriangle className="h-4 w-4" />
-                <AlertTitle className="flex items-center gap-4">Urgency Level {renderUrgencyBadge(result.urgencyLevel)}</AlertTitle>
-                <AlertDescription>
-                    Based on the symptoms, the urgency to consult a vet is considered {result.urgencyLevel.toLowerCase()}.
-                </AlertDescription>
-              </Alert>
+               <Alert variant={result.urgencyLevel.toLowerCase().startsWith('high') ? 'destructive' : 'default'}>
+                 <AlertTriangle className="h-4 w-4" />
+                 <AlertTitle className="flex items-center gap-2">Urgency Level: {renderUrgencyBadge(result.urgencyLevel)}</AlertTitle>
+                 <AlertDescription>
+                   Based on the symptoms, the urgency to consult a vet is considered <strong>{(result.urgencyLevel.split(' ')[0] || 'low').toLowerCase()}</strong>.
+                 </AlertDescription>
+               </Alert>
               
               <div className="space-y-2">
-                <h3 className="font-semibold">Possible Conditions</h3>
-                <div className="prose prose-sm text-foreground" dangerouslySetInnerHTML={{ __html: result.possibleConditions.replace(/\*/g, '•') }} />
+                <h3 className="font-semibold flex items-center gap-2">🩺 Possible Conditions</h3>
+                <div className="prose prose-sm max-w-none text-foreground" dangerouslySetInnerHTML={{ __html: `<ul>${renderMarkdownList(result.possibleConditions)}</ul>` }} />
               </div>
               
               <div className="space-y-2">
-                <h3 className="font-semibold">Recommendations</h3>
-                <div className="prose prose-sm text-foreground" dangerouslySetInnerHTML={{ __html: result.recommendations.replace(/\*/g, '•') }} />
+                <h3 className="font-semibold flex items-center gap-2">💡 Recommendations</h3>
+                <div className="prose prose-sm max-w-none text-foreground" dangerouslySetInnerHTML={{ __html: `<ul>${renderMarkdownList(result.recommendations)}</ul>` }} />
               </div>
             </CardContent>
             <CardFooter>

@@ -1,7 +1,8 @@
 
 'use client';
+import { useState, useRef } from 'react';
 import { useParams, notFound, useRouter } from 'next/navigation';
-import { mockData } from '@/lib/mock-data';
+import { mockData as initialMockData } from '@/lib/mock-data';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -10,42 +11,84 @@ import { Separator } from '@/components/ui/separator';
 import { format, formatDistanceToNow } from 'date-fns';
 import { MessageSquare, ThumbsUp, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from '@/context/auth-context';
+import { useNotificationToast } from '@/hooks/use-notification-toast';
+import { cn } from '@/lib/utils';
+import type { ForumReply } from '@/lib/types';
 
 export default function ForumTopicPage() {
   const params = useParams<{ topicId: string }>();
   const router = useRouter();
+  const { user } = useAuth();
+  const { notificationToast: toast } = useNotificationToast();
+
+  const [mockData, setMockData] = useState(initialMockData);
+  const [replyContent, setReplyContent] = useState('');
+  const replyTextareaRef = useRef<HTMLTextAreaElement>(null);
+
   const topic = mockData.forumTopics.find(t => t.topicId === params.topicId);
+
+  // Local state for upvotes since it's not in the data model
+  const [isUpvoted, setIsUpvoted] = useState(false);
+  const [upvoteCount, setUpvoteCount] = useState(Math.floor(Math.random() * 50)); // Random initial upvotes
 
   if (!topic) {
     notFound();
   }
   
-  const replies = topic.replies || [
-      {
-        "replyId": "reply_001",
-        "userId": "user_002",
-        "userName": "Arjun Patel",
-        "userPhoto": mockData.users.find(u=>u.userId === "user_002")?.photoURL || '',
-        "content": "I've heard good things about The Pet People Cafe in HSR Layout. They have a nice rooftop area.",
-        "timestamp": "2025-02-23T11:00:00Z"
-      },
-      {
-        "replyId": "reply_002",
-        "userId": "user_006",
-        "userName": "Shreyan Bagchi",
-        "userPhoto": mockData.users.find(u=>u.userId === "user_006")?.photoURL || '',
-        "content": "Toit in Indiranagar is a classic choice! They are very welcoming to pets in their outdoor section.",
-        "timestamp": "2025-02-23T12:30:00Z"
-      },
-       {
-        "replyId": "reply_003",
-        "userId": "user_008",
-        "userName": "Grad Circle",
-        "userPhoto": mockData.users.find(u=>u.userId === "user_008")?.photoURL || '',
-        "content": "We're not a cafe, but we're a pet-friendly workspace! Feel free to drop by for a coffee if you're in the area.",
-        "timestamp": "2025-02-23T14:00:00Z"
-      }
-  ];
+  if (!user) {
+    return null; 
+  }
+  
+  const handleUpvote = () => {
+    setUpvoteCount(prev => isUpvoted ? prev - 1 : prev + 1);
+    setIsUpvoted(!isUpvoted);
+  };
+
+  const handleReplyClick = () => {
+    replyTextareaRef.current?.focus();
+  };
+
+  const handlePostReply = () => {
+    if (!replyContent.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Reply cannot be empty.",
+      });
+      return;
+    }
+
+    const newReply: ForumReply = {
+      replyId: `reply_${Date.now()}`,
+      userId: user.userId,
+      userName: user.displayName,
+      userPhoto: user.photoURL,
+      content: replyContent,
+      timestamp: new Date().toISOString(),
+    };
+
+    setMockData(prevData => ({
+      ...prevData,
+      forumTopics: prevData.forumTopics.map(t => {
+        if (t.topicId === params.topicId) {
+          return {
+            ...t,
+            replies: [...(t.replies || []), newReply],
+            replyCount: (t.replyCount || 0) + 1,
+            lastReplyAt: new Date().toISOString(),
+          };
+        }
+        return t;
+      })
+    }));
+
+    setReplyContent('');
+    toast({
+      title: "Reply posted!",
+    });
+  };
+
+  const replies = topic.replies || [];
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -74,10 +117,11 @@ export default function ForumTopicPage() {
           <p className="text-foreground/90 whitespace-pre-wrap">{topic.content}</p>
         </CardContent>
         <CardFooter className="flex justify-end gap-4">
-             <Button variant="outline">
-                <ThumbsUp className="mr-2 h-4 w-4" /> Upvote
+             <Button variant="outline" onClick={handleUpvote}>
+                <ThumbsUp className={cn("mr-2 h-4 w-4", isUpvoted && "fill-current text-primary")} /> 
+                {isUpvoted ? 'Upvoted' : 'Upvote'} ({upvoteCount})
              </Button>
-            <Button>
+            <Button onClick={handleReplyClick}>
                 <MessageSquare className="mr-2 h-4 w-4" /> Reply
             </Button>
         </CardFooter>
@@ -113,10 +157,16 @@ export default function ForumTopicPage() {
             <CardTitle>Your Reply</CardTitle>
         </CardHeader>
         <CardContent>
-            <Textarea rows={5} placeholder="Write your reply here..." />
+            <Textarea 
+                ref={replyTextareaRef}
+                rows={5} 
+                placeholder="Write your reply here..." 
+                value={replyContent}
+                onChange={(e) => setReplyContent(e.target.value)}
+            />
         </CardContent>
         <CardFooter>
-            <Button>Post Reply</Button>
+            <Button onClick={handlePostReply}>Post Reply</Button>
         </CardFooter>
       </Card>
     </div>

@@ -14,49 +14,55 @@ import { AlertTriangle } from 'lucide-react';
 const careGuides = [
   {
     category: "Nutrition",
-    title: "The Ultimate Guide to Pet Nutrition",
+    title: "🥗 The Ultimate Guide to Pet Nutrition",
     description: "Learn what to feed your pet at every stage of their life for optimal health.",
     icon: <Bone className="w-8 h-8 text-primary" />,
     href: "https://www.aspca.org/pet-care/animal-poison-control/people-foods-avoid-feeding-your-pets"
   },
   {
     category: "Training",
-    title: "Positive Reinforcement Training Techniques",
+    title: "🐾 Positive Reinforcement Training Techniques",
     description: "Discover effective and humane ways to train your pet using positive reinforcement.",
     icon: <Brain className="w-8 h-8 text-primary" />,
     href: "https://www.humanesociety.org/resources/positive-reinforcement-training"
   },
   {
     category: "Health & Wellness",
-    title: "Recognizing Common Health Issues",
+    title: "❤️ Recognizing Common Health Issues",
     description: "Know the signs of common health problems to keep your pet safe and healthy.",
     icon: <Heart className="w-8 h-8 text-primary" />,
     href: "https://www.avma.org/resources-tools/pet-owners/petcare/10-signs-your-pet-may-be-sick"
   },
   {
     category: "Grooming",
-    title: "Grooming Basics for a Happy Pet",
+    title: "✂️ Grooming Basics for a Happy Pet",
     description: "From brushing to bathing, get tips on how to keep your pet looking and feeling great.",
     icon: <Scissors className="w-8 h-8 text-primary" />,
     href: "https://www.aspca.org/pet-care/general-pet-care/grooming-your-dog"
   },
   {
     category: "Behavior",
-    title: "Decoding Your Pet's Behavior",
+    title: "🧠 Decoding Your Pet's Behavior",
     description: "Understand what your pet is trying to tell you with their barks, meows, and body language.",
     icon: <Users className="w-8 h-8 text-primary" />,
     href: "https://www.humanesociety.org/resources/cat-body-language"
   },
   {
     category: "First-Time Owners",
-    title: "New Pet Checklist for First-Time Owners",
+    title: "🐶 New Pet Checklist for First-Time Owners",
     description: "Everything you need to know and prepare for when bringing a new pet home.",
     icon: <Lightbulb className="w-8 h-8 text-primary" />,
     href: "https://www.thesprucepets.com/new-dog-checklist-1117354"
   }
 ];
 
-const tipTopics = ["Nutrition", "Training", "Grooming", "Behavior", "Health"];
+const tipTopics = [
+  { name: "Nutrition", emoji: "🥗" },
+  { name: "Training", emoji: "🐾" },
+  { name: "Grooming", emoji: "✂️" },
+  { name: "Behavior", emoji: "🧠" },
+  { name: "Health", emoji: "❤️" },
+];
 
 export default function TipsPage() {
   const [tipOfTheDay, setTipOfTheDay] = useState<AITipOfTheDayOutput | null>(null);
@@ -99,10 +105,27 @@ export default function TipsPage() {
     }
   };
 
+  const renderMarkdownList = (text: string) => {
+    if (!text) return '';
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .split('\n')
+      .map(line => {
+        if (line.trim().startsWith('* ')) {
+          return `<li>${line.replace('* ', '').trim()}</li>`;
+        }
+        if (line.trim() === '') {
+          return '<br />';
+        }
+        return line.trim();
+      })
+      .join('');
+  };
+
   return (
     <div>
-      <h1 className="text-3xl font-bold tracking-tight font-headline">Tips & Advice</h1>
-      <p className="text-muted-foreground mt-2">Your daily dose of pet care wisdom.</p>
+      <h1 className="text-3xl font-bold tracking-tight font-headline">💡 Tips & Advice</h1>
+      <p className="text-muted-foreground mt-2">Your daily dose of pet care wisdom, powered by AI ✨.</p>
       
       {/* Tip of the Day */}
       <Card className="mt-8 bg-primary/10 border-primary/20">
@@ -118,7 +141,7 @@ export default function TipsPage() {
           {isTipLoading ? (
             <Skeleton className="h-6 w-3/4" />
           ) : (
-            <p className="text-lg text-foreground">"{tipOfTheDay?.tip}"</p>
+            <p className="text-lg text-foreground">{tipOfTheDay?.tip}</p>
           )}
         </CardContent>
       </Card>
@@ -135,13 +158,17 @@ export default function TipsPage() {
                 <div className="flex flex-wrap gap-2">
                     {tipTopics.map(topic => (
                         <Button 
-                            key={topic}
+                            key={topic.name}
                             variant="outline"
-                            onClick={() => handleGenerateTip(topic)}
+                            onClick={() => handleGenerateTip(topic.name)}
                             disabled={isGeneratedTipLoading}
                         >
-                            {isGeneratedTipLoading && selectedTopic === topic ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                            {topic}
+                            {isGeneratedTipLoading && selectedTopic === topic.name ? (
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            ) : (
+                                <span className="mr-2">{topic.emoji}</span>
+                            )}
+                            {topic.name}
                         </Button>
                     ))}
                 </div>
@@ -166,7 +193,7 @@ export default function TipsPage() {
                   )}
                   {generatedTip && (
                     <div className="space-y-4 text-sm">
-                        <p className="text-base">{generatedTip.tip}</p>
+                        <div className="prose prose-sm max-w-none text-foreground text-base" dangerouslySetInnerHTML={{ __html: `<ul>${renderMarkdownList(generatedTip.tip)}</ul>` }} />
                         <div>
                             <h4 className="font-semibold mb-2">Further Reading:</h4>
                             <ul className="space-y-2">

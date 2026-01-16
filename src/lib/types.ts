@@ -227,6 +227,14 @@ export type AdoptionPet = {
   };
 };
 
+export type Notification = {
+  id: string;
+  title: string;
+  description?: string;
+  createdAt: string;
+  read: boolean;
+};
+
 export type MockData = {
   users: User[];
   pets: Pet[];

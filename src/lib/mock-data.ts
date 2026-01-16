@@ -446,7 +446,10 @@ export const mockData: MockData = {
       caption: "Salty paws and sandy noses. Max living his best life at the beach today! 🌊 #beachday #dogsofpetconnect",
       likes: 75,
       likedBy: [],
-      comments: [],
+      comments: [
+        { commentId: "cmt_001", userId: "user_002", userName: "Arjun Patel", userPhoto: getImageUrl("user_arjun"), text: "Looks amazing! I need to take Simba to the beach sometime.", timestamp: "2025-01-15T12:35:00Z" },
+        { commentId: "cmt_002", userId: "user_004", userName: "Rohan Mehta", userPhoto: getImageUrl("user_rohan"), text: "So much fun!", timestamp: "2025-01-15T12:45:00Z" }
+      ],
       saved: false,
       createdAt: subDays(now, 0).toISOString()
     },
@@ -478,7 +481,9 @@ export const mockData: MockData = {
       caption: "4 years ago, I found Rocky on the streets. Today, he's my best friend ❤️ #AdoptDontShop #rescuedog",
       likes: 89,
       likedBy: ["user_001", "user_002", "user_004", "user_005"],
-      comments: [],
+      comments: [
+        { commentId: "cmt_004", userId: "user_001", userName: "Priya Sharma", userPhoto: getImageUrl("user_priya"), text: "He looks so happy! You're an amazing pet parent.", timestamp: "2025-01-13T10:00:00Z" }
+      ],
       saved: false,
       createdAt: subDays(now, 3).toISOString()
     },
@@ -493,7 +498,10 @@ export const mockData: MockData = {
       caption: "Bruno stole an entire paratha from the table today. Living up to the Beagle reputation 😂 #beaglelife",
       likes: 56,
       likedBy: ["user_001"],
-      comments: [],
+      comments: [
+        { commentId: "cmt_005", userId: "user_001", userName: "Priya Sharma", userPhoto: getImageUrl("user_priya"), text: "Classic Beagle behavior! 😂", timestamp: "2025-01-12T15:00:00Z" },
+        { commentId: "cmt_006", userId: "user_005", userName: "Ishita Gupta", userPhoto: getImageUrl("user_ishita"), text: "The struggle is real!", timestamp: "2025-01-12T15:30:00Z" }
+      ],
       saved: false,
       createdAt: subDays(now, 4).toISOString()
     },
@@ -592,7 +600,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_shreyan"),
       petId: "pet_011",
       petName: "Shadow",
-      image: "https://picsum.photos/seed/shadowpost1/600/600",
+      image: getImageUrl("post_shadow_void"),
       caption: "The void stares back. #bombaycat #blackcat",
       likes: 33,
       likedBy: ["user_007"],
@@ -607,7 +615,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_shreyan"),
       petId: "pet_009",
       petName: "Sheru",
-      image: "https://picsum.photos/seed/sherupost2/600/600",
+      image: getImageUrl("post_sheru_couch"),
       caption: "King of the couch.",
       likes: 41,
       likedBy: [],
@@ -622,7 +630,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_shreyan"),
       petId: "pet_011",
       petName: "Shadow",
-      image: "https://picsum.photos/seed/shadowpost2/600/600",
+      image: getImageUrl("post_shadow_silly"),
       caption: "I think my cat is broken.",
       likes: 55,
       likedBy: [],
@@ -637,7 +645,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_ishaan"),
       petId: "pet_012",
       petName: "Coco",
-      image: "https://picsum.photos/seed/cocopost1/600/600",
+      image: getImageUrl("post_coco_new"),
       caption: "Welcome to the family, Coco! So much floof in such a tiny package. #pomeranian #puppy",
       likes: 102,
       likedBy: ["user_006", "user_001"],
@@ -652,7 +660,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_ishaan"),
       petId: "pet_010",
       petName: "Mittens",
-      image: "https://picsum.photos/seed/mittenspost2/600/600",
+      image: getImageUrl("post_mittens_annoyed"),
       caption: "Mittens is not impressed with the new puppy. 😂",
       likes: 67,
       likedBy: [],
@@ -667,7 +675,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_ishaan"),
       petId: "pet_012",
       petName: "Coco",
-      image: "https://picsum.photos/seed/cocopost2/600/600",
+      image: getImageUrl("post_coco_paws"),
       caption: "Tiny paws, big adventures.",
       likes: 88,
       likedBy: [],
@@ -682,7 +690,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_grad_circle"),
       petId: "pet_013",
       petName: "Chip",
-      image: "https://picsum.photos/seed/chippost1/600/600",
+      image: getImageUrl("post_chip_welcome"),
       caption: "Meet the newest member of the Grad Circle team, Chip! He's in charge of mandatory belly rub breaks.",
       likes: 150,
       likedBy: ["user_006", "user_007"],
@@ -697,7 +705,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_grad_circle"),
       petId: "pet_013",
       petName: "Chip",
-      image: "https://picsum.photos/seed/chippost2/600/600",
+      image: getImageUrl("post_chip_work"),
       caption: "Chip hard at work during our weekly stand-up.",
       likes: 123,
       likedBy: [],
@@ -712,7 +720,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_grad_circle"),
       petId: "pet_013",
       petName: "Chip",
-      image: "https://picsum.photos/seed/chippost3/600/600",
+      image: getImageUrl("post_chip_productive"),
       caption: "Did you know a pet-friendly office can reduce stress and increase productivity? Chip is doing his part!",
       likes: 111,
       likedBy: [],
@@ -727,7 +735,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_ishaan"),
       petId: "pet_015",
       petName: "Zorro",
-      image: "https://picsum.photos/seed/zorro_post1/600/600",
+      image: getImageUrl("post_zorro_desk"),
       caption: "Zorro exploring his new kingdom (my desk).",
       likes: 45,
       likedBy: [],
@@ -742,7 +750,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_ishaan"),
       petId: "pet_015",
       petName: "Zorro",
-      image: "https://picsum.photos/seed/zorro_post2/600/600",
+      image: getImageUrl("post_zorro_salad"),
       caption: "Salad for one, please. 🥬",
       likes: 58,
       likedBy: [],
@@ -757,7 +765,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_ishaan"),
       petId: "pet_015",
       petName: "Zorro",
-      image: "https://picsum.photos/seed/zorro_post3/600/600",
+      image: getImageUrl("post_zorro_tail"),
       caption: "The definition of a fluffy tail.",
       likes: 62,
       likedBy: [],
@@ -772,7 +780,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_shreyan"),
       petId: "pet_016",
       petName: "Rocket",
-      image: "https://picsum.photos/seed/rocket_post1/600/600",
+      image: getImageUrl("post_rocket_new"),
       caption: "Meet Rocket, the newest and tiniest member of the family!",
       likes: 71,
       likedBy: [],
@@ -787,7 +795,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_shreyan"),
       petId: "pet_016",
       petName: "Rocket",
-      image: "https://picsum.photos/seed/rocket_post2/600/600",
+      image: getImageUrl("post_rocket_tiny"),
       caption: "He's so small! My phone is bigger than he is.",
       likes: 82,
       likedBy: [],
@@ -802,7 +810,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_shreyan"),
       petId: "pet_016",
       petName: "Rocket",
-      image: "https://picsum.photos/seed/rocket_post3/600/600",
+      image: getImageUrl("post_rocket_cute"),
       caption: "It's hard to get anything done with this level of cuteness around.",
       likes: 75,
       likedBy: [],
@@ -817,7 +825,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_grad_circle"),
       petId: "pet_017",
       petName: "Byte",
-      image: "https://picsum.photos/seed/byte_post1/600/600",
+      image: getImageUrl("post_byte_barkend"),
       caption: "Our new Head of Bark-end Development, Byte, ensuring all our code is paw-some.",
       likes: 99,
       likedBy: [],
@@ -832,7 +840,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_grad_circle"),
       petId: "pet_017",
       petName: "Byte",
-      image: "https://picsum.photos/seed/byte_post2/600/600",
+      image: getImageUrl("post_byte_friends"),
       caption: "Byte and Chip are the best of friends. #officepups",
       likes: 130,
       likedBy: [],
@@ -847,7 +855,7 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_grad_circle"),
       petId: "pet_017",
       petName: "Byte",
-      image: "https://picsum.photos/seed/byte_post3/600/600",
+      image: getImageUrl("post_byte_meeting"),
       caption: "Important meeting in progress.",
       likes: 115,
       likedBy: [],
@@ -935,7 +943,40 @@ export const mockData: MockData = {
       replyCount: 4,
       lastReplyAt: subDays(now, 1).toISOString(),
       createdAt: subDays(now, 3).toISOString(),
-      replies: []
+      replies: [
+        {
+          "replyId": "reply_001",
+          "userId": "user_002",
+          "userName": "Arjun Patel",
+          "userPhoto": getImageUrl("user_arjun"),
+          "content": "I've heard good things about The Pet People Cafe in HSR Layout. They have a nice rooftop area.",
+          "timestamp": "2025-02-23T11:00:00Z"
+        },
+        {
+          "replyId": "reply_002",
+          "userId": "user_006",
+          "userName": "Shreyan Bagchi",
+          "userPhoto": getImageUrl("user_shreyan"),
+          "content": "Toit in Indiranagar is a classic choice! They are very welcoming to pets in their outdoor section.",
+          "timestamp": "2025-02-23T12:30:00Z"
+        },
+        {
+          "replyId": "reply_003",
+          "userId": "user_008",
+          "userName": "Grad Circle",
+          "userPhoto": getImageUrl("user_grad_circle"),
+          "content": "We're not a cafe, but we're a pet-friendly workspace! Feel free to drop by for a coffee if you're in the area.",
+          "timestamp": "2025-02-23T14:00:00Z"
+        },
+        {
+          "replyId": "reply_004",
+          "userId": "user_004",
+          "userName": "Rohan Mehta",
+          "userPhoto": getImageUrl("user_rohan"),
+          "content": "Don't forget The Hole In The Wall Cafe in Koramangala!",
+          "timestamp": "2025-02-24T09:00:00Z"
+        }
+      ]
     },
     {
       topicId: "topic_002",
@@ -949,7 +990,24 @@ export const mockData: MockData = {
       replyCount: 2,
       lastReplyAt: subDays(now, 2).toISOString(),
       createdAt: subDays(now, 5).toISOString(),
-      replies: []
+      replies: [
+        {
+          "replyId": "reply_005",
+          "userId": "user_005",
+          "userName": "Ishita Gupta",
+          "userPhoto": getImageUrl("user_ishita"),
+          "content": "Take it slow! Keep them in separate rooms for a few days and let them smell each other's scent first.",
+          "timestamp": "2025-01-21T18:00:00Z"
+        },
+        {
+          "replyId": "reply_006",
+          "userId": "user_001",
+          "userName": "Priya Sharma",
+          "userPhoto": getImageUrl("user_priya"),
+          "content": "Exactly what Ishita said. And feed them on opposite sides of a closed door. That helps create a positive association.",
+          "timestamp": "2025-01-22T09:00:00Z"
+        }
+      ]
     },
     {
       topicId: "topic_003",
@@ -963,7 +1021,16 @@ export const mockData: MockData = {
       replyCount: 8,
       lastReplyAt: subDays(now, 0).toISOString(),
       createdAt: subDays(now, 2).toISOString(),
-      replies: []
+      replies: [
+        {
+          "replyId": "reply_007",
+          "userId": "user_001",
+          "userName": "Priya Sharma",
+          "userPhoto": getImageUrl("user_priya"),
+          "content": "Switch to a low-calorie diet food and measure his portions exactly. Also, more exercise! It's tough with Beagles, I know.",
+          "timestamp": subDays(now, 1).toISOString()
+        }
+      ]
     },
     {
       topicId: "topic_004",
@@ -1090,6 +1157,32 @@ export const mockData: MockData = {
       description: "Spike is a gentle giant but can be timid around new people. He escaped from our backyard. He is wearing a blue collar with a name tag.",
       reward: 5000,
       createdAt: subDays(now, 1).toISOString(),
+    },
+    {
+      alertId: "lpa_003",
+      status: 'active',
+      ownerId: "user_001",
+      ownerName: "Priya Sharma",
+      ownerPhone: "+91-9876543210",
+      petId: "pet_018", 
+      petName: "Whiskers",
+      petType: 'Cat',
+      breed: "Siamese",
+      age: { years: 2, months: 0 },
+      gender: 'Female',
+      color: "Cream with dark points",
+      petPhoto: getImageUrl("pet_whiskers_lost"),
+      distinctiveMarks: "She has striking blue eyes.",
+      lastSeenLocation: {
+        address: "Jayanagar 4th Block",
+        city: "Bangalore",
+        landmark: "Near the Jayanagar shopping complex"
+      },
+      lastSeenDate: subDays(now, 2).toISOString().split('T')[0],
+      lastSeenTime: "18:00",
+      description: "Whiskers is very friendly but might be scared. She slipped out the front door. She is not wearing a collar. We miss her dearly.",
+      reward: 2000,
+      createdAt: subDays(now, 2).toISOString(),
     },
     {
       alertId: "lpa_002",
@@ -1236,11 +1329,11 @@ export const mockData: MockData = {
       "gender": "Female",
       "photo": getImageUrl("pet_oreo_adopt"),
       "location": "Mumbai, MH",
-      "story": "Oreo is a sweet and calm cat who loves to cuddle and nap in sunny spots. She is a little shy at first, but warms up quickly with a gentle touch. She is litter-trained and gets along well with other calm cats.",
-      "reasonForAdoption": "Her owner unfortunately developed a severe cat allergy and, after trying everything, had to make the difficult decision to rehome her. She's looking for a quiet and loving home.",
+      "story": "Oreo is a curious and affectionate cat who loves to cuddle and play with feather toys. She's a bit shy at first but warms up quickly. She is litter-trained and gets along well with other cats.",
+      "reasonForAdoption": "Her previous owner developed allergies. Oreo is looking for a quiet and loving home.",
       "contact": {
         "name": "Aisha Khan",
-        "phone": "+91 98765 43212"
+        "phone": "+91 91234 56789"
       }
     }
   ]
@@ -1250,6 +1343,10 @@ export const mockData: MockData = {
 
 
     
+
+
+
+
 
 
 

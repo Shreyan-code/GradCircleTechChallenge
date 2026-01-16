@@ -1,28 +1,93 @@
-
 'use client';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { mockData } from "@/lib/mock-data";
 import { Send, Search, Users, ChevronLeft, MoreVertical } from "lucide-react";
 import { format, formatDistanceToNowStrict } from 'date-fns';
 import { cn } from '@/lib/utils';
-import type { Conversation, Message, User } from '@/lib/types';
+import type { Conversation, Message } from '@/lib/types';
 import { useAuth } from '@/context/auth-context';
+import { useData } from '@/context/data-context';
 
 export default function MessagesPage() {
   const { user: currentUser } = useAuth();
+  const { data, setData } = useData();
   
   if (!currentUser) return null;
-  
-  const conversations = mockData.conversations.filter(c => c.participants.includes(currentUser?.userId || ''));
-  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(conversations[0] || null);
+
+  const [newMessage, setNewMessage] = useState('');
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+
+  const conversations = data.conversations
+    .filter(c => c.participants.includes(currentUser.userId))
+    .sort((a, b) => new Date(b.lastMessageAt).getTime() - new Date(a.lastMessageAt).getTime());
+
+  const [selectedConversationId, setSelectedConversationId] = useState<string | null>(conversations[0]?.conversationId || null);
+
+  const selectedConversation = conversations.find(c => c.conversationId === selectedConversationId);
 
   const otherParticipantId = selectedConversation?.participants.find(p => p !== currentUser.userId);
-  const otherParticipant = mockData.users.find(u => u.userId === otherParticipantId);
-  const petInvolved = otherParticipant ? mockData.pets.find(p => otherParticipant.petIds.includes(p.petId)) : null;
+  const otherParticipant = data.users.find(u => u.userId === otherParticipantId);
+  const petInvolved = otherParticipant ? data.pets.find(p => otherParticipant.petIds.includes(p.petId)) : null;
+
+  useEffect(() => {
+    // Scroll to bottom when messages change or conversation is selected
+    if (scrollAreaRef.current) {
+        // The viewport is the first child of the scroll area
+        const viewport = scrollAreaRef.current.firstElementChild;
+        if (viewport) {
+            setTimeout(() => {
+                viewport.scrollTop = viewport.scrollHeight;
+            }, 0);
+        }
+    }
+  }, [selectedConversation, data.conversations]);
+
+  const handleSendMessage = () => {
+    if (!newMessage.trim() || !selectedConversationId) return;
+
+    const message: Message = {
+      messageId: `msg_${Date.now()}`,
+      senderId: currentUser.userId,
+      text: newMessage,
+      createdAt: new Date().toISOString(),
+      readBy: [currentUser.userId],
+    };
+
+    setData(prevData => {
+      const newConversations = prevData.conversations.map(convo => {
+        if (convo.conversationId === selectedConversationId) {
+          const updatedConvo = {
+            ...convo,
+            messages: [...convo.messages, message],
+            lastMessage: newMessage,
+            lastMessageBy: currentUser.userId,
+            lastMessageAt: new Date().toISOString(),
+          };
+          return updatedConvo;
+        }
+        return convo;
+      });
+      return { ...prevData, conversations: newConversations };
+    });
+
+    setNewMessage('');
+  };
+
+  const handleSelectConversation = (convoId: string) => {
+    setSelectedConversationId(convoId);
+    setData(prevData => {
+      const newConversations = prevData.conversations.map(c => {
+        if (c.conversationId === convoId) {
+          return { ...c, unreadCount: { ...c.unreadCount, [currentUser.userId]: 0 } };
+        }
+        return c;
+      });
+      return { ...prevData, conversations: newConversations };
+    });
+  };
 
   return (
     <div className="h-[calc(100vh-10rem)] border bg-card text-card-foreground rounded-lg flex">
@@ -36,7 +101,7 @@ export default function MessagesPage() {
         </div>
         <ScrollArea className="flex-1">
           {conversations.map(convo => {
-            const otherUser = mockData.users.find(u => u.userId === convo.participants.find(id => id !== currentUser.userId));
+            const otherUser = data.users.find(u => u.userId === convo.participants.find(id => id !== currentUser.userId));
             if (!otherUser) return null;
 
             const isUnread = (convo.unreadCount[currentUser.userId] || 0) > 0;
@@ -44,7 +109,7 @@ export default function MessagesPage() {
             return (
               <button 
                 key={convo.conversationId} 
-                onClick={() => setSelectedConversation(convo)}
+                onClick={() => handleSelectConversation(convo.conversationId)}
                 className={cn(
                   "w-full text-left p-4 flex items-center gap-4 hover:bg-accent",
                   selectedConversation?.conversationId === convo.conversationId && "bg-accent"
@@ -80,7 +145,7 @@ export default function MessagesPage() {
         {selectedConversation && otherParticipant ? (
           <>
             <div className="p-4 border-b flex items-center gap-4">
-               <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSelectedConversation(null)}>
+               <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSelectedConversationId(null)}>
                 <ChevronLeft className="h-5 w-5" />
               </Button>
               <Avatar>
@@ -102,7 +167,7 @@ export default function MessagesPage() {
                 </Button>
               </div>
             </div>
-            <ScrollArea className="flex-1 p-6 bg-secondary/30">
+            <ScrollArea className="flex-1 p-6 bg-secondary/30" ref={scrollAreaRef}>
               <div className="space-y-6">
                 {selectedConversation.messages.map(msg => (
                   <div key={msg.messageId} className={cn("flex items-end gap-3", msg.senderId === currentUser.userId ? "justify-end" : "justify-start")}>
@@ -124,8 +189,19 @@ export default function MessagesPage() {
             </ScrollArea>
             <div className="p-4 border-t">
               <div className="relative">
-                <Input placeholder="Type a message..." className="pr-12" />
-                <Button size="icon" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8">
+                <Input 
+                  placeholder="Type a message..." 
+                  className="pr-12"
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                />
+                <Button 
+                  size="icon" 
+                  className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8"
+                  onClick={handleSendMessage}
+                  disabled={!newMessage.trim()}
+                >
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
@@ -144,4 +220,3 @@ export default function MessagesPage() {
     </div>
   );
 }
-

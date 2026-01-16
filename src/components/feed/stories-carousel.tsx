@@ -6,12 +6,12 @@ import { useState, useMemo } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Plus, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollArea, ScrollBar } from '../ui/scroll-area';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from '../ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger, DialogClose } from '../ui/dialog';
 import { formatDistanceToNow } from 'date-fns';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { useToast } from '@/hooks/use-toast';
+import { useNotificationToast } from '@/hooks/use-notification-toast';
 
 interface StoriesCarouselProps {
   stories: Story[];
@@ -21,7 +21,7 @@ interface StoriesCarouselProps {
 export function StoriesCarousel({ stories, currentUser }: StoriesCarouselProps) {
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [isAddStoryOpen, setAddStoryOpen] = useState(false);
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
 
   const storyIndex = useMemo(() => {
     if (!selectedStory) return -1;
@@ -109,6 +109,12 @@ export function StoriesCarousel({ stories, currentUser }: StoriesCarouselProps) 
       <Dialog open={!!selectedStory} onOpenChange={(open) => !open && setSelectedStory(null)}>
         {selectedStory && (
           <DialogContent className="p-0 max-w-md w-full bg-black border-0 rounded-lg overflow-hidden flex items-center justify-center">
+            <DialogHeader>
+              <DialogTitle className="sr-only">Story from {selectedStory.userName}</DialogTitle>
+              <DialogDescription className="sr-only">
+                {selectedStory.caption || `A story posted by ${selectedStory.userName}.`}
+              </DialogDescription>
+            </DialogHeader>
             <div className="relative aspect-[9/16] w-full">
               <Image src={selectedStory.storyImage} alt={`Story from ${selectedStory.userName}`} layout="fill" objectFit="cover" />
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 to-transparent" />
