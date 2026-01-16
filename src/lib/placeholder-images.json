@@ -92,9 +92,9 @@
     },
     {
       "id": "pet_kaiser",
-      "description": "Photo of Kaiser, a Siberian Husky",
-      "imageUrl": "https://images.unsplash.com/photo-1610482613524-aaeb252156a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMGFuZCUyMHdoaXRlJTIwc2liZXJpYW4lMjBodXNreXxlbnwwfHx8fDE3NjkxODMyMDB8MA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "siberian husky"
+      "description": "Photo of Kaiser, a Samoyed",
+      "imageUrl": "https://images.unsplash.com/photo-1548256083-8b7c35cb58c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzYW1veWVkfGVufDB8fHx8fDE3NjkxODMyMDB8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "Samoyed dog"
     },
     {
       "id": "pet_ginger",
@@ -255,8 +255,14 @@
     {
       "id": "pet_chip_doodle",
       "description": "Photo of Chip, a golden doodle",
-      "imageUrl": "https://images.unsplash.com/photo-1615233505853-241838c92823?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb2xkZW5lJTIwZG9vZGxlfGVufDB8fHx8fDE3NjkxODMyMDB8MA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "golden doodle"
+      "imageUrl": "https://images.unsplash.com/photo-1615233505853-241838c92823?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxnb2xkZW5lJTIwZG9vZGxlfGVufDB8fHx8fDE3Njk0MTI0NTh8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "happy goldendoodle"
+    },
+    {
+      "id": "pet_byte_doodle",
+      "description": "Photo of Byte, a golden doodle puppy",
+      "imageUrl": "https://images.unsplash.com/photo-1590212151088-e99d638a5043?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxnb2xkZW5lJTIwZG9vZGxlfGVufDB8fHx8fDE3Njk0MTI0NTh8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "goldendoodle puppy"
     }
   ]
 }

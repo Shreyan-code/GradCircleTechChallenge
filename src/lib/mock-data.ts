@@ -427,7 +427,7 @@ export const mockData: MockData = {
       birthDate: "2023-09-15",
       color: "Cream",
       weight: 22,
-      photo: "https://picsum.photos/seed/bytedog/400/400",
+      photo: getImageUrl("pet_byte_doodle"),
       specialNeeds: "Head of Bark-end Development.",
       activityLevel: 7,
       microchipId: "BYTE54321",
