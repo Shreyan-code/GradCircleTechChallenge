@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { mockData as initialMockData } from "@/lib/mock-data";
 import type { LostPetAlert } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,7 @@ import { format } from 'date-fns';
 import { cn } from "@/lib/utils";
 import { ReportPetForm } from "./report-pet-form";
 import { useAuth } from "@/context/auth-context";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function LostPetsPage() {
   const [mockData, setMockData] = useState(initialMockData);
@@ -71,14 +72,18 @@ export default function LostPetsPage() {
                 Report a Pet
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
-            <DialogHeader>
+          <DialogContent className="sm:max-w-md flex flex-col max-h-[90vh] p-0">
+            <DialogHeader className="p-6 pb-4">
               <DialogTitle>Report a Lost Pet</DialogTitle>
               <DialogDescription>
                 Fill out the form below. Your report will be reviewed before being posted.
               </DialogDescription>
             </DialogHeader>
-            <ReportPetForm userPets={currentUserPets} onSave={handleReportPet} />
+            <ScrollArea className="flex-1">
+                <div className="px-6 pb-6">
+                    <ReportPetForm userPets={currentUserPets} onSave={handleReportPet} />
+                </div>
+            </ScrollArea>
           </DialogContent>
         </Dialog>
       </div>
