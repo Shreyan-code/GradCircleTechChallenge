@@ -56,7 +56,7 @@ const ResourceSchema = z.object({
 });
 
 const AIGeneratedTipOutputSchema = z.object({
-  tip: z.string().describe('A detailed, helpful tip about the specified topic, formatted as a markdown bulleted list.'),
+  tip: z.string().describe('A detailed, helpful tip about the specified topic. This MUST be formatted as a markdown bulleted list, where each point starts with `* ` and is on a new line.'),
   resources: z.array(ResourceSchema).describe('A list of 1-2 relevant, high-quality external web links for further reading.'),
 });
 export type AIGeneratedTipOutput = z.infer<typeof AIGeneratedTipOutputSchema>;
@@ -73,7 +73,7 @@ const generatedTipPrompt = ai.definePrompt({
 
 Your task is to provide a helpful, actionable tip and some external resources. Use markdown for formatting and include relevant emojis to make the content more engaging.
 
-1.  **tip**: Generate a helpful tip about the specified topic. Structure it as a markdown bulleted list with 2-3 points. Each point should be a concise piece of advice.
+1.  **tip**: Generate a helpful tip about the specified topic. You MUST structure it as a markdown bulleted list with 2-3 points. Each point must start with a \`* \` and a relevant emoji on a new line.
     *   Example for "Training" topic:
         *   🐾 Start with short, positive training sessions, just 5-10 minutes at a time.
         *   🎉 Use high-value treats (like small pieces of chicken or cheese) to keep them motivated and excited.
