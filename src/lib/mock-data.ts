@@ -846,7 +846,7 @@ export const mockData: MockData = {
       petId: "pet_011",
       petName: "Kaiser",
       petType: 'Dog',
-      breed: "Siberian Husky",
+      breed: "Samoyed",
       age: { years: 2, months: 0 },
       gender: 'Male',
       color: "Black and White",
