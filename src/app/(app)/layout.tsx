@@ -69,7 +69,7 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
   const router = useRouter();
   const { setOpenMobile } = useSidebar();
-  const { notifications, unreadCount, markAllAsRead } = useNotifications();
+  const { notifications, unreadCount, markAllAsRead, clearNotifications } = useNotifications();
 
 
   if (!user) {
@@ -174,7 +174,14 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[350px]">
-              <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+              <div className="flex items-center justify-between p-2 pt-1 pb-1">
+                <DropdownMenuLabel className="p-0">Notifications</DropdownMenuLabel>
+                {notifications.length > 0 && (
+                  <Button variant="ghost" size="sm" className="text-xs h-auto py-1 px-2" onClick={clearNotifications}>
+                    Clear all
+                  </Button>
+                )}
+              </div>
               <DropdownMenuSeparator />
                 <ScrollArea className="h-[400px]">
                   {notifications.length > 0 ? (
