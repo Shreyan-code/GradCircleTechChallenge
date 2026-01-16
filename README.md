@@ -61,6 +61,13 @@ This is where it gets really cool - we used AI to make life easier for pet owner
 - Gives you next steps
 - Super helpful for those 2 AM panic moments!
 
+**AI Tip of the Day** 💡
+- Get a fresh AI-generated tip every time you visit
+- Topics cover everything from nutrition to training to health
+- Want specific advice? Just ask! "How do I train my puppy?" or "What should I feed my senior cat?"
+- Comes with links to helpful external resources
+- It's like having a pet expert in your pocket!
+
 ### 🏘️ Community Features (The Helpful Stuff!)
 
 **Forums**
@@ -85,11 +92,6 @@ This is where it gets really cool - we used AI to make life easier for pet owner
 - Organize your own gatherings
 - Make IRL friends (not just online!)
 
-**Tips & Advice** 📚
-- Daily pet care tips
-- Links to helpful guides
-- Training advice
-- Health resources
 
 ## Tech Stack (For the Nerds 🤓)
 
