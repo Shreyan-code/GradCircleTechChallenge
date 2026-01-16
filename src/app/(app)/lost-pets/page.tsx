@@ -13,7 +13,6 @@ import { format } from 'date-fns';
 import { cn } from "@/lib/utils";
 import { ReportPetForm } from "./report-pet-form";
 import { useAuth } from "@/context/auth-context";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function LostPetsPage() {
   const [mockData, setMockData] = useState(initialMockData);
@@ -72,18 +71,14 @@ export default function LostPetsPage() {
                 Report a Pet
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md flex flex-col max-h-[90vh] p-0">
-            <DialogHeader className="p-6 pb-4">
+          <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
               <DialogTitle>Report a Lost Pet</DialogTitle>
               <DialogDescription>
                 Fill out the form below. Your report will be reviewed before being posted.
               </DialogDescription>
             </DialogHeader>
-            <ScrollArea className="flex-1">
-                <div className="px-6 pb-6">
-                    <ReportPetForm userPets={currentUserPets} onSave={handleReportPet} />
-                </div>
-            </ScrollArea>
+            <ReportPetForm userPets={currentUserPets} onSave={handleReportPet} />
           </DialogContent>
         </Dialog>
       </div>
