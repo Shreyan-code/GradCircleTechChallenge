@@ -91,10 +91,10 @@
       "imageHint": "persian cat"
     },
     {
-      "id": "pet_kaiser",
-      "description": "Photo of Kaiser, a Samoyed",
-      "imageUrl": "https://images.unsplash.com/photo-1548256083-8b7c35cb58c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzYW1veWVkfGVufDB8fHx8fDE3NjkxODMyMDB8MA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "Samoyed dog"
+      "id": "pet_spike_lost",
+      "description": "Photo of Spike, a lost german shepherd",
+      "imageUrl": "https://images.unsplash.com/photo-1546238232-20232dec5427?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxnZXJtYW4lMjBzaGVwaGVyZHxlbnwwfHx8fDE3Njk1MDU2NDV8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "german shepherd"
     },
     {
       "id": "pet_ginger",

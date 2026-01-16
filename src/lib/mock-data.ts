@@ -442,9 +442,9 @@ export const mockData: MockData = {
       userPhoto: getImageUrl("user_priya"),
       petId: "pet_001",
       petName: "Max",
-      image: getImageUrl("story_rocky_park"),
-      caption: "A perfect evening at the park with my two favorite fluffballs. ❤️ #doglife #petconnect",
-      likes: 68,
+      image: getImageUrl("post_golden_beach"),
+      caption: "Salty paws and sandy noses. Max living his best life at the beach today! 🌊 #beachday #dogsofpetconnect",
+      likes: 75,
       likedBy: [],
       comments: [],
       saved: false,
@@ -1068,28 +1068,28 @@ export const mockData: MockData = {
     {
       alertId: "lpa_001",
       status: 'active',
-      ownerId: "user_006",
-      ownerName: "Shreyan Bagchi",
-      ownerPhone: "+91-9876543210",
-      petId: "pet_011",
-      petName: "Kaiser",
+      ownerId: "user_004",
+      ownerName: "Rohan Mehta",
+      ownerPhone: "+91-9988776655",
+      petId: "pet_005",
+      petName: "Spike",
       petType: 'Dog',
-      breed: "Samoyed",
-      age: { years: 2, months: 0 },
+      breed: "German Shepherd",
+      age: { years: 4, months: 0 },
       gender: 'Male',
-      color: "Black and White",
-      petPhoto: getImageUrl("pet_kaiser"),
-      distinctiveMarks: "Blue eyes, one floppy ear.",
+      color: "Black and Tan",
+      petPhoto: getImageUrl("pet_spike_lost"),
+      distinctiveMarks: "He has a floppy right ear.",
       lastSeenLocation: {
-        address: "Koramangala 4th Block",
+        address: "Koramangala 8th Block",
         city: "Bangalore",
-        landmark: "Near Forum Mall"
+        landmark: "Near Bethany High School"
       },
-      lastSeenDate: "2025-02-20",
-      lastSeenTime: "18:30",
-      description: "Kaiser is very friendly but might be scared. He slipped out of his leash during our evening walk.",
-      reward: 10000,
-      createdAt: "2025-02-20T20:00:00Z",
+      lastSeenDate: subDays(now, 1).toISOString().split('T')[0],
+      lastSeenTime: "21:00",
+      description: "Spike is a gentle giant but can be timid around new people. He escaped from our backyard. He is wearing a blue collar with a name tag.",
+      reward: 5000,
+      createdAt: subDays(now, 1).toISOString(),
     },
     {
       alertId: "lpa_002",
@@ -1266,4 +1266,5 @@ export const mockData: MockData = {
 
 
     
+
 
