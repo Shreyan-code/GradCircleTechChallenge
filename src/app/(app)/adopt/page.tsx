@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { PawPrint, MapPin, Phone } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
 
 export default function AdoptionPage() {
   const { adoptionPets } = mockData;

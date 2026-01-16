@@ -11,7 +11,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
-import { useToast } from "@/hooks/use-toast";
+import { useNotificationToast } from "@/hooks/use-notification-toast";
 
 interface PlaydateMatchmakerUIProps {
   userPets: Pet[];
@@ -23,7 +23,7 @@ export function PlaydateMatchmakerUI({ userPets, allPets }: PlaydateMatchmakerUI
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<AiPlaydateMatchmakerOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
 
   const handleFindMatches = async () => {
     if (!selectedPetId) return;

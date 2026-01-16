@@ -12,7 +12,7 @@ import { format, formatDistanceToNow } from 'date-fns';
 import { MessageSquare, ThumbsUp, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/context/auth-context';
-import { useToast } from '@/hooks/use-toast';
+import { useNotificationToast } from '@/hooks/use-notification-toast';
 import { cn } from '@/lib/utils';
 import type { ForumReply } from '@/lib/types';
 
@@ -20,7 +20,7 @@ export default function ForumTopicPage() {
   const params = useParams<{ topicId: string }>();
   const router = useRouter();
   const { user } = useAuth();
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
 
   const [mockData, setMockData] = useState(initialMockData);
   const [replyContent, setReplyContent] = useState('');

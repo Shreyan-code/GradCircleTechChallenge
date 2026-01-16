@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { NewDiscussionForm } from './new-discussion-form';
 import type { ForumTopic } from '@/lib/types';
 import { useAuth } from '@/context/auth-context';
-import { useToast } from '@/hooks/use-toast';
+import { useNotificationToast } from '@/hooks/use-notification-toast';
 
 const cityChapters = [
   { name: "Bangalore", comingSoon: true },
@@ -27,7 +27,7 @@ export default function ForumsPage() {
   const [mockData, setMockData] = useState(initialMockData);
   const [isNewDiscussionOpen, setNewDiscussionOpen] = useState(false);
   const { user } = useAuth();
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
 
   if (!user) return null;
 

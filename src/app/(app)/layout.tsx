@@ -39,6 +39,9 @@ import { Badge } from '@/components/ui/badge';
 import { SearchBar } from '@/components/search-bar';
 import { useAuth } from '@/context/auth-context';
 import { cn } from '@/lib/utils';
+import { useNotifications } from '@/context/notification-context';
+import { formatDistanceToNow } from 'date-fns';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 type NavItem = {
   href: string;
@@ -66,6 +69,7 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
   const router = useRouter();
   const { setOpenMobile } = useSidebar();
+  const { notifications, unreadCount, markAllAsRead } = useNotifications();
 
 
   if (!user) {
@@ -156,10 +160,39 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
         <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:px-6">
           <SidebarTrigger className="md:hidden" />
           <SearchBar />
-          <Button variant="ghost" size="icon" className="rounded-full">
-            <Bell className="h-5 w-5" />
-            <span className="sr-only">Toggle notifications</span>
-          </Button>
+          <DropdownMenu onOpenChange={(open) => open && markAllAsRead()}>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full relative">
+                <Bell className="h-5 w-5" />
+                {unreadCount > 0 && (
+                  <span className="absolute top-1.5 right-1.5 flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                  </span>
+                )}
+                <span className="sr-only">Toggle notifications</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-[350px]">
+              <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+                <ScrollArea className="h-[400px]">
+                  {notifications.length > 0 ? (
+                    notifications.map((n) => (
+                      <DropdownMenuItem key={n.id} className="flex-col items-start gap-1 whitespace-normal">
+                        <p className="font-semibold">{n.title}</p>
+                        {n.description && <p className="text-sm text-muted-foreground">{n.description}</p>}
+                        <p className="text-xs text-muted-foreground mt-1">{formatDistanceToNow(new Date(n.createdAt), { addSuffix: true })}</p>
+                      </DropdownMenuItem>
+                    ))
+                  ) : (
+                    <div className="p-4 text-center text-sm text-muted-foreground">
+                      You're all caught up!
+                    </div>
+                  )}
+                </ScrollArea>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </header>
         <main className="flex-1 p-4 md:p-6 lg:p-8">
             {children}

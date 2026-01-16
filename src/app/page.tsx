@@ -10,7 +10,7 @@ import { mockData } from '@/lib/mock-data';
 import { Badge } from '@/components/ui/badge';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { cn } from '@/lib/utils';
-import { useToast } from '@/hooks/use-toast';
+import { useNotificationToast } from '@/hooks/use-notification-toast';
 
 const features = [
   {
@@ -46,7 +46,7 @@ const features = [
 ];
 
 export default function LandingPage() {
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
   const heroImage = PlaceHolderImages.find(p => p.id === 'landing-hero');
   const featureImage1 = PlaceHolderImages.find(p => p.id === 'landing-feature-1');
   const featureImage2 = PlaceHolderImages.find(p => p.id === 'landing-feature-2');

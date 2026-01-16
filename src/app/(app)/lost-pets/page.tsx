@@ -8,7 +8,7 @@ import type { LostPetAlert } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Phone, MapPin, Share2, PlusCircle, AlertTriangle } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useNotificationToast } from "@/hooks/use-notification-toast";
 import { format } from 'date-fns';
 import { cn } from "@/lib/utils";
 import { ReportPetForm } from "./report-pet-form";
@@ -17,7 +17,7 @@ import { useAuth } from "@/context/auth-context";
 export default function LostPetsPage() {
   const [mockData, setMockData] = useState(initialMockData);
   const [isReportDialogOpen, setReportDialogOpen] = useState(false);
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
   const { user } = useAuth();
 
   if (!user) return null;

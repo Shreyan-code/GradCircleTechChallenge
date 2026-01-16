@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useToast } from "@/hooks/use-toast";
+import { useNotificationToast } from "@/hooks/use-notification-toast";
 import { mockData as initialMockData } from "@/lib/mock-data";
 import { Mail, MapPin, PlusCircle, Settings, UserPlus, Send, MessageSquare } from "lucide-react";
 import Image from 'next/image';
@@ -20,7 +20,7 @@ import { useAuth } from '@/context/auth-context';
 
 export default function ProfilePage() {
   const params = useParams<{ userId: string }>();
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
   const [isFollowing, setIsFollowing] = useState(false);
   const [mockData, setMockData] = useState(initialMockData);
   

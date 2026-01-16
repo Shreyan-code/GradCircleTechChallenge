@@ -11,7 +11,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { useToast } from '@/hooks/use-toast';
+import { useNotificationToast } from '@/hooks/use-notification-toast';
 
 interface StoriesCarouselProps {
   stories: Story[];
@@ -21,7 +21,7 @@ interface StoriesCarouselProps {
 export function StoriesCarousel({ stories, currentUser }: StoriesCarouselProps) {
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [isAddStoryOpen, setAddStoryOpen] = useState(false);
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
 
   const storyIndex = useMemo(() => {
     if (!selectedStory) return -1;
@@ -109,9 +109,9 @@ export function StoriesCarousel({ stories, currentUser }: StoriesCarouselProps) 
       <Dialog open={!!selectedStory} onOpenChange={(open) => !open && setSelectedStory(null)}>
         {selectedStory && (
           <DialogContent className="p-0 max-w-md w-full bg-black border-0 rounded-lg overflow-hidden flex items-center justify-center">
-            <DialogHeader className="sr-only">
-              <DialogTitle>Story from {selectedStory.userName}</DialogTitle>
-              <DialogDescription>
+            <DialogHeader>
+              <DialogTitle className="sr-only">Story from {selectedStory.userName}</DialogTitle>
+              <DialogDescription className="sr-only">
                 {selectedStory.caption || `A story posted by ${selectedStory.userName}.`}
               </DialogDescription>
             </DialogHeader>

@@ -8,7 +8,7 @@ import { PawPrint } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { useNotificationToast } from "@/hooks/use-notification-toast";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -16,7 +16,7 @@ export default function ForgotPasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { forgotPassword } = useAuth();
   const router = useRouter();
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
 
   const handleResetPassword = async () => {
     if (newPassword !== confirmPassword) {

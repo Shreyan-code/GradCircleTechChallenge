@@ -11,7 +11,7 @@ import { Loader2, Send, Sparkles } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useAuth } from '@/context/auth-context';
-import { useToast } from '@/hooks/use-toast';
+import { useNotificationToast } from '@/hooks/use-notification-toast';
 
 interface AdvisorChatProps {
   pets: Pet[];
@@ -30,7 +30,7 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
   const [isLoading, setIsLoading] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
   
   useEffect(() => {
     if (scrollAreaRef.current) {

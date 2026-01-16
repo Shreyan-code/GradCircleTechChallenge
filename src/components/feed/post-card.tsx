@@ -13,7 +13,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Link from 'next/link';
 import { useAuth } from '@/context/auth-context';
-import { useToast } from '@/hooks/use-toast';
+import { useNotificationToast } from '@/hooks/use-notification-toast';
 
 interface PostCardProps {
   post: Post;
@@ -21,7 +21,7 @@ interface PostCardProps {
 
 export function PostCard({ post }: PostCardProps) {
   const { user } = useAuth();
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(post.saved);
   const [likeCount, setLikeCount] = useState(post.likes);

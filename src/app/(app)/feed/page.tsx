@@ -10,14 +10,14 @@ import { useAuth } from "@/context/auth-context";
 import { mockData as initialMockData } from "@/lib/mock-data";
 import { Plus, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { useNotificationToast } from "@/hooks/use-notification-toast";
 import type { Post } from '@/lib/types';
 
 export default function FeedPage() {
   const [posts, setPosts] = useState(initialMockData.posts);
   const { stories } = initialMockData;
   const { user } = useAuth();
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
 
   const [isCreatePostOpen, setCreatePostOpen] = useState(false);
   const [caption, setCaption] = useState('');

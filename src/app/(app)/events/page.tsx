@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
+import { useNotificationToast } from "@/hooks/use-notification-toast";
 import { mockData as initialMockData } from "@/lib/mock-data";
 import type { Event } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +12,7 @@ import { useAuth } from '@/context/auth-context';
 
 export default function EventsPage() {
   const [mockData, setMockData] = useState(initialMockData);
-  const { toast } = useToast();
+  const { notificationToast: toast } = useNotificationToast();
   const { user: currentUser } = useAuth();
   
   if (!currentUser) return null;
