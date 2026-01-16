@@ -40,14 +40,14 @@ import { useAuth } from '@/context/auth-context';
 
 const navItems = [
   { href: '/feed', icon: Home, label: 'Feed' },
+  { href: '/forums', icon: MessageSquare, label: 'Forums' },
+  { href: '/events', icon: Calendar, label: 'Events & Meetups' },
   { href: '/connect', icon: Users, label: 'Connect', isAI: true },
   { href: '/health', icon: Heart, label: 'Health Tools', isAI: true },
   { href: '/tips', icon: Lightbulb, label: 'Tips & Advice', isAI: true },
   { href: '/adopt', icon: PawPrint, label: 'Adopt a Pet' },
   { href: '/lost-pets', icon: ShieldQuestion, label: 'Lost & Found' },
   { href: '/store', icon: Store, label: 'Pet Store', comingSoon: true },
-  { href: '/forums', icon: MessageSquare, label: 'Forums' },
-  { href: '/events', icon: Calendar, label: 'Events & Meetups' },
   { href: '/messages', icon: Bell, label: 'Messages' },
 ];
 
