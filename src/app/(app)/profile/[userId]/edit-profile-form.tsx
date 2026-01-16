@@ -8,6 +8,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { User } from '@/lib/types';
+import { useUserProfile } from '@/hooks/use-user-profile';
+import { useAuth } from '@/context/auth-context';
 
 const schema = z.object({
   displayName: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -22,10 +24,13 @@ type FormValues = z.infer<typeof schema>;
 
 interface EditProfileFormProps {
   user: User;
-  onSave: (data: Partial<User>) => void;
+  onSave: () => void;
 }
 
 export function EditProfileForm({ user, onSave }: EditProfileFormProps) {
+  const { user: currentUser } = useAuth();
+  const { updateUserProfile } = useUserProfile(currentUser!.userId);
+  
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -38,8 +43,9 @@ export function EditProfileForm({ user, onSave }: EditProfileFormProps) {
     },
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    onSave(data);
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    await updateUserProfile(data);
+    onSave();
   };
 
   return (
@@ -99,7 +105,9 @@ export function EditProfileForm({ user, onSave }: EditProfileFormProps) {
             )}
             />
         </div>
-        <Button type="submit" className="w-full">Save Changes</Button>
+        <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+            {form.formState.isSubmitting ? 'Saving...' : 'Save Changes'}
+        </Button>
       </form>
     </Form>
   );

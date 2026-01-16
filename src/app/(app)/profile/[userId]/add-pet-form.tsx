@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import type { Pet } from '@/lib/types';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const breeds = {
   Dog: [
@@ -39,20 +40,18 @@ const schema = z.object({
   microchipId: z.string(),
 });
 
-// Form values will have `photo` as a file list
 type FormValues = Omit<Pet, 'petId' | 'ownerId' | 'ownerName' | 'createdAt' | 'photo'> & {
   photo?: FileList;
 };
 
-// Data passed to onSave will have `photo` as a URL string
 type OnSaveData = Omit<Pet, 'petId' | 'ownerId' | 'ownerName' | 'createdAt'>;
 
-
 interface AddPetFormProps {
-  onSave: (data: OnSaveData) => void;
+  onSave: (data: OnSaveData) => Promise<void>;
 }
 
 export function AddPetForm({ onSave }: AddPetFormProps) {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -76,16 +75,24 @@ export function AddPetForm({ onSave }: AddPetFormProps) {
     form.resetField('breed');
   }, [petType, form]);
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    // Simulate the upload by generating a placeholder image URL
-    const photoUrl = `https://picsum.photos/seed/${data.name.replace(/\s+/g, '-').toLowerCase()}/400/400`;
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    setIsSubmitting(true);
+    let photoUrl = '';
+
+    if (data.photo && data.photo.length > 0) {
+      const file = data.photo[0];
+      const storage = getStorage();
+      const storageRef = ref(storage, `pets/${Date.now()}_${file.name}`);
+      await uploadBytes(storageRef, file);
+      photoUrl = await getDownloadURL(storageRef);
+    }
     
-    // Exclude the 'photo' file list from the data and add the new URL
     const { photo, ...restOfData } = data;
     const dataToSave: OnSaveData = { ...restOfData, photo: photoUrl };
     
-    onSave(dataToSave);
+    await onSave(dataToSave);
     form.reset();
+    setIsSubmitting(false);
   };
 
   return (
@@ -202,7 +209,9 @@ export function AddPetForm({ onSave }: AddPetFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">Add Pet</Button>
+        <Button type="submit" className="w-full" disabled={isSubmitting}>
+          {isSubmitting ? 'Adding Pet...' : 'Add Pet'}
+        </Button>
       </form>
     </Form>
   );
