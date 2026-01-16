@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -7,9 +8,14 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import type { Pet } from '@/lib/types';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useAuth } from '@/context/auth-context';
+import { collection, addDoc, serverTimestamp, updateDoc, doc, increment } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { db } from '@/lib/firebase';
+import { useNotificationToast } from '@/hooks/use-notification-toast';
+import { useRouter } from 'next/navigation';
 
 const breeds = {
   Dog: [
@@ -39,20 +45,14 @@ const schema = z.object({
   microchipId: z.string(),
 });
 
-// Form values will have `photo` as a file list
-type FormValues = Omit<Pet, 'petId' | 'ownerId' | 'ownerName' | 'createdAt' | 'photo'> & {
-  photo?: FileList;
-};
+type FormValues = z.infer<typeof schema>;
 
-// Data passed to onSave will have `photo` as a URL string
-type OnSaveData = Omit<Pet, 'petId' | 'ownerId' | 'ownerName' | 'createdAt'>;
+export function AddPetForm({ onFinished }: { onFinished: () => void }) {
+  const { user } = useAuth();
+  const { notificationToast: toast } = useNotificationToast();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const router = useRouter();
 
-
-interface AddPetFormProps {
-  onSave: (data: OnSaveData) => void;
-}
-
-export function AddPetForm({ onSave }: AddPetFormProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -76,16 +76,48 @@ export function AddPetForm({ onSave }: AddPetFormProps) {
     form.resetField('breed');
   }, [petType, form]);
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    // Simulate the upload by generating a placeholder image URL
-    const photoUrl = `https://picsum.photos/seed/${data.name.replace(/\s+/g, '-').toLowerCase()}/400/400`;
-    
-    // Exclude the 'photo' file list from the data and add the new URL
-    const { photo, ...restOfData } = data;
-    const dataToSave: OnSaveData = { ...restOfData, photo: photoUrl };
-    
-    onSave(dataToSave);
-    form.reset();
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    if (!user) {
+        toast({ title: "Error", description: "You must be logged in to add a pet." });
+        return;
+    }
+
+    setIsSubmitting(true);
+    try {
+        let photoUrl = `https://picsum.photos/seed/${data.name.replace(/\s+/g, '-').toLowerCase()}/400/400`;
+        if (data.photo && data.photo.length > 0) {
+            const file = data.photo[0];
+            const storage = getStorage();
+            const storageRef = ref(storage, `pets/${user.userId}/${Date.now()}_${file.name}`);
+            await uploadBytes(storageRef, file);
+            photoUrl = await getDownloadURL(storageRef);
+        }
+
+        const { photo, ...petData } = data;
+
+        const petCollectionRef = collection(db, `users/${user.userId}/pets`);
+        await addDoc(petCollectionRef, {
+            ...petData,
+            ownerId: user.userId,
+            ownerName: user.displayName,
+            photo: photoUrl,
+            createdAt: serverTimestamp(),
+        });
+
+        const userDocRef = doc(db, 'users', user.userId);
+        await updateDoc(userDocRef, {
+            petCount: increment(1),
+        });
+
+        toast({ title: "Success!", description: `${data.name} has been added to your family.` });
+        onFinished();
+        router.refresh();
+    } catch (error) {
+        console.error("Error adding pet:", error);
+        toast({ title: "Error", description: "There was a problem adding your pet. Please try again." });
+    } finally {
+        setIsSubmitting(false);
+    }
   };
 
   return (
@@ -202,7 +234,9 @@ export function AddPetForm({ onSave }: AddPetFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">Add Pet</Button>
+        <Button type="submit" className="w-full" disabled={isSubmitting}>
+          {isSubmitting ? 'Adding Pet...' : 'Add Pet'}
+        </Button>
       </form>
     </Form>
   );

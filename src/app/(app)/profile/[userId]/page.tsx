@@ -8,7 +8,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useNotificationToast } from "@/hooks/use-notification-toast";
-import { mockData as initialMockData } from "@/lib/mock-data";
 import { Mail, MapPin, PlusCircle, Settings, UserPlus, Send, MessageSquare } from "lucide-react";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,26 +16,27 @@ import { EditProfileForm } from './edit-profile-form';
 import { AddPetForm } from './add-pet-form';
 import type { Pet, User } from '@/lib/types';
 import { useAuth } from '@/context/auth-context';
+import { useUserProfile } from '@/hooks/use-user-profile';
 
 export default function ProfilePage() {
   const params = useParams<{ userId: string }>();
   const { notificationToast: toast } = useNotificationToast();
+  const { user: currentUser } = useAuth();
+  const { user, pets, posts, loading, error, updateUserProfile } = useUserProfile(params.userId);
+
   const [isFollowing, setIsFollowing] = useState(false);
-  const [mockData, setMockData] = useState(initialMockData);
-  
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openAddPet, setOpenAddPet] = useState(false);
-  
-  const { user: currentUser } = useAuth();
-  
-  const user = mockData.users.find(u => u.userId === params.userId);
-  
-  if (!user || !currentUser) {
-    // Should handle loading state better
+
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
+
+  if (error || !user) {
     return notFound();
   }
-  
-  const isCurrentUser = currentUser.userId === params.userId;
+
+  const isCurrentUser = currentUser?.userId === params.userId;
 
   const handleFollow = () => {
     setIsFollowing(!isFollowing);
@@ -44,42 +44,11 @@ export default function ProfilePage() {
       title: isFollowing ? `Unfollowed ${user.displayName}` : `You are now following ${user.displayName}!`,
     });
   };
-  
-  const handleUpdateProfile = (updatedUser: Partial<User>) => {
-    setMockData(prevData => ({
-        ...prevData,
-        users: prevData.users.map(u => u.userId === user.userId ? { ...u, ...updatedUser } : u)
-    }));
+
+  const handleUpdateProfile = () => {
     toast({ title: "Profile updated successfully!"});
     setOpenEditProfile(false);
   };
-  
-  const handleAddPet = (newPet: Omit<Pet, 'petId' | 'ownerId' | 'ownerName' | 'createdAt'>) => {
-    const petId = `pet_${String(mockData.pets.length + 1).padStart(3, '0')}`;
-    const petWithOwner: Pet = {
-        ...newPet,
-        petId: petId,
-        ownerId: currentUser.userId,
-        ownerName: currentUser.displayName,
-        createdAt: new Date().toISOString(),
-    };
-
-    setMockData(prevData => ({
-        ...prevData,
-        pets: [...prevData.pets, petWithOwner],
-        users: prevData.users.map(u => 
-            u.userId === currentUser.userId 
-                ? { ...u, petIds: [...u.petIds, petId], petCount: u.petCount + 1 } 
-                : u
-        )
-    }));
-    toast({ title: `${newPet.name} has been added to your family!` });
-    setOpenAddPet(false);
-  };
-
-
-  const userPets = mockData.pets.filter(p => user.petIds.includes(p.petId));
-  const userPosts = mockData.posts.filter(p => p.userId === user.userId);
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -91,7 +60,7 @@ export default function ProfilePage() {
         <div className="flex-1 text-center md:text-left">
           <div className="flex items-center justify-center md:justify-start gap-4">
             <h1 className="text-2xl md:text-3xl font-bold font-headline">{user.displayName}</h1>
-             {isCurrentUser ? (
+            {isCurrentUser ? (
               <Dialog open={openEditProfile} onOpenChange={setOpenEditProfile}>
                 <DialogTrigger asChild>
                     <Button variant="outline" size="sm">
@@ -111,7 +80,7 @@ export default function ProfilePage() {
                   <UserPlus className="mr-2 h-4 w-4" />
                   {isFollowing ? 'Following' : 'Follow'}
                 </Button>
-                 <Dialog>
+                <Dialog>
                     <DialogTrigger asChild>
                         <Button size="sm" variant="outline">
                             <MessageSquare className="mr-2 h-4 w-4" /> Message
@@ -122,28 +91,7 @@ export default function ProfilePage() {
                             <DialogTitle>Chat with {user.displayName}</DialogTitle>
                         </DialogHeader>
                         <ScrollArea className="flex-1 p-4 bg-secondary/50 rounded-lg">
-                            <div className="space-y-4">
-                                <div className="flex justify-start">
-                                    <div className="bg-muted p-3 rounded-lg max-w-[80%]">
-                                        <p className="text-sm">Hey! Love your pet photos. That Golden Retriever is adorable.</p>
-                                    </div>
-                                </div>
-                                <div className="flex justify-end">
-                                    <div className="bg-primary text-primary-foreground p-3 rounded-lg max-w-[80%]">
-                                        <p className="text-sm">Thanks so much! That's Max. He's a handful but we love him.</p>
-                                    </div>
-                                </div>
-                                 <div className="flex justify-start">
-                                    <div className="bg-muted p-3 rounded-lg max-w-[80%]">
-                                        <p className="text-sm">I can imagine! We should arrange a playdate sometime. My Beagle, Bruno, would love to meet him.</p>
-                                    </div>
-                                </div>
-                                 <div className="flex justify-end">
-                                    <div className="bg-primary text-primary-foreground p-3 rounded-lg max-w-[80%]">
-                                        <p className="text-sm">That sounds like a great idea! Let's do it.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            {/* Chat messages will be loaded from a real-time database */}
                         </ScrollArea>
                         <div className="mt-auto flex gap-2 pt-4">
                             <Input placeholder="Type a message..." />
@@ -155,7 +103,7 @@ export default function ProfilePage() {
             )}
           </div>
           <div className="mt-4 flex justify-center md:justify-start gap-8 text-sm">
-            <div><span className="font-bold">{user.postCount}</span> Posts</div>
+            <div><span className="font-bold">{posts.length}</span> Posts</div>
             <div><span className="font-bold">{user.followers + (isFollowing && !isCurrentUser ? 1: 0) }</span> Followers</div>
             <div><span className="font-bold">{user.following}</span> Following</div>
           </div>
@@ -181,15 +129,15 @@ export default function ProfilePage() {
                         <DialogHeader>
                             <DialogTitle>Add a New Pet</DialogTitle>
                         </DialogHeader>
-                        <AddPetForm onSave={handleAddPet} />
+                        <AddPetForm onFinished={() => setOpenAddPet(false)} />
                     </DialogContent>
                 </Dialog>
             )}
         </div>
         
-        {userPets.length > 0 ? (
+        {pets.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
-            {userPets.map(pet => (
+            {pets.map(pet => (
               <Card key={pet.petId} className="hover:shadow-lg transition-shadow">
                 <CardHeader className="p-0">
                   <div className="relative aspect-square w-full">
@@ -212,9 +160,9 @@ export default function ProfilePage() {
 
       <div className="mt-16">
         <h2 className="text-xl font-bold font-headline mb-4 px-4">Posts</h2>
-        {userPosts.length > 0 ? (
+        {posts.length > 0 ? (
           <div className="grid grid-cols-3 gap-1">
-            {userPosts.map(post => (
+            {posts.map(post => (
               <div key={post.postId} className="relative aspect-square group">
                 <Image src={post.image} alt={post.caption} fill className="object-cover" />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
