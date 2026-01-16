@@ -1242,22 +1242,6 @@ export const mockData: MockData = {
         "name": "Aisha Khan",
         "phone": "+91 98765 43212"
       }
-    },
-    {
-      "adoptionId": "adopt_003",
-      "name": "Lucy",
-      "type": "Dog",
-      "breed": "Indie",
-      "age": { "years": 3, "months": 0 },
-      "gender": "Female",
-      "photo": getImageUrl("pet_lucy_adopt"),
-      "location": "Delhi, NCR",
-      "story": "Lucy was rescued from a tough situation but has blossomed into a loving and trusting companion. She is incredibly resilient and has a heart of gold. She loves her walks and is very loyal to her people. She is looking for a patient owner who can give her the stable home she deserves.",
-      "reasonForAdoption": "She was rescued by a local animal welfare group, has completed her medical treatment, and is now fully healthy and ready for her forever family.",
-      "contact": {
-        "name": "Delhi Paws Rescue",
-        "phone": "+91 98765 43213"
-      }
     }
   ]
 };
@@ -1266,6 +1250,7 @@ export const mockData: MockData = {
 
 
     
+
 
 
 

@@ -247,12 +247,6 @@
       "imageHint": "black white cat"
     },
     {
-      "id": "pet_lucy_adopt",
-      "description": "A cute indie dog looking for a home",
-      "imageUrl": "https://images.unsplash.com/photo-1625794084883-55a53909f193?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmRpZSUyMGRvZ3xlbnwwfHx8fDE3NjkxNzk3ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "indie dog"
-    },
-    {
       "id": "pet_chip_doodle",
       "description": "Photo of Chip, a golden doodle",
       "imageUrl": "https://images.unsplash.com/photo-1568393691622-c7c13b243293?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxnb2xkZW5kb29kbGV8ZW58MHx8fHwxNzI5Nzc0NDgxfDA&ixlib=rb-4.0.3&q=80&w=1080",
