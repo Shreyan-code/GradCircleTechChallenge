@@ -20,32 +20,7 @@ export default function ForumTopicPage() {
     notFound();
   }
   
-  const replies = topic.replies || [
-      {
-        "replyId": "reply_001",
-        "userId": "user_002",
-        "userName": "Arjun Patel",
-        "userPhoto": mockData.users.find(u=>u.userId === "user_002")?.photoURL || '',
-        "content": "I've heard good things about The Pet People Cafe in HSR Layout. They have a nice rooftop area.",
-        "timestamp": "2025-02-23T11:00:00Z"
-      },
-      {
-        "replyId": "reply_002",
-        "userId": "user_006",
-        "userName": "Shreyan Bagchi",
-        "userPhoto": mockData.users.find(u=>u.userId === "user_006")?.photoURL || '',
-        "content": "Toit in Indiranagar is a classic choice! They are very welcoming to pets in their outdoor section.",
-        "timestamp": "2025-02-23T12:30:00Z"
-      },
-       {
-        "replyId": "reply_003",
-        "userId": "user_008",
-        "userName": "Grad Circle",
-        "userPhoto": mockData.users.find(u=>u.userId === "user_008")?.photoURL || '',
-        "content": "We're not a cafe, but we're a pet-friendly workspace! Feel free to drop by for a coffee if you're in the area.",
-        "timestamp": "2025-02-23T14:00:00Z"
-      }
-  ];
+  const replies = topic.replies || [];
 
   return (
     <div className="max-w-4xl mx-auto">

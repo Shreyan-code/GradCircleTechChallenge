@@ -446,7 +446,10 @@ export const mockData: MockData = {
       caption: "Salty paws and sandy noses. Max living his best life at the beach today! 🌊 #beachday #dogsofpetconnect",
       likes: 75,
       likedBy: [],
-      comments: [],
+      comments: [
+        { commentId: "cmt_001", userId: "user_002", userName: "Arjun Patel", userPhoto: getImageUrl("user_arjun"), text: "Looks amazing! I need to take Simba to the beach sometime.", timestamp: "2025-01-15T12:35:00Z" },
+        { commentId: "cmt_002", userId: "user_004", userName: "Rohan Mehta", userPhoto: getImageUrl("user_rohan"), text: "So much fun!", timestamp: "2025-01-15T12:45:00Z" }
+      ],
       saved: false,
       createdAt: subDays(now, 0).toISOString()
     },
@@ -478,7 +481,9 @@ export const mockData: MockData = {
       caption: "4 years ago, I found Rocky on the streets. Today, he's my best friend ❤️ #AdoptDontShop #rescuedog",
       likes: 89,
       likedBy: ["user_001", "user_002", "user_004", "user_005"],
-      comments: [],
+      comments: [
+        { commentId: "cmt_004", userId: "user_001", userName: "Priya Sharma", userPhoto: getImageUrl("user_priya"), text: "He looks so happy! You're an amazing pet parent.", timestamp: "2025-01-13T10:00:00Z" }
+      ],
       saved: false,
       createdAt: subDays(now, 3).toISOString()
     },
@@ -493,7 +498,10 @@ export const mockData: MockData = {
       caption: "Bruno stole an entire paratha from the table today. Living up to the Beagle reputation 😂 #beaglelife",
       likes: 56,
       likedBy: ["user_001"],
-      comments: [],
+      comments: [
+        { commentId: "cmt_005", userId: "user_001", userName: "Priya Sharma", userPhoto: getImageUrl("user_priya"), text: "Classic Beagle behavior! 😂", timestamp: "2025-01-12T15:00:00Z" },
+        { commentId: "cmt_006", userId: "user_005", userName: "Ishita Gupta", userPhoto: getImageUrl("user_ishita"), text: "The struggle is real!", timestamp: "2025-01-12T15:30:00Z" }
+      ],
       saved: false,
       createdAt: subDays(now, 4).toISOString()
     },
@@ -935,7 +943,40 @@ export const mockData: MockData = {
       replyCount: 4,
       lastReplyAt: subDays(now, 1).toISOString(),
       createdAt: subDays(now, 3).toISOString(),
-      replies: []
+      replies: [
+        {
+          "replyId": "reply_001",
+          "userId": "user_002",
+          "userName": "Arjun Patel",
+          "userPhoto": getImageUrl("user_arjun"),
+          "content": "I've heard good things about The Pet People Cafe in HSR Layout. They have a nice rooftop area.",
+          "timestamp": "2025-02-23T11:00:00Z"
+        },
+        {
+          "replyId": "reply_002",
+          "userId": "user_006",
+          "userName": "Shreyan Bagchi",
+          "userPhoto": getImageUrl("user_shreyan"),
+          "content": "Toit in Indiranagar is a classic choice! They are very welcoming to pets in their outdoor section.",
+          "timestamp": "2025-02-23T12:30:00Z"
+        },
+        {
+          "replyId": "reply_003",
+          "userId": "user_008",
+          "userName": "Grad Circle",
+          "userPhoto": getImageUrl("user_grad_circle"),
+          "content": "We're not a cafe, but we're a pet-friendly workspace! Feel free to drop by for a coffee if you're in the area.",
+          "timestamp": "2025-02-23T14:00:00Z"
+        },
+        {
+          "replyId": "reply_004",
+          "userId": "user_004",
+          "userName": "Rohan Mehta",
+          "userPhoto": getImageUrl("user_rohan"),
+          "content": "Don't forget The Hole In The Wall Cafe in Koramangala!",
+          "timestamp": "2025-02-24T09:00:00Z"
+        }
+      ]
     },
     {
       topicId: "topic_002",
@@ -949,7 +990,24 @@ export const mockData: MockData = {
       replyCount: 2,
       lastReplyAt: subDays(now, 2).toISOString(),
       createdAt: subDays(now, 5).toISOString(),
-      replies: []
+      replies: [
+        {
+          "replyId": "reply_005",
+          "userId": "user_005",
+          "userName": "Ishita Gupta",
+          "userPhoto": getImageUrl("user_ishita"),
+          "content": "Take it slow! Keep them in separate rooms for a few days and let them smell each other's scent first.",
+          "timestamp": "2025-01-21T18:00:00Z"
+        },
+        {
+          "replyId": "reply_006",
+          "userId": "user_001",
+          "userName": "Priya Sharma",
+          "userPhoto": getImageUrl("user_priya"),
+          "content": "Exactly what Ishita said. And feed them on opposite sides of a closed door. That helps create a positive association.",
+          "timestamp": "2025-01-22T09:00:00Z"
+        }
+      ]
     },
     {
       topicId: "topic_003",
@@ -963,7 +1021,16 @@ export const mockData: MockData = {
       replyCount: 8,
       lastReplyAt: subDays(now, 0).toISOString(),
       createdAt: subDays(now, 2).toISOString(),
-      replies: []
+      replies: [
+        {
+          "replyId": "reply_007",
+          "userId": "user_001",
+          "userName": "Priya Sharma",
+          "userPhoto": getImageUrl("user_priya"),
+          "content": "Switch to a low-calorie diet food and measure his portions exactly. Also, more exercise! It's tough with Beagles, I know.",
+          "timestamp": subDays(now, 1).toISOString()
+        }
+      ]
     },
     {
       topicId: "topic_004",
@@ -1260,6 +1327,7 @@ export const mockData: MockData = {
 
 
     
+
 
 
 
