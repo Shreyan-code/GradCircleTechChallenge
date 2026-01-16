@@ -61,6 +61,7 @@ This is where it gets really cool - we used AI to make life easier for pet owner
 - Gives you next steps
 - Super helpful for those 2 AM panic moments!
 
+
 **AI Tip of the Day** 💡
 - Get a fresh AI-generated tip every time you visit
 - Topics cover everything from nutrition to training to health
