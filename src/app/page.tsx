@@ -72,7 +72,7 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
+        <div className="container px-4 md:px-6 flex h-14 items-center">
           <Link href="/" className="flex items-center gap-2 font-bold text-lg text-foreground">
             <PawPrint className="h-7 w-7 text-primary" />
             <span className="font-headline">PetConnect</span>
@@ -91,7 +91,7 @@ export default function LandingPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="py-16 md:py-24 lg:py-32">
-          <div className="container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="container px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col items-start text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground font-headline tracking-tight">
                 The Social Network for <span className="text-primary">Pet Owners</span> in India.
@@ -126,7 +126,7 @@ export default function LandingPage() {
 
         {/* Lost & Found Section */}
         <section className="py-16 md:py-24 bg-primary/5">
-          <div className="container">
+          <div className="container px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground font-headline">Help Bring Them Home</h2>
               <p className="mt-4 text-lg text-muted-foreground">
@@ -173,7 +173,7 @@ export default function LandingPage() {
         
         {/* Features Section */}
         <section id="features" className="py-16 md:py-24 bg-secondary">
-          <div className="container">
+          <div className="container px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground font-headline">A Community Tailor-Made for You</h2>
               <p className="mt-4 text-lg text-muted-foreground">
@@ -198,7 +198,7 @@ export default function LandingPage() {
 
         {/* Alternating Feature Blocks */}
         <section className="py-16 md:py-24">
-          <div className="container grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="container px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative w-full h-80 lg:h-[400px] rounded-2xl overflow-hidden shadow-lg">
               {featureImage1 && (
                   <Image src={featureImage1.imageUrl} alt={featureImage1.description} fill style={{objectFit: 'cover'}} data-ai-hint={featureImage1.imageHint} />
@@ -211,7 +211,7 @@ export default function LandingPage() {
               </p>
             </div>
           </div>
-          <div className="container grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mt-16 md:mt-24">
+          <div className="container px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mt-16 md:mt-24">
             <div className="lg:order-2 relative w-full h-80 lg:h-[400px] rounded-2xl overflow-hidden shadow-lg">
                {featureImage2 && (
                   <Image src={featureImage2.imageUrl} alt={featureImage2.description} fill style={{objectFit: 'cover'}} data-ai-hint={featureImage2.imageHint} />
@@ -228,7 +228,7 @@ export default function LandingPage() {
 
         {/* CTA Section */}
         <section className="bg-secondary">
-          <div className="container">
+          <div className="container px-4 md:px-6">
             <div className="relative my-16 md:my-24 p-8 md:p-16 rounded-2xl overflow-hidden bg-primary/90 text-primary-foreground">
                {ctaImage && (
                   <Image src={ctaImage.imageUrl} alt={ctaImage.description} fill style={{objectFit: 'cover'}} className="opacity-20" data-ai-hint={ctaImage.imageHint}/>
@@ -250,7 +250,7 @@ export default function LandingPage() {
       </main>
 
       <footer className="border-t">
-        <div className="container py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="container px-4 md:px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <PawPrint className="h-6 w-6 text-primary" />
             <span className="font-bold text-foreground font-headline">PetConnect</span>
