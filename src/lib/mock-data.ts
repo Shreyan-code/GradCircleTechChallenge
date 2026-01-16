@@ -1319,6 +1319,22 @@ export const mockData: MockData = {
         "name": "Rohan Sharma",
         "phone": "+91 98765 43211"
       }
+    },
+    {
+      "adoptionId": "adopt_002",
+      "name": "Oreo",
+      "type": "Cat",
+      "breed": "Domestic Shorthair",
+      "age": { "years": 1, "months": 6 },
+      "gender": "Female",
+      "photo": getImageUrl("pet_oreo_adopt"),
+      "location": "Mumbai, MH",
+      "story": "Oreo is a curious and affectionate cat who loves to cuddle and play with feather toys. She's a bit shy at first but warms up quickly. She is litter-trained and gets along well with other cats.",
+      "reasonForAdoption": "Her previous owner developed allergies. Oreo is looking for a quiet and loving home.",
+      "contact": {
+        "name": "Aisha Khan",
+        "phone": "+91 91234 56789"
+      }
     }
   ]
 };
@@ -1327,6 +1343,7 @@ export const mockData: MockData = {
 
 
     
+
 
 
 
