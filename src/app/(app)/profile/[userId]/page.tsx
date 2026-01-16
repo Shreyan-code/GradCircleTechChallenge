@@ -17,8 +17,6 @@ import { AddPetForm } from './add-pet-form';
 import type { Pet, User } from '@/lib/types';
 import { useAuth } from '@/context/auth-context';
 import { useUserProfile } from '@/hooks/use-user-profile';
-import { collection, addDoc, serverTimestamp, updateDoc, doc, increment } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 
 export default function ProfilePage() {
   const params = useParams<{ userId: string }>();
@@ -50,31 +48,6 @@ export default function ProfilePage() {
   const handleUpdateProfile = () => {
     toast({ title: "Profile updated successfully!"});
     setOpenEditProfile(false);
-  };
-
-  const handleAddPet = async (newPet: Omit<Pet, 'petId' | 'ownerId' | 'ownerName' | 'createdAt'>) => {
-    if (!currentUser) return;
-
-    try {
-      const petCollectionRef = collection(db, `users/${currentUser.userId}/pets`);
-      await addDoc(petCollectionRef, {
-        ...newPet,
-        ownerId: currentUser.userId,
-        ownerName: currentUser.displayName,
-        createdAt: serverTimestamp(),
-      });
-
-      const userDocRef = doc(db, 'users', currentUser.userId);
-      await updateDoc(userDocRef, {
-        petCount: increment(1),
-      });
-
-      toast({ title: `${newPet.name} has been added to your family!` });
-      setOpenAddPet(false);
-    } catch (e) {
-      console.error("Error adding pet: ", e);
-      toast({ title: "Error", description: "Could not add pet. Please try again." });
-    }
   };
 
   return (
@@ -156,7 +129,7 @@ export default function ProfilePage() {
                         <DialogHeader>
                             <DialogTitle>Add a New Pet</DialogTitle>
                         </DialogHeader>
-                        <AddPetForm onSave={handleAddPet} />
+                        <AddPetForm onFinished={() => setOpenAddPet(false)} />
                     </DialogContent>
                 </Dialog>
             )}
