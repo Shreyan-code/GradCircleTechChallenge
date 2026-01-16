@@ -4,19 +4,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { mockData as initialMockData } from "@/lib/mock-data";
 import { Send, Search, Users, ChevronLeft, MoreVertical } from "lucide-react";
 import { format, formatDistanceToNowStrict } from 'date-fns';
 import { cn } from '@/lib/utils';
 import type { Conversation, Message } from '@/lib/types';
 import { useAuth } from '@/context/auth-context';
+import { useData } from '@/context/data-context';
 
 export default function MessagesPage() {
   const { user: currentUser } = useAuth();
+  const { data, setData } = useData();
   
   if (!currentUser) return null;
 
-  const [data, setData] = useState(initialMockData);
   const [newMessage, setNewMessage] = useState('');
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +43,7 @@ export default function MessagesPage() {
             }, 0);
         }
     }
-  }, [selectedConversation]);
+  }, [selectedConversation, data.conversations]);
 
   const handleSendMessage = () => {
     if (!newMessage.trim() || !selectedConversationId) return;

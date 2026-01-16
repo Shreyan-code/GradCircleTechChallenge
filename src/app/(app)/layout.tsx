@@ -16,7 +16,6 @@ import {
   SidebarFooter,
   useSidebar
 } from '@/components/ui/sidebar';
-import { mockData } from '@/lib/mock-data';
 import {
   Bell,
   Calendar,
@@ -42,6 +41,7 @@ import { cn } from '@/lib/utils';
 import { useNotifications } from '@/context/notification-context';
 import { formatDistanceToNow } from 'date-fns';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useData } from '@/context/data-context';
 
 type NavItem = {
   href: string;
@@ -70,6 +70,7 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { setOpenMobile } = useSidebar();
   const { notifications, unreadCount, markAllAsRead, clearNotifications } = useNotifications();
+  const { data } = useData();
 
 
   if (!user) {
@@ -86,7 +87,7 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
     setOpenMobile(false);
   }
 
-  const conversations = mockData.conversations.filter(c => c.participants.includes(user.userId));
+  const conversations = data.conversations.filter(c => c.participants.includes(user.userId));
   const totalUnread = conversations.reduce((acc, convo) => acc + (convo.unreadCount[user.userId] || 0), 0);
 
   return (

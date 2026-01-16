@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { AuthProvider } from '@/context/auth-context';
 import { NotificationProvider } from '@/context/notification-context';
+import { DataProvider } from '@/context/data-context';
 
 export const metadata: Metadata = {
   title: 'PetConnect - The Social Network for Pet Owners',
@@ -25,7 +26,9 @@ export default function RootLayout({
       <body className={cn('font-body antialiased', process.env.NODE_ENV === 'development' ? 'debug-screens' : '')}>
         <AuthProvider>
           <NotificationProvider>
-            {children}
+            <DataProvider>
+              {children}
+            </DataProvider>
           </NotificationProvider>
         </AuthProvider>
         <Toaster />
