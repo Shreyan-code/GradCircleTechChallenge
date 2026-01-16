@@ -17,45 +17,55 @@ export default function EventsPage() {
   
   if (!currentUser) return null;
 
-  const handleRegister = (eventId: string) => {
+  const handleToggleRegistration = (eventId: string) => {
     const event = mockData.events.find(e => e.eventId === eventId);
     if (!event) return;
 
-    // Check if user is already registered
-    if (event.attendees.some(a => a.userId === currentUser.userId)) {
-        toast({
-            title: "Already Registered!",
-            description: `You are already registered for ${event.title}.`,
-        });
-        return;
+    const isRegistered = event.attendees.some(a => a.userId === currentUser.userId);
+
+    if (isRegistered) {
+      // Unregister
+      const updatedEvents = mockData.events.map(e => {
+        if (e.eventId === eventId) {
+          return {
+            ...e,
+            attendees: e.attendees.filter(a => a.userId !== currentUser.userId),
+            attendeeCount: e.attendeeCount - 1,
+          };
+        }
+        return e;
+      });
+      setMockData(prev => ({ ...prev, events: updatedEvents }));
+      toast({
+        title: "Unregistered",
+        description: `You are no longer registered for ${event.title}.`,
+      });
+    } else {
+      // Register
+      const updatedEvents = mockData.events.map(e => {
+        if (e.eventId === eventId) {
+          return {
+            ...e,
+            attendees: [
+              ...e.attendees,
+              {
+                userId: currentUser.userId,
+                userName: currentUser.displayName,
+                userPhoto: currentUser.photoURL,
+                rsvpDate: new Date().toISOString(),
+              }
+            ],
+            attendeeCount: e.attendeeCount + 1,
+          };
+        }
+        return e;
+      });
+      setMockData(prev => ({ ...prev, events: updatedEvents }));
+      toast({
+        title: "Registration Successful!",
+        description: `You have successfully registered for ${event.title}.`,
+      });
     }
-
-    // Add user to attendees
-    const updatedEvents = mockData.events.map(e => {
-      if (e.eventId === eventId) {
-        return {
-          ...e,
-          attendees: [
-            ...e.attendees,
-            {
-              userId: currentUser.userId,
-              userName: currentUser.displayName,
-              userPhoto: currentUser.photoURL,
-              rsvpDate: new Date().toISOString(),
-            }
-          ],
-          attendeeCount: e.attendeeCount + 1,
-        };
-      }
-      return e;
-    });
-
-    setMockData(prev => ({ ...prev, events: updatedEvents }));
-
-    toast({
-      title: "Registration Successful!",
-      description: `You have successfully registered for ${event.title}.`,
-    });
   };
 
   return (
@@ -95,9 +105,13 @@ export default function EventsPage() {
                              <p className="mt-4 text-sm">{event.description}</p>
                         </CardContent>
                         <CardFooter>
-                            <Button className="w-full" onClick={() => handleRegister(event.eventId)} disabled={isRegistered}>
+                            <Button 
+                                className="w-full" 
+                                variant={isRegistered ? 'outline' : 'default'}
+                                onClick={() => handleToggleRegistration(event.eventId)}
+                            >
                                 <Ticket className="mr-2 h-4 w-4" />
-                                {isRegistered ? 'Registered' : 'Register Now'}
+                                {isRegistered ? 'Unregister' : 'Register Now'}
                             </Button>
                         </CardFooter>
                     </Card>
