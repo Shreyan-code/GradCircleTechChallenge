@@ -83,6 +83,13 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
     "How can I tell if my cat is stressed?",
     "What are common signs of arthritis in older dogs?",
   ];
+
+  const renderAiMessage = (text: string) => {
+    const formattedText = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br />');
+    return { __html: formattedText };
+  };
   
   if (!user) return null;
 
@@ -143,7 +150,11 @@ export function AdvisorChat({ pets }: AdvisorChatProps) {
                         : 'bg-secondary text-secondary-foreground'
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+                    {message.sender === 'ai' ? (
+                       <div className="text-sm" dangerouslySetInnerHTML={renderAiMessage(message.text)} />
+                    ) : (
+                      <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+                    )}
                   </div>
                    {message.sender === 'user' && (
                     <Avatar className="w-8 h-8">
