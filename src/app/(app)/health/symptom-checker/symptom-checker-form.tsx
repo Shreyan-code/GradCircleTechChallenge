@@ -118,7 +118,7 @@ export function SymptomCheckerForm() {
           {step === 1 && (
             <>
               <CardHeader>
-                <CardTitle>Step 1: Select Your Pet</CardTitle>
+                <CardTitle>Step 1: Select Your Pet 🐾</CardTitle>
                 <CardDescription>Choose which pet is experiencing symptoms.</CardDescription>
               </CardHeader>
               <CardContent>
@@ -164,7 +164,7 @@ export function SymptomCheckerForm() {
           {step === 2 && (
             <>
               <CardHeader>
-                <CardTitle>Step 2: Describe the Symptoms</CardTitle>
+                <CardTitle>Step 2: Describe the Symptoms 📝</CardTitle>
                 <CardDescription>
                   Be as detailed as possible. You can also select from the common symptoms below.
                 </CardDescription>
@@ -215,7 +215,7 @@ export function SymptomCheckerForm() {
         {step === 3 && result && (
           <>
             <CardHeader>
-              <CardTitle>AI Analysis Results</CardTitle>
+              <CardTitle>🤖 AI Analysis Results</CardTitle>
               <CardDescription>
                 Here are the potential insights based on the symptoms provided.
               </CardDescription>
@@ -230,12 +230,12 @@ export function SymptomCheckerForm() {
                </Alert>
               
               <div className="space-y-2">
-                <h3 className="font-semibold">Possible Conditions</h3>
+                <h3 className="font-semibold flex items-center gap-2">🩺 Possible Conditions</h3>
                 <div className="prose prose-sm max-w-none text-foreground" dangerouslySetInnerHTML={{ __html: `<ul>${renderMarkdownList(result.possibleConditions)}</ul>` }} />
               </div>
               
               <div className="space-y-2">
-                <h3 className="font-semibold">Recommendations</h3>
+                <h3 className="font-semibold flex items-center gap-2">💡 Recommendations</h3>
                 <div className="prose prose-sm max-w-none text-foreground" dangerouslySetInnerHTML={{ __html: `<ul>${renderMarkdownList(result.recommendations)}</ul>` }} />
               </div>
             </CardContent>
