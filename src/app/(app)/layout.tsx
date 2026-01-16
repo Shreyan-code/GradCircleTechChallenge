@@ -47,7 +47,7 @@ const navItems = [
   { href: '/store', icon: Store, label: 'Pet Store', comingSoon: true },
   { href: '/forums', icon: MessageSquare, label: 'Forums' },
   { href: '/events', icon: Calendar, label: 'Events & Meetups' },
-  { href: '/tips', icon: Lightbulb, label: 'Tips & Advice' },
+  { href: '/tips', icon: Lightbulb, label: 'Tips & Advice', isAI: true },
   { href: '/messages', icon: Bell, label: 'Messages' },
 ];
 

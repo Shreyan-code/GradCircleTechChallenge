@@ -1,10 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Lightbulb, Bone, Brain, Heart, Scissors, ArrowRight, Users } from "lucide-react";
-import Link from 'next/link';
+'use client';
 
-const tipOfTheDay = {
-  tip: "A tired dog is a happy dog. Ensure your furry friend gets enough physical exercise and mental stimulation every day to prevent boredom and destructive behaviors."
-};
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Lightbulb, Bone, Brain, Heart, Scissors, ArrowRight, Users, Sparkles, Loader2, Link as LinkIcon } from "lucide-react";
+import Link from 'next/link';
+import { aiTipOfTheDay, AITipOfTheDayOutput, aiGeneratedTip, AIGeneratedTipOutput } from '@/ai/flows/ai-pet-tips';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AlertTriangle } from 'lucide-react';
+
 
 const careGuides = [
   {
@@ -51,8 +56,49 @@ const careGuides = [
   }
 ];
 
+const tipTopics = ["Nutrition", "Training", "Grooming", "Behavior", "Health"];
 
 export default function TipsPage() {
+  const [tipOfTheDay, setTipOfTheDay] = useState<AITipOfTheDayOutput | null>(null);
+  const [isTipLoading, setIsTipLoading] = useState(true);
+  
+  const [generatedTip, setGeneratedTip] = useState<AIGeneratedTipOutput | null>(null);
+  const [isGeneratedTipLoading, setIsGeneratedTipLoading] = useState(false);
+  const [generatedTipError, setGeneratedTipError] = useState<string | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTip = async () => {
+      try {
+        setIsTipLoading(true);
+        const result = await aiTipOfTheDay();
+        setTipOfTheDay(result);
+      } catch (error) {
+        console.error("Failed to fetch tip of the day:", error);
+        setTipOfTheDay({ tip: "Could not load tip. Please try refreshing." });
+      } finally {
+        setIsTipLoading(false);
+      }
+    };
+    fetchTip();
+  }, []);
+
+  const handleGenerateTip = async (topic: string) => {
+    setGeneratedTip(null);
+    setGeneratedTipError(null);
+    setIsGeneratedTipLoading(true);
+    setSelectedTopic(topic);
+    try {
+      const result = await aiGeneratedTip({ topic });
+      setGeneratedTip(result);
+    } catch (error) {
+      console.error(`Failed to generate tip for ${topic}:`, error);
+      setGeneratedTipError("Sorry, we couldn't generate a tip right now. Please try another topic.");
+    } finally {
+      setIsGeneratedTipLoading(false);
+    }
+  };
+
   return (
     <div>
       <h1 className="text-3xl font-bold tracking-tight font-headline">Tips & Advice</h1>
@@ -61,15 +107,91 @@ export default function TipsPage() {
       {/* Tip of the Day */}
       <Card className="mt-8 bg-primary/10 border-primary/20">
         <CardHeader className="flex flex-row items-center gap-4">
-          <Lightbulb className="w-8 h-8 text-primary" />
+          <Sparkles className="w-8 h-8 text-primary" />
           <div>
-            <CardTitle className="font-headline text-primary">Tip of the Day</CardTitle>
+            <CardTitle className="font-headline text-primary flex items-center gap-2">
+              AI Tip of the Day
+            </CardTitle>
           </div>
         </CardHeader>
         <CardContent>
-          <p className="text-lg text-foreground">"{tipOfTheDay.tip}"</p>
+          {isTipLoading ? (
+            <Skeleton className="h-6 w-3/4" />
+          ) : (
+            <p className="text-lg text-foreground">"{tipOfTheDay?.tip}"</p>
+          )}
         </CardContent>
       </Card>
+      
+      {/* AI Generated Tips */}
+      <div className="mt-12">
+        <h2 className="text-2xl font-bold tracking-tight font-headline flex items-center gap-2">
+          <Sparkles className="w-6 h-6 text-primary" />
+          AI-Powered Advice
+        </h2>
+        <p className="text-muted-foreground mt-2">Select a topic to get a custom tip from our AI.</p>
+        <Card className="mt-6">
+            <CardContent className="pt-6">
+                <div className="flex flex-wrap gap-2">
+                    {tipTopics.map(topic => (
+                        <Button 
+                            key={topic}
+                            variant="outline"
+                            onClick={() => handleGenerateTip(topic)}
+                            disabled={isGeneratedTipLoading}
+                        >
+                            {isGeneratedTipLoading && selectedTopic === topic ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                            {topic}
+                        </Button>
+                    ))}
+                </div>
+
+                <div className="mt-6">
+                  {isGeneratedTipLoading && (
+                     <div className="space-y-4">
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-3/4" />
+                        <div className="mt-4 space-y-2">
+                            <Skeleton className="h-4 w-1/2" />
+                            <Skeleton className="h-4 w-1/2" />
+                        </div>
+                    </div>
+                  )}
+                  {generatedTipError && (
+                     <Alert variant="destructive">
+                        <AlertTriangle className="h-4 w-4" />
+                        <AlertTitle>Error</AlertTitle>
+                        <AlertDescription>{generatedTipError}</AlertDescription>
+                     </Alert>
+                  )}
+                  {generatedTip && (
+                    <div className="space-y-4 text-sm">
+                        <p className="text-base">{generatedTip.tip}</p>
+                        <div>
+                            <h4 className="font-semibold mb-2">Further Reading:</h4>
+                            <ul className="space-y-2">
+                                {generatedTip.resources.map(resource => (
+                                    <li key={resource.url}>
+                                        <a 
+                                            href={resource.url} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2 text-primary hover:underline"
+                                        >
+                                           <LinkIcon className="h-4 w-4" />
+                                           {resource.title}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                  )}
+                </div>
+            </CardContent>
+        </Card>
+      </div>
+
 
       {/* Pet Care Guides */}
       <div className="mt-12">
